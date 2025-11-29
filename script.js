@@ -61,8 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 
                 totalChars++;
-                // 50% chance to prune (remove character)
-                if (Math.random() > 0.5) {
+                // 20% chance to prune (remove character)
+                if (Math.random() > 0.2) {
                     removedChars++;
                 } else {
                     newText += char;
