@@ -174,29 +174,80 @@
     <section id="conferences" class="section bg-light">
         <div class="container">
             <h2 class="section-title" data-i18n="section_conferences">Conferences & Summer Schools</h2>
-            <ul class="conference-list">
-                <li>
-                    <span class="conf-date" data-i18n="conf1_date">Jul 2024</span>
-                    <div class="conf-info">
-                        <strong>International Conference on Machine Learning (ICML)</strong>
-                        <span class="conf-loc" data-i18n="conf1_loc">Vienna, Austria - Attendee & Poster Presenter</span>
+            
+            <div class="conferences-grid">
+                
+                <!-- Conference 1 -->
+                <article class="conf-card" data-id="c1">
+                    <div class="conf-image">
+                        <!-- Placeholder image, replace with yours -->
+                        <img src="https://via.placeholder.com/400x200" alt="RISC-V Summit">
                     </div>
-                </li>
-                <li>
-                    <span class="conf-date" data-i18n="conf2_date">Aug 2023</span>
-                    <div class="conf-info">
-                        <strong>Deep Learning Summer School</strong>
-                        <span class="conf-loc" data-i18n="conf2_loc">Montreal, Canada - Scholarship Recipient</span>
+                    <div class="conf-content">
+                        <h3 data-i18n="conf1_title">RISC-V Summit Europe 2025</h3>
+                        <div class="conf-meta">
+                            <i class="fas fa-map-marker-alt"></i> <span data-i18n="conf1_loc">Paris, France</span>
+                            <span style="margin: 0 5px;">|</span>
+                            <i class="far fa-calendar-alt"></i> <span data-i18n="conf1_date">May 2025</span>
+                        </div>
                     </div>
-                </li>
-                <li>
-                    <span class="conf-date" data-i18n="conf3_date">Nov 2022</span>
-                    <div class="conf-info">
-                        <strong>NeurIPS Workshop</strong>
-                        <span class="conf-loc" data-i18n="conf3_loc">New Orleans, USA - Virtual Attendee</span>
+                    <div class="hidden-content" style="display:none;">
+                        <img src="https://via.placeholder.com/800x400" class="modal-hero-img" alt="RISC-V Summit">
+                        <p class="blog-date" data-i18n="conf1_blog_date">Written on May 20, 2025</p>
+                        <div data-i18n="conf1_blog_content">
+                            <p>Attending the RISC-V Summit Europe was an incredible experience. I had the opportunity to present my latest research on sparse inference accelerators...</p>
+                            <p>The keynote speakers were inspiring, discussing the future of open hardware...</p>
+                        </div>
                     </div>
-                </li>
-            </ul>
+                </article>
+
+                <!-- Conference 2 -->
+                <article class="conf-card" data-id="c2">
+                    <div class="conf-image">
+                        <img src="https://via.placeholder.com/400x200" alt="BSC Course">
+                    </div>
+                    <div class="conf-content">
+                        <h3 data-i18n="conf2_title">BSC Training Course: RISC-V principles</h3>
+                        <div class="conf-meta">
+                            <i class="fas fa-map-marker-alt"></i> <span data-i18n="conf2_loc">Barcelona, Spain</span>
+                            <span style="margin: 0 5px;">|</span>
+                            <i class="far fa-calendar-alt"></i> <span data-i18n="conf2_date">Nov 2024</span>
+                        </div>
+                    </div>
+                    <div class="hidden-content" style="display:none;">
+                        <img src="https://via.placeholder.com/800x400" class="modal-hero-img" alt="BSC Course">
+                        <p class="blog-date" data-i18n="conf2_blog_date">Written on November 15, 2024</p>
+                        <div data-i18n="conf2_blog_content">
+                            <p>This intensive course at the Barcelona Supercomputing Center provided deep insights into the RISC-V ISA...</p>
+                            <p>We worked on practical exercises involving custom instruction implementation...</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Conference 3 -->
+                <article class="conf-card" data-id="c3">
+                    <div class="conf-image">
+                        <img src="https://via.placeholder.com/400x200" alt="ACM Summer School">
+                    </div>
+                    <div class="conf-content">
+                        <h3 data-i18n="conf3_title">ACM Europe Summer School on HPC</h3>
+                        <div class="conf-meta">
+                            <i class="fas fa-map-marker-alt"></i> <span data-i18n="conf3_loc">Barcelona, Spain</span>
+                            <span style="margin: 0 5px;">|</span>
+                            <i class="far fa-calendar-alt"></i> <span data-i18n="conf3_date">Sept 2024</span>
+                        </div>
+                    </div>
+                    <div class="hidden-content" style="display:none;">
+                        <img src="https://via.placeholder.com/800x400" class="modal-hero-img" alt="ACM Summer School">
+                        <p class="blog-date" data-i18n="conf3_blog_date">Written on September 10, 2024</p>
+                        <div data-i18n="conf3_blog_content">
+                            <p>The ACM Europe Summer School was a fantastic opportunity to network with other PhD students...</p>
+                            <p>We learned about the latest trends in HPC architectures for AI...</p>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
         </div>
     </section>
 
