@@ -61,36 +61,34 @@
                 <!-- Proyecto 1 -->
                 <div class="timeline-item">
                     <article class="project-card" data-id="1">
-                        <div class="project-date" data-i18n="p1_date">2024 - Present</div>
+                        <div class="project-date" data-i18n="p1_date">2025 (Under development)</div>
                         <div class="project-content">
-                            <h3 data-i18n="p1_title">Anomaly Detection with Deep Learning</h3>
-                            <p class="project-desc" data-i18n="p1_desc">Development of a novel Transformer-based architecture for anomaly detection in industrial sensor time series.</p>
+                            <h3 data-i18n="p1_title">Sparse inference accelerator for unstructured pruning optimization on CNN</h3>
+                            <p class="project-desc" data-i18n="p1_desc">Development of a specialized FPGA-deployable co-processor to accelerate unstructured pruning in CNNs, implementing a full flow from PyTorch analysis to execution.</p>
                             <div class="tags">
-                                <span>Python</span>
                                 <span>PyTorch</span>
-                                <span>Time Series</span>
+                                <span>ONNX</span>
+                                <span>Gem5</span>
+                                <span>RISC-V</span>
+                                <span>FPGA</span>
                             </div>
-                            <span class="btn-link"><span data-i18n="btn_details">View Details</span> <i class="fas fa-plus"></i></span>
                         </div>
                         <!-- Contenido Oculto para el Modal -->
                         <div class="hidden-content" style="display:none;">
                             <h3 data-i18n="modal_desc_title">Detailed Description</h3>
-                            <p data-i18n="p1_modal_desc">This project focuses on creating robust Deep Learning models capable of identifying anomalous patterns in massive data streams from IoT sensors in industrial environments.</p>
+                            <p data-i18n="p1_modal_desc">This project tackles a critical challenge in AI hardware acceleration: unstructured pruning in Convolutional Neural Networks (CNNs). While pruning theoretically reduces computational load, the resulting irregularity in memory access patterns often degrades performance on conventional hardware. The goal is to design a specialized co-processor capable of exploiting this sparsity to maximize throughput and energy efficiency on edge devices.</p>
                             
                             <h3 data-i18n="modal_method_title">Methodology</h3>
                             <ul>
-                                <li data-i18n="p1_modal_li1">Time series preprocessing using sliding window techniques and adaptive normalization.</li>
-                                <li data-i18n="p1_modal_li2">Implementation of a modified Transformer architecture with sparse attention mechanisms to improve computational efficiency.</li>
-                                <li data-i18n="p1_modal_li3">Unsupervised training using an error reconstruction approach.</li>
+                                <li data-i18n="p1_modal_li1">Creation of post-training methods to analyse and classificate all kernels in a CNN model.
+                                </li>
+                                <li data-i18n="p1_modal_li2">Design of a dispatcher that receives the data and send it to the accelerator.</li>
+                                <li data-i18n="p1_modal_li3">Design of an MMIO accelerator that accelerates sparse kernel convolutions.</li>
+                                <li data-i18n="p1_modal_li4">Integration of the accelerator with a RISC-V CPU, in order to validate and verificate the design with real benchmarks.</li>
                             </ul>
 
-                            <h3 data-i18n="modal_results_title">Results</h3>
-                            <p data-i18n="p1_modal_results">The proposed model outperformed traditional baselines (LSTM, Autoencoders) by 15% in terms of F1-Score on the public SWaT dataset.</p>
-                            
-                            <div class="links-modal">
-                                <a href="#" class="btn" data-i18n="btn_paper">View Paper</a>
-                                <a href="#" class="btn btn-outline" data-i18n="btn_repo">GitHub Repo</a>
-                            </div>
+                            <h3 data-i18n="modal_results_title">Status</h3>
+                            <p data-i18n="p1_modal_results">This project is under development, and is expected to finish on the first quarter of 2026.</p>
                         </div>
                     </article>
                 </div>
