@@ -291,4 +291,21 @@ document.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }
     });
+
+    // CAROUSEL LOGIC
+    const track = document.querySelector('.conferences-track');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    const nextBtn = document.querySelector('.carousel-btn.next');
+
+    if (track && prevBtn && nextBtn) {
+        const scrollAmount = 350; // Adjust based on card width + gap
+
+        nextBtn.addEventListener('click', () => {
+            track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+    }
 });

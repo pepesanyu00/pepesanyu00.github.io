@@ -178,117 +178,121 @@
         <div class="container">
             <h2 class="section-title" data-i18n="section_conferences">Conferences & Summer Schools</h2>
             
-            <div class="conferences-grid">
-                
-                <!-- Conference 1 -->
-                <article class="conf-card" data-id="c1">
-                    <div class="conf-image">
-                        <!-- Placeholder image, replace with yours -->
-                        <img src="images/rv_summit2.jpeg" alt="RISC-V Summit">
-                    </div>
-                    <div class="conf-content">
-                        <h3 data-i18n="conf1_title">RISC-V Summit Europe 2025</h3>
-                        <div class="conf-meta">
-                            <i class="fas fa-map-marker-alt"></i> <span data-i18n="conf1_loc">Paris, France</span>
-                            <span style="margin: 0 5px;">|</span>
-                            <i class="far fa-calendar-alt"></i> <span data-i18n="conf1_date">May 2025</span>
+            <div class="carousel-container">
+                <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+                <div class="conferences-track">
+                    
+                    <!-- Conference 1 -->
+                    <article class="conf-card" data-id="c1">
+                        <div class="conf-image">
+                            <!-- Placeholder image, replace with yours -->
+                            <img src="images/rv_summit2.jpeg" alt="RISC-V Summit">
                         </div>
-                        <a href="#" class="conf-linkedin" target="_blank">
-                            <i class="fab fa-linkedin"></i> <span data-i18n="lnk_linkedin">View Post</span>
-                        </a>
-                    </div>
-                    <div class="hidden-content" style="display:none;">
-                        <div class="modal-layout-vertical">
-                            <img src="images/rv_summit.jpeg" class="modal-vertical-img" alt="RISC-V Summit">
-                            <div class="modal-text-content">
-                                <p class="blog-date" data-i18n="conf1_blog_date">Written on May 16, 2025</p>
-                                <div data-i18n="conf1_blog_content">
-                                    <p>This week, I had the pleasure of presenting my work titled "RISC-V Vector Extension: A Case Study on Time Series Analysis." It was an incredibly enriching experience, and truly inspiring to witness all the progress happening in this promising industry. This event clearly shows that RISC-V International is achieving great things, and it might well become the go-to architecture in the near future.</p>
-                                </div>
+                        <div class="conf-content">
+                            <h3 data-i18n="conf1_title">RISC-V Summit Europe 2025</h3>
+                            <div class="conf-meta">
+                                <i class="fas fa-map-marker-alt"></i> <span data-i18n="conf1_loc">Paris, France</span>
+                                <span style="margin: 0 5px;">|</span>
+                                <i class="far fa-calendar-alt"></i> <span data-i18n="conf1_date">May 2025</span>
                             </div>
                         </div>
-                    </div>
-                </article>
-
-                <!-- Conference 2 -->
-                <article class="conf-card" data-id="c2">
-                    <div class="conf-image">
-                        <img src="images/sarteco2.jpeg" alt="SARTECO">
-                    </div>
-                    <div class="conf-content">
-                        <h3 data-i18n="conf2_title">SARTECO</h3>
-                        <div class="conf-meta">
-                            <i class="fas fa-map-marker-alt"></i> <span data-i18n="conf2_loc">Barcelona, Spain</span>
-                            <span style="margin: 0 5px;">|</span>
-                            <i class="far fa-calendar-alt"></i> <span data-i18n="conf2_date">Nov 2024</span>
-                        </div>
-                        <a href="#" class="conf-linkedin" target="_blank">
-                            <i class="fab fa-linkedin"></i> <span data-i18n="lnk_linkedin">View Post</span>
-                        </a>
-                    </div>
-                    <div class="hidden-content" style="display:none;">
-                        <img src="images/sarteco.jpeg" class="modal-hero-img" alt="SARTECO">
-                        <p class="blog-date" data-i18n="conf2_blog_date">Written on July 4, 2025</p>
-                        <div data-i18n="conf2_blog_content">
-                            <p>Last week, I had the chance to attend SARTECO days for the first time, held this year in Seville. I’d heard great things from colleagues who had been to previous editions, and it definitely lived up to the hype. It was a fantastic experience. I got to connect with researchers working on topics closely related to mine, and was genuinely inspired by the level of talent and passion for research that exists in Spain.</p>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Conference 3 -->
-                <article class="conf-card" data-id="c3">
-                    <div class="conf-image">
-                        <img src="images/acm_SS2.jpeg" alt="ACM Summer School">
-                    </div>
-                    <div class="conf-content">
-                        <h3 data-i18n="conf3_title">ACM Europe Summer School on HPC</h3>
-                        <div class="conf-meta">
-                            <i class="fas fa-map-marker-alt"></i> <span data-i18n="conf3_loc">Barcelona, Spain</span>
-                            <span style="margin: 0 5px;">|</span>
-                            <i class="far fa-calendar-alt"></i> <span data-i18n="conf3_date">Sept 2024</span>
-                        </div>
-                        <a href="#" class="conf-linkedin" target="_blank">
-                            <i class="fab fa-linkedin"></i> <span data-i18n="lnk_linkedin">View Post</span>
-                        </a>
-                    </div>
-                    <div class="hidden-content" style="display:none;">
-                        <div class="modal-layout-vertical">
-                            <img src="images/acm_SS.jpeg" class="modal-vertical-img" alt="ACM Summer School">
-                            <div class="modal-text-content">
-                                <p class="blog-date" data-i18n="conf3_blog_date">Written on September 10, 2024</p>
-                                <div data-i18n="conf3_blog_content">
-                                    <p>This week, I had the pleasure of attending the ACM Europe Summer School on HPC Computer Architectures for AI and Dedicated Applications, a great tech event where I had the opportunity to enjoy numerous talks by individuals who dedicate their passion and a significant part of their lives to the pursuit of new knowledge that enables us to move towards a promising technological future. Among these individuals were Mateo Valero, Luca Benini, and Leslie Lamport, among many others. Not only were the talks a great source of inspiration for me, but so was meeting people from all over the world who are striving to make their way in this complex and exciting world of research. During this week, we discussed a wide range of current and important topics such as artificial intelligence, the rise of open architectures like RISC-V, the development of dedicated accelerators, and quantum computing. The latter, explained by the wonderful team from Qilimanjaro, allowed me to gain a much deeper understanding of this technology and its inherent complexity. Finally, I would like to extend my gratitude to the Barcelona Supercomputing Center (BSC) and ACM, Association for Computing Machinery for organizing this event and for promoting science and knowledge about current technologies to those of us who are just beginning our careers. Thanks to events like this, we are motivated to contribute our own small part to the advancement of science.</p>
+                        <div class="hidden-content" style="display:none;">
+                            <div class="modal-layout-vertical">
+                                <img src="images/rv_summit.jpeg" class="modal-vertical-img" alt="RISC-V Summit">
+                                <div class="modal-text-content">
+                                    <p class="blog-date" data-i18n="conf1_blog_date">Written on May 16, 2025</p>
+                                    <div data-i18n="conf1_blog_content">
+                                        <p>This week, I had the pleasure of presenting my work titled "RISC-V Vector Extension: A Case Study on Time Series Analysis." It was an incredibly enriching experience, and truly inspiring to witness all the progress happening in this promising industry. This event clearly shows that RISC-V International is achieving great things, and it might well become the go-to architecture in the near future.</p>
+                                    </div>
                                 </div>
+                                <a href="#" class="conf-linkedin" target="_blank">
+                                    <i class="fab fa-linkedin"></i> <span data-i18n="lnk_linkedin">View Post</span>
+                                </a>
                             </div>
                         </div>
-                    </div>
-                </article>
+                    </article>
 
-                <!-- Conference 4 -->
-                <article class="conf-card" data-id="c4">
-                    <div class="conf-image">
-                        <img src="https://via.placeholder.com/400x200" alt="BSC Course">
-                    </div>
-                    <div class="conf-content">
-                        <h3 data-i18n="conf4_title">BSC Training Course: RISC-V principles</h3>
-                        <div class="conf-meta">
-                            <i class="fas fa-map-marker-alt"></i> <span data-i18n="conf4_loc">Barcelona, Spain</span>
-                            <span style="margin: 0 5px;">|</span>
-                            <i class="far fa-calendar-alt"></i> <span data-i18n="conf4_date">Nov 2024</span>
+                    <!-- Conference 2 -->
+                    <article class="conf-card" data-id="c2">
+                        <div class="conf-image">
+                            <img src="images/sarteco2.jpeg" alt="SARTECO">
                         </div>
-                        <a href="#" class="conf-linkedin" target="_blank">
-                            <i class="fab fa-linkedin"></i> <span data-i18n="lnk_linkedin">View Post</span>
-                        </a>
-                    </div>
-                    <div class="hidden-content" style="display:none;">
-                        <img src="https://via.placeholder.com/800x400" class="modal-hero-img" alt="BSC Course">
-                        <p class="blog-date" data-i18n="conf4_blog_date">Written on November 15, 2024</p>
-                        <div data-i18n="conf4_blog_content">
-                            <p>This intensive course at the Barcelona Supercomputing Center provided deep insights into the RISC-V ISA. We worked on practical exercises involving custom instruction implementation and explored the potential of open hardware for future HPC applications.</p>
+                        <div class="conf-content">
+                            <h3 data-i18n="conf2_title">SARTECO</h3>
+                            <div class="conf-meta">
+                                <i class="fas fa-map-marker-alt"></i> <span data-i18n="conf2_loc">Barcelona, Spain</span>
+                                <span style="margin: 0 5px;">|</span>
+                                <i class="far fa-calendar-alt"></i> <span data-i18n="conf2_date">Nov 2024</span>
+                            </div>
                         </div>
-                    </div>
-                </article>
+                        <div class="hidden-content" style="display:none;">
+                            <img src="images/sarteco.jpeg" class="modal-hero-img" alt="SARTECO">
+                            <p class="blog-date" data-i18n="conf2_blog_date">Written on July 4, 2025</p>
+                            <div data-i18n="conf2_blog_content">
+                                <p>Last week, I had the chance to attend SARTECO days for the first time, held this year in Seville. I’d heard great things from colleagues who had been to previous editions, and it definitely lived up to the hype. It was a fantastic experience. I got to connect with researchers working on topics closely related to mine, and was genuinely inspired by the level of talent and passion for research that exists in Spain.</p>
+                            </div>
+                            <a href="#" class="conf-linkedin" target="_blank">
+                                <i class="fab fa-linkedin"></i> <span data-i18n="lnk_linkedin">View Post</span>
+                            </a>
+                        </div>
+                    </article>
 
+                    <!-- Conference 3 -->
+                    <article class="conf-card" data-id="c3">
+                        <div class="conf-image">
+                            <img src="images/acm_SS2.jpeg" alt="ACM Summer School">
+                        </div>
+                        <div class="conf-content">
+                            <h3 data-i18n="conf3_title">ACM Europe Summer School on HPC</h3>
+                            <div class="conf-meta">
+                                <i class="fas fa-map-marker-alt"></i> <span data-i18n="conf3_loc">Barcelona, Spain</span>
+                                <span style="margin: 0 5px;">|</span>
+                                <i class="far fa-calendar-alt"></i> <span data-i18n="conf3_date">Sept 2024</span>
+                            </div>
+                        </div>
+                        <div class="hidden-content" style="display:none;">
+                            <div class="modal-layout-vertical">
+                                <img src="images/acm_SS.jpeg" class="modal-vertical-img" alt="ACM Summer School">
+                                <div class="modal-text-content">
+                                    <p class="blog-date" data-i18n="conf3_blog_date">Written on September 10, 2024</p>
+                                    <div data-i18n="conf3_blog_content">
+                                        <p>This week, I had the pleasure of attending the ACM Europe Summer School on HPC Computer Architectures for AI and Dedicated Applications, a great tech event where I had the opportunity to enjoy numerous talks by individuals who dedicate their passion and a significant part of their lives to the pursuit of new knowledge that enables us to move towards a promising technological future. Among these individuals were Mateo Valero, Luca Benini, and Leslie Lamport, among many others. Not only were the talks a great source of inspiration for me, but so was meeting people from all over the world who are striving to make their way in this complex and exciting world of research. During this week, we discussed a wide range of current and important topics such as artificial intelligence, the rise of open architectures like RISC-V, the development of dedicated accelerators, and quantum computing. The latter, explained by the wonderful team from Qilimanjaro, allowed me to gain a much deeper understanding of this technology and its inherent complexity. Finally, I would like to extend my gratitude to the Barcelona Supercomputing Center (BSC) and ACM, Association for Computing Machinery for organizing this event and for promoting science and knowledge about current technologies to those of us who are just beginning our careers. Thanks to events like this, we are motivated to contribute our own small part to the advancement of science.</p>
+                                    </div>
+                                </div>
+                                <a href="#" class="conf-linkedin" target="_blank">
+                                    <i class="fab fa-linkedin"></i> <span data-i18n="lnk_linkedin">View Post</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Conference 4 -->
+                    <article class="conf-card" data-id="c4">
+                        <div class="conf-image">
+                            <img src="images/risc-v_logo.jpeg" alt="BSC Course">
+                        </div>
+                        <div class="conf-content">
+                            <h3 data-i18n="conf4_title">BSC Training Course: RISC-V principles</h3>
+                            <div class="conf-meta">
+                                <i class="fas fa-map-marker-alt"></i> <span data-i18n="conf4_loc">Barcelona, Spain</span>
+                                <span style="margin: 0 5px;">|</span>
+                                <i class="far fa-calendar-alt"></i> <span data-i18n="conf4_date">Nov 2024</span>
+                            </div>
+                        </div>
+                        <div class="hidden-content" style="display:none;">
+                            <img src="images/risc-v_logo.jpeg" class="modal-hero-img" alt="BSC Course">
+                            <p class="blog-date" data-i18n="conf4_blog_date">Written on November 15, 2024</p>
+                            <div data-i18n="conf4_blog_content">
+                                <p>This intensive course at the Barcelona Supercomputing Center provided deep insights into the RISC-V ISA. We worked on practical exercises involving custom instruction implementation and explored the potential of open hardware for future HPC applications.</p>
+                            </div>
+                            <a href="#" class="conf-linkedin" target="_blank">
+                                <i class="fab fa-linkedin"></i> <span data-i18n="lnk_linkedin">View Post</span>
+                            </a>
+                        </div>
+                    </article>
+
+                </div>
+                <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
     </section>
