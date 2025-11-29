@@ -707,6 +707,95 @@ h1, h2, h3 {
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    position: relative; /* For overlay */
+    min-height: 400px; /* Ensure height for overlay */
+    display: flex;
+    flex-direction: column;
+}
+
+/* AI Overlay */
+.ai-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.ai-overlay-content {
+    color: var(--text-color);
+    max-width: 80%;
+}
+
+.ai-overlay-content i {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.ai-overlay-content h3 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.ai-overlay-content p {
+    margin-bottom: 20px;
+    color: var(--text-light);
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Progress Bar */
+#ai-progress-container {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+#ai-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+#ai-status-text {
+    font-size: 0.85rem;
+    color: var(--text-light);
 }
 
 .chat-window {
@@ -717,6 +806,7 @@ h1, h2, h3 {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    flex-grow: 1;
 }
 
 .message {
@@ -733,6 +823,7 @@ h1, h2, h3 {
     background: #e9ecef;
     color: #333;
     border-bottom-left-radius: 4px;
+    font-family: 'Courier New', Courier, monospace; /* Terminal feel */
 }
 
 .message.user {

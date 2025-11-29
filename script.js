@@ -9,63 +9,117 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // AI Chat Simulation
+    // AI Chat Integration (WebLLM - WebGPU)
     const chatInput = document.getElementById('chat-input');
     const chatSend = document.getElementById('chat-send');
     const chatMessages = document.getElementById('chat-messages');
+    const btnInitAI = document.getElementById('btn-init-ai');
+    const aiOverlay = document.getElementById('ai-init-overlay');
+    const aiProgressContainer = document.getElementById('ai-progress-container');
+    const aiProgressFill = document.getElementById('ai-progress-fill');
+    const aiStatusText = document.getElementById('ai-status-text');
 
-    const knowledgeBase = {
-        "hola": "¡Hola! Soy el asistente virtual de este portafolio. ¿En qué puedo ayudarte?",
-        "quien eres": "Soy una IA simulada diseñada para ayudarte a navegar por este portafolio.",
-        "proyectos": "Puedes ver los proyectos de investigación en la sección 'Investigación' más arriba. ¡Son muy interesantes!",
-        "contacto": "Puedes contactar a través de las redes sociales listadas en el pie de página o en la sección de inicio.",
-        "aficiones": "Al investigador le encanta el senderismo, la fotografía y la ciencia ficción.",
-        "default": "Interesante pregunta. Como soy una IA en entrenamiento, te sugiero explorar la web para encontrar esa respuesta o contactar directamente al autor."
-    };
+    let engine = null;
+    // Using Llama-3.2-1B-Instruct quantized for WebGPU
+    const selectedModel = "Llama-3.2-1B-Instruct-q4f16_1-MLC"; 
 
     function addMessage(text, sender) {
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message', sender);
-        
-        const textP = document.createElement('p');
-        textP.textContent = text;
-        
-        messageDiv.appendChild(textP);
+        const p = document.createElement('p');
+        p.textContent = text;
+        messageDiv.appendChild(p);
         chatMessages.appendChild(messageDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
+        return p;
+    }
+
+    async function initAI() {
+        btnInitAI.disabled = true;
+        btnInitAI.textContent = "Initializing WebGPU...";
+        aiProgressContainer.classList.remove('hidden');
+        
+        try {
+            // Dynamic import from CDN
+            const { CreateMLCEngine } = await import('https://esm.run/@mlc-ai/web-llm');
+
+            const initProgressCallback = (report) => {
+                console.log(report);
+                aiStatusText.textContent = report.text;
+                if (report.progress) {
+                    aiProgressFill.style.width = `${report.progress * 100}%`;
+                }
+            };
+
+            engine = await CreateMLCEngine(
+                selectedModel,
+                { 
+                    initProgressCallback: initProgressCallback,
+                    logLevel: "INFO"
+                }
+            );
+
+            // Success
+            aiOverlay.classList.add('hidden');
+            chatInput.disabled = false;
+            chatSend.disabled = false;
+            chatInput.placeholder = "Ask me about RISC-V, HPC, or why x86 is obsolete...";
+            
+            // Initial greeting
+            addMessage("System online. I am the sarcastic digital twin of José. Ask me why RISC-V rules.", 'bot');
+
+        } catch (error) {
+            console.error("AI Init Error:", error);
+            aiStatusText.textContent = "Error: " + error.message + ". Ensure your browser supports WebGPU.";
+            btnInitAI.disabled = false;
+            btnInitAI.textContent = "Retry Initialization";
+        }
     }
 
     async function handleChat() {
-        const text = chatInput.value.trim().toLowerCase();
+        const text = chatInput.value.trim();
         if (!text) return;
 
-        addMessage(chatInput.value, 'user');
+        addMessage(text, 'user');
         chatInput.value = '';
+        chatInput.disabled = true;
+        chatSend.disabled = true;
 
-        // Simulate AI thinking delay
-        const loadingDiv = document.createElement('div');
-        loadingDiv.classList.add('message', 'bot', 'loading');
-        loadingDiv.innerHTML = '<span>.</span><span>.</span><span>.</span>';
-        chatMessages.appendChild(loadingDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+        // Create a placeholder for the bot response
+        const botMessageP = addMessage("Thinking...", 'bot');
+        let fullResponse = "";
 
-        setTimeout(() => {
-            chatMessages.removeChild(loadingDiv);
-            
-            let response = knowledgeBase["default"];
-            
-            // Simple keyword matching
-            for (const key in knowledgeBase) {
-                if (text.includes(key)) {
-                    response = knowledgeBase[key];
-                    break;
-                }
+        try {
+            const messages = [
+                { role: "system", content: "You are a sarcastic version of José Sánchez Yun, a PhD researcher in High-Performance Computing. You love RISC-V and despise inefficient hardware like x86. You answer questions briefly, with technical arrogance but accuracy. You are running locally on the user's browser via WebGPU." },
+                { role: "user", content: text }
+            ];
+
+            const chunks = await engine.chat.completions.create({
+                messages,
+                temperature: 0.7,
+                stream: true,
+            });
+
+            botMessageP.textContent = ""; // Clear "Thinking..."
+
+            for await (const chunk of chunks) {
+                const content = chunk.choices[0]?.delta?.content || "";
+                fullResponse += content;
+                botMessageP.textContent = fullResponse;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
             }
-            
-            addMessage(response, 'bot');
-        }, 1500);
+
+        } catch (error) {
+            botMessageP.textContent = "Error: " + error.message;
+        } finally {
+            chatInput.disabled = false;
+            chatSend.disabled = false;
+            chatInput.focus();
+        }
     }
 
+    btnInitAI.addEventListener('click', initAI);
     chatSend.addEventListener('click', handleChat);
     chatInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') handleChat();
