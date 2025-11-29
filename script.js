@@ -314,4 +314,27 @@ document.addEventListener('DOMContentLoaded', () => {
             track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
         });
     }
+
+    // FLICKR RANDOM PHOTO (Optional)
+    // To enable, replace 'YOUR_FLICKR_ID' with your actual Flickr User ID (e.g., '12345678@N00')
+    const flickrId = '196477770@N08'; // Leave empty to use local image
+    const flickrImg = document.getElementById('flickr-img');
+
+    if (flickrId && flickrImg) {
+        const script = document.createElement('script');
+        script.src = `https://api.flickr.com/services/feeds/photos_public.gne?id=${flickrId}&format=json&jsoncallback=flickrCallback`;
+        document.body.appendChild(script);
+    }
+
+    // Global callback for Flickr JSONP
+    window.flickrCallback = function(data) {
+        if (data.items && data.items.length > 0) {
+            const randomItem = data.items[Math.floor(Math.random() * data.items.length)];
+            const flickrImg = document.getElementById('flickr-img');
+            if (flickrImg) {
+                flickrImg.src = randomItem.media.m.replace('_m.jpg', '_b.jpg'); // Try to get higher res
+                flickrImg.alt = randomItem.title;
+            }
+        }
+    };
 });
