@@ -325,29 +325,32 @@
         </div>
     </section>
 
-    <!-- PRUNING GAME -->
-    <section id="pruning-game" class="section ai-section">
+    <!-- DOM PRUNING DEMO -->
+    <section id="pruning-demo" class="section ai-section">
         <div class="container">
-            <h2 class="section-title text-white" data-i18n="section_game">The Unstructured Pruning Game</h2>
-            <p class="ai-subtitle" data-i18n="game_subtitle">Experience my PhD thesis: Prune the connections to optimize the Neural Network. Be careful not to destroy the accuracy!</p>
+            <h2 class="section-title text-white" data-i18n="section_pruning">Unstructured Pruning Demo</h2>
+            <p class="ai-subtitle" data-i18n="pruning_subtitle">See how my research works applied to this very website.</p>
             
-            <div class="game-interface">
-                <div class="game-stats">
-                    <div class="stat-box">
-                        <span class="stat-label">Sparsity</span>
-                        <span id="sparsity-val" class="stat-value">0%</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="stat-label">Accuracy</span>
-                        <span id="accuracy-val" class="stat-value">100%</span>
-                    </div>
+            <div class="pruning-interface">
+                <div class="pruning-controls">
+                    <p class="pruning-explanation" data-i18n="pruning_expl">
+                        Click the button to randomly remove 50% of the visual elements (letters) from this page. 
+                        Notice how it remains functional? That's what I do with Neural Networks: remove the superfluous while maintaining accuracy.
+                    </p>
+                    <button id="btn-prune-web" class="btn-primary">Apply Pruning (50% Sparsity)</button>
+                    <button id="btn-restore-web" class="btn-secondary hidden">Restore Website</button>
                 </div>
                 
-                <div id="network-canvas"></div>
-                
-                <div class="game-controls">
-                    <p id="game-feedback" class="game-feedback">Model is heavy and slow. Start pruning!</p>
-                    <button id="btn-reset-game" class="btn-primary">Reset Network</button>
+                <div id="pruning-stats" class="pruning-stats hidden">
+                    <div class="stat-item">
+                        <span class="stat-label">Sparsity</span>
+                        <span id="web-sparsity" class="stat-val">0%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Functionality</span>
+                        <span class="stat-val">100%</span>
+                    </div>
+                    <p class="pruning-message" data-i18n="pruning_msg">"Optimized for efficiency. Still readable, right?"</p>
                 </div>
             </div>
         </div>
@@ -359,7 +362,6 @@
         </div>
     </footer>
 
-    <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

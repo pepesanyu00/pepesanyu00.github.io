@@ -9,136 +9,92 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Unstructured Pruning Game (D3.js)
-    const canvasContainer = document.getElementById('network-canvas');
-    const sparsityVal = document.getElementById('sparsity-val');
-    const accuracyVal = document.getElementById('accuracy-val');
-    const feedbackText = document.getElementById('game-feedback');
-    const btnReset = document.getElementById('btn-reset-game');
+    // DOM Pruning Demo
+    const btnPrune = document.getElementById('btn-prune-web');
+    const btnRestore = document.getElementById('btn-restore-web');
+    const pruningStats = document.getElementById('pruning-stats');
+    const webSparsity = document.getElementById('web-sparsity');
+    
+    let originalTextNodes = new Map();
+    let isPruned = false;
 
-    let width, height;
-    let svg;
-    let nodes = [];
-    let links = [];
-    let initialLinksCount = 0;
-    let currentLinksCount = 0;
-
-    function initGame() {
-        if (!canvasContainer) return;
-        
-        // Clear previous SVG
-        canvasContainer.innerHTML = '';
-        
-        width = canvasContainer.clientWidth;
-        height = canvasContainer.clientHeight;
-
-        svg = d3.select("#network-canvas")
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height);
-
-        // Generate Neural Network Structure
-        const layers = [4, 6, 6, 4]; // Neurons per layer
-        const layerSpacing = width / (layers.length + 1);
-        
-        nodes = [];
-        links = [];
-
-        // Create Nodes
-        layers.forEach((neuronCount, layerIndex) => {
-            const x = (layerIndex + 1) * layerSpacing;
-            const ySpacing = height / (neuronCount + 1);
-            
-            for (let i = 0; i < neuronCount; i++) {
-                nodes.push({
-                    id: `l${layerIndex}-n${i}`,
-                    layer: layerIndex,
-                    x: x,
-                    y: (i + 1) * ySpacing
-                });
+    function getTextNodes(node) {
+        let textNodes = [];
+        if (node.nodeType === 3) { // Text node
+            if (node.nodeValue.trim() !== "") {
+                textNodes.push(node);
             }
-        });
+        } else {
+            // Exclude the pruning section itself so controls remain visible
+            if (node.id === 'pruning-demo' || (node.closest && node.closest('#pruning-demo'))) {
+                return [];
+            }
+            
+            for (let child of node.childNodes) {
+                textNodes.push(...getTextNodes(child));
+            }
+        }
+        return textNodes;
+    }
 
-        // Create Dense Links (Fully Connected)
-        for (let i = 0; i < nodes.length; i++) {
-            for (let j = 0; j < nodes.length; j++) {
-                if (nodes[j].layer === nodes[i].layer + 1) {
-                    links.push({
-                        source: nodes[i],
-                        target: nodes[j],
-                        id: `${nodes[i].id}-${nodes[j].id}`
-                    });
+    function pruneWeb() {
+        if (isPruned) return;
+        
+        const allTextNodes = getTextNodes(document.body);
+        let totalChars = 0;
+        let removedChars = 0;
+
+        allTextNodes.forEach(node => {
+            // Save original
+            if (!originalTextNodes.has(node)) {
+                originalTextNodes.set(node, node.nodeValue);
+            }
+
+            const originalText = node.nodeValue;
+            let newText = "";
+            
+            for (let char of originalText) {
+                // Keep spaces to preserve word boundaries mostly
+                if (char.trim() === "") {
+                    newText += char;
+                    continue;
+                }
+                
+                totalChars++;
+                // 50% chance to prune (remove character)
+                if (Math.random() > 0.5) {
+                    removedChars++;
+                } else {
+                    newText += char;
                 }
             }
-        }
+            node.nodeValue = newText;
+        });
 
-        initialLinksCount = links.length;
-        currentLinksCount = initialLinksCount;
-        updateStats();
-
-        // Draw Links
-        const linkElements = svg.selectAll(".link")
-            .data(links, d => d.id)
-            .enter().append("line")
-            .attr("class", "link")
-            .attr("x1", d => d.source.x)
-            .attr("y1", d => d.source.y)
-            .attr("x2", d => d.target.x)
-            .attr("y2", d => d.target.y)
-            .on("mouseover", function(event, d) {
-                // Pruning Action
-                d3.select(this).remove();
-                currentLinksCount--;
-                updateStats();
-            });
-
-        // Draw Nodes
-        svg.selectAll(".node")
-            .data(nodes)
-            .enter().append("circle")
-            .attr("class", "node")
-            .attr("cx", d => d.x)
-            .attr("cy", d => d.y)
-            .attr("r", 8);
+        const sparsity = totalChars > 0 ? ((removedChars / totalChars) * 100).toFixed(1) : 0;
+        webSparsity.textContent = `${sparsity}%`;
+        
+        pruningStats.classList.remove('hidden');
+        btnPrune.classList.add('hidden');
+        btnRestore.classList.remove('hidden');
+        isPruned = true;
     }
 
-    function updateStats() {
-        const sparsity = ((initialLinksCount - currentLinksCount) / initialLinksCount) * 100;
-        let accuracy = 100;
-
-        // Accuracy Logic based on Sparsity
-        if (sparsity < 50) {
-            accuracy = 98 + (Math.random() * 2); // High accuracy
-        } else if (sparsity < 75) {
-            accuracy = 90 - ((sparsity - 50) * 0.5); // Slight drop
-        } else {
-            accuracy = Math.max(0, 80 - Math.pow((sparsity - 75), 1.5)); // Exponential drop
-        }
-
-        sparsityVal.textContent = `${sparsity.toFixed(1)}%`;
-        accuracyVal.textContent = `${accuracy.toFixed(1)}%`;
-
-        // Feedback Logic
-        if (sparsity < 30) {
-            feedbackText.textContent = "Model is heavy and slow. High latency on edge devices.";
-            feedbackText.style.color = "#ff6b6b";
-        } else if (sparsity >= 30 && sparsity < 70) {
-            feedbackText.textContent = "Good balance! Hardware efficient and accurate.";
-            feedbackText.style.color = "#51cf66";
-        } else if (sparsity >= 70 && sparsity < 85) {
-            feedbackText.textContent = "Aggressive pruning! Accuracy is starting to suffer.";
-            feedbackText.style.color = "#fcc419";
-        } else {
-            feedbackText.textContent = "CRITICAL DAMAGE! You lobotomized the network.";
-            feedbackText.style.color = "#ff6b6b";
-        }
+    function restoreWeb() {
+        originalTextNodes.forEach((text, node) => {
+            node.nodeValue = text;
+        });
+        
+        pruningStats.classList.add('hidden');
+        btnPrune.classList.remove('hidden');
+        btnRestore.classList.add('hidden');
+        isPruned = false;
     }
 
-    btnReset.addEventListener('click', initGame);
-    
-    // Initialize on load
-    initGame();
-    window.addEventListener('resize', initGame);
+    if (btnPrune) {
+        btnPrune.addEventListener('click', pruneWeb);
+        btnRestore.addEventListener('click', restoreWeb);
+    }
 
     // LANGUAGE SWITCHER
     const langToggle = document.getElementById('lang-toggle');
@@ -213,7 +169,13 @@ document.addEventListener('DOMContentLoaded', () => {
             flickr_caption: "Here you have a random photo from my flickr profile :)",
             section_ai: "Ask My Digital Twin",
             ai_subtitle: "An experimental AI-powered interface (simulated) to answer your questions about my profile.",
-            ai_welcome: "Hello! I am [Your Name]'s virtual assistant. Ask me about my projects, contact info, or hobbies."
+            ai_welcome: "Hello! I am [Your Name]'s virtual assistant. Ask me about my projects, contact info, or hobbies.",
+            
+            // Pruning Demo Translations
+            section_pruning: "Unstructured Pruning Demo",
+            pruning_subtitle: "See how my research works applied to this very website.",
+            pruning_expl: "Click the button to randomly remove 50% of the visual elements (letters) from this page. Notice how it remains functional? That's what I do with Neural Networks: remove the superfluous while maintaining accuracy.",
+            pruning_msg: "\"Optimized for efficiency. Still readable, right?\""
         },
         es: {
             nav_about: "Sobre Mí",
@@ -282,7 +244,13 @@ document.addEventListener('DOMContentLoaded', () => {
             flickr_caption: "Aquí tienes una foto aleatoria de mi perfil de flickr :)",
             section_ai: "Pregunta a mi Gemelo Digital",
             ai_subtitle: "Una interfaz experimental impulsada por IA (simulada) para responder tus dudas sobre mi perfil.",
-            ai_welcome: "¡Hola! Soy el asistente virtual de [Tu Nombre]. Pregúntame sobre mis proyectos, contacto o aficiones."
+            ai_welcome: "¡Hola! Soy el asistente virtual de [Tu Nombre]. Pregúntame sobre mis proyectos, contacto o aficiones.",
+            
+            // Pruning Demo Translations (ES)
+            section_pruning: "Demo de Poda No Estructurada",
+            pruning_subtitle: "Mira cómo funciona mi investigación aplicada a esta misma web.",
+            pruning_expl: "Haz clic en el botón para eliminar aleatoriamente el 50% de los elementos visuales (letras) de esta página. ¿Notas cómo sigue siendo funcional? Eso es lo que hago con las Redes Neuronales: eliminar lo superfluo manteniendo la precisión.",
+            pruning_msg: "\"Optimizado para eficiencia. Aún legible, ¿verdad?\""
         }
     };
 
