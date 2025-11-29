@@ -37,60 +37,114 @@
         </div>
     </header>
 
-    <!-- INVESTIGACIÓN (Timeline/Grid) -->
+    <!-- INVESTIGACIÓN (Timeline) -->
     <section id="research" class="section">
         <div class="container">
-            <h2 class="section-title">Research experience</h2>
-            <div class="projects-grid">
+            <h2 class="section-title">Research Experience</h2>
+            <div class="timeline">
                 
-                <!-- Proyecto 1 (Más reciente) -->
-                <article class="project-card">
-                    <div class="project-date">2024 - Presente</div>
-                    <div class="project-content">
-                        <h3>Detección de Anomalías con Deep Learning</h3>
-                        <p class="project-desc">Desarrollo de una arquitectura novedosa basada en Transformers para la detección de anomalías en series temporales de sensores industriales.</p>
-                        <div class="tags">
-                            <span>Python</span>
-                            <span>PyTorch</span>
-                            <span>Time Series</span>
+                <!-- Proyecto 1 -->
+                <div class="timeline-item">
+                    <article class="project-card" data-id="1">
+                        <div class="project-date">2024 - Presente</div>
+                        <div class="project-content">
+                            <h3>Detección de Anomalías con Deep Learning</h3>
+                            <p class="project-desc">Desarrollo de una arquitectura novedosa basada en Transformers para la detección de anomalías en series temporales de sensores industriales.</p>
+                            <div class="tags">
+                                <span>Python</span>
+                                <span>PyTorch</span>
+                                <span>Time Series</span>
+                            </div>
+                            <span class="btn-link">Ver Detalles <i class="fas fa-plus"></i></span>
                         </div>
-                        <a href="#" class="btn-link">Ver Publicación <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
+                        <!-- Contenido Oculto para el Modal -->
+                        <div class="hidden-content" style="display:none;">
+                            <h3>Descripción Detallada</h3>
+                            <p>Este proyecto se centra en la creación de modelos robustos de Deep Learning capaces de identificar patrones anómalos en flujos de datos masivos provenientes de sensores IoT en entornos industriales.</p>
+                            
+                            <h3>Metodología</h3>
+                            <ul>
+                                <li>Preprocesamiento de series temporales utilizando técnicas de ventana deslizante y normalización adaptativa.</li>
+                                <li>Implementación de una arquitectura Transformer modificada con mecanismos de atención dispersa para mejorar la eficiencia computacional.</li>
+                                <li>Entrenamiento no supervisado utilizando un enfoque de reconstrucción de errores.</li>
+                            </ul>
+
+                            <h3>Resultados</h3>
+                            <p>El modelo propuesto superó a los baselines tradicionales (LSTM, Autoencoders) en un 15% en términos de F1-Score en el dataset público SWaT.</p>
+                            
+                            <div class="links-modal">
+                                <a href="#" class="btn">Ver Paper</a>
+                                <a href="#" class="btn btn-outline">Repositorio GitHub</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
 
                 <!-- Proyecto 2 -->
-                <article class="project-card">
-                    <div class="project-date">2023</div>
-                    <div class="project-content">
-                        <h3>Optimización de Algoritmos Genéticos</h3>
-                        <p class="project-desc">Estudio comparativo sobre la eficiencia de algoritmos evolutivos en problemas de optimización combinatoria a gran escala.</p>
-                        <div class="tags">
-                            <span>C++</span>
-                            <span>Evolutionary Comp</span>
-                            <span>Research</span>
+                <div class="timeline-item">
+                    <article class="project-card" data-id="2">
+                        <div class="project-date">2023</div>
+                        <div class="project-content">
+                            <h3>Optimización de Algoritmos Genéticos</h3>
+                            <p class="project-desc">Estudio comparativo sobre la eficiencia de algoritmos evolutivos en problemas de optimización combinatoria a gran escala.</p>
+                            <div class="tags">
+                                <span>C++</span>
+                                <span>Evolutionary Comp</span>
+                                <span>HPC</span>
+                            </div>
+                            <span class="btn-link">Ver Detalles <i class="fas fa-plus"></i></span>
                         </div>
-                        <a href="#" class="btn-link">Ver Repositorio <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
+                        <div class="hidden-content" style="display:none;">
+                            <h3>Descripción Detallada</h3>
+                            <p>Investigación sobre cómo paralelizar algoritmos genéticos utilizando OpenMP y MPI para resolver el problema del viajante de comercio (TSP) con millones de ciudades.</p>
+                            <h3>Contribuciones</h3>
+                            <ul>
+                                <li>Diseño de un nuevo operador de cruce que preserva mejor las subestructuras óptimas.</li>
+                                <li>Implementación híbrida CPU-GPU para acelerar la evaluación de la función de fitness.</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
 
                 <!-- Proyecto 3 -->
-                <article class="project-card">
-                    <div class="project-date">2022</div>
-                    <div class="project-content">
-                        <h3>Sistema de Recomendación Contextual</h3>
-                        <p class="project-desc">Implementación de un sistema híbrido de recomendación para plataformas de e-learning, integrando filtrado colaborativo y basado en contenido.</p>
-                        <div class="tags">
-                            <span>Python</span>
-                            <span>Scikit-learn</span>
-                            <span>Flask</span>
+                <div class="timeline-item">
+                    <article class="project-card" data-id="3">
+                        <div class="project-date">2022</div>
+                        <div class="project-content">
+                            <h3>Sistema de Recomendación Contextual</h3>
+                            <p class="project-desc">Implementación de un sistema híbrido de recomendación para plataformas de e-learning, integrando filtrado colaborativo y basado en contenido.</p>
+                            <div class="tags">
+                                <span>Python</span>
+                                <span>Scikit-learn</span>
+                                <span>Flask</span>
+                            </div>
+                            <span class="btn-link">Ver Detalles <i class="fas fa-plus"></i></span>
                         </div>
-                        <a href="#" class="btn-link">Ver Demo <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
+                        <div class="hidden-content" style="display:none;">
+                            <h3>Descripción Detallada</h3>
+                            <p>Desarrollo de un motor de recomendación para una plataforma educativa con más de 10,000 usuarios activos.</p>
+                            <h3>Tecnologías</h3>
+                            <p>Se utilizó Matrix Factorization para el filtrado colaborativo y NLP (TF-IDF) para el análisis de contenido de los cursos.</p>
+                        </div>
+                    </article>
+                </div>
 
             </div>
         </div>
     </section>
+
+    <!-- MODAL CONTAINER -->
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Título del Proyecto</h2>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- El contenido se inyectará aquí vía JS -->
+            </div>
+        </div>
+    </div>
 
     <!-- CONGRESOS & EVENTOS -->
     <section id="conferences" class="section bg-light">

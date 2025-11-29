@@ -70,4 +70,55 @@ document.addEventListener('DOMContentLoaded', () => {
     chatInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') handleChat();
     });
+
+    // MODAL LOGIC
+    const modal = document.getElementById('project-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+    const closeModalBtn = document.querySelector('.close-modal');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    function openModal(card) {
+        const title = card.querySelector('h3').textContent;
+        const hiddenContent = card.querySelector('.hidden-content').innerHTML;
+        const tags = card.querySelector('.tags').outerHTML;
+        const date = card.querySelector('.project-date').textContent;
+
+        modalTitle.textContent = title;
+        
+        // Construct modal body content
+        let contentHTML = `
+            <div style="margin-bottom: 20px; color: #666; font-weight: bold;">${date}</div>
+            ${tags}
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+            ${hiddenContent}
+        `;
+        
+        modalBody.innerHTML = contentHTML;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    projectCards.forEach(card => {
+        card.addEventListener('click', () => openModal(card));
+    });
+
+    closeModalBtn.addEventListener('click', closeModal);
+
+    // Close on outside click
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
 });
