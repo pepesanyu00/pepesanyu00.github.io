@@ -663,19 +663,23 @@ h1, h2, h3 {
 }
 
 .hobby-link.instagram {
-    background: #f09433; 
-    background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
-    background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
-    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+    background: var(--primary-color);
     color: white;
-    box-shadow: 0 4px 15px rgba(220, 39, 67, 0.3);
+    box-shadow: var(--shadow);
 }
 
 .hobby-link.flickr {
-    background: #0063dc;
-    background: linear-gradient(90deg, #0063dc 0%, #ff0084 100%);
+    background: var(--primary-color);
     color: white;
-    box-shadow: 0 4px 15px rgba(0, 99, 220, 0.3);
+    box-shadow: var(--shadow);
+}
+
+.flickr-caption {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-top: 10px;
+    text-align: center;
 }
 
 .hobby-link:hover {
