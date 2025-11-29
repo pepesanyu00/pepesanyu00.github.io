@@ -12,6 +12,22 @@
 </head>
 <body>
 
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">JSY</a>
+            <ul class="nav-links">
+                <li><a href="#research" data-i18n="nav_research">Research</a></li>
+                <li><a href="#conferences" data-i18n="nav_conferences">Conferences</a></li>
+                <li><a href="#hobbies" data-i18n="nav_hobbies">Hobbies</a></li>
+                <li><a href="#ai-demo" data-i18n="nav_ai">AI Twin</a></li>
+            </ul>
+            <button id="lang-toggle" class="lang-btn">
+                <i class="fas fa-globe"></i> <span id="lang-text">ES</span>
+            </button>
+        </div>
+    </nav>
+
     <!-- HERO SECTION -->
     <header class="hero">
         <div class="container hero-content">
@@ -21,10 +37,9 @@
             </div>
             <div class="hero-text">
                 <h1>José Sánchez Yun</h1>
-                <p class="tagline">PhD student at the University of Málaga</p>
-                <p class="bio">
+                <p class="tagline" data-i18n="hero_tagline">PhD student at the University of Málaga</p>
+                <p class="bio" data-i18n="hero_bio">
                     PhD Researcher focused on Machine Learning optimization and High-Performance Computing. Specialized in developing efficient solutions of ML models on RISC-V architectures and parallel algorithms. Passionate about bridging the gap between state-of-the-art research and real-world systems to build functional, scalable, and high-performance products.
-
                 </p>
                 <div class="social-links">
                     <a href="#" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
@@ -40,41 +55,41 @@
     <!-- INVESTIGACIÓN (Timeline) -->
     <section id="research" class="section">
         <div class="container">
-            <h2 class="section-title">Research Experience</h2>
+            <h2 class="section-title" data-i18n="section_research">Research Experience</h2>
             <div class="timeline">
                 
                 <!-- Proyecto 1 -->
                 <div class="timeline-item">
                     <article class="project-card" data-id="1">
-                        <div class="project-date">2024 - Presente</div>
+                        <div class="project-date" data-i18n="p1_date">2024 - Present</div>
                         <div class="project-content">
-                            <h3>Detección de Anomalías con Deep Learning</h3>
-                            <p class="project-desc">Desarrollo de una arquitectura novedosa basada en Transformers para la detección de anomalías en series temporales de sensores industriales.</p>
+                            <h3 data-i18n="p1_title">Anomaly Detection with Deep Learning</h3>
+                            <p class="project-desc" data-i18n="p1_desc">Development of a novel Transformer-based architecture for anomaly detection in industrial sensor time series.</p>
                             <div class="tags">
                                 <span>Python</span>
                                 <span>PyTorch</span>
                                 <span>Time Series</span>
                             </div>
-                            <span class="btn-link">Ver Detalles <i class="fas fa-plus"></i></span>
+                            <span class="btn-link"><span data-i18n="btn_details">View Details</span> <i class="fas fa-plus"></i></span>
                         </div>
                         <!-- Contenido Oculto para el Modal -->
                         <div class="hidden-content" style="display:none;">
-                            <h3>Descripción Detallada</h3>
-                            <p>Este proyecto se centra en la creación de modelos robustos de Deep Learning capaces de identificar patrones anómalos en flujos de datos masivos provenientes de sensores IoT en entornos industriales.</p>
+                            <h3 data-i18n="modal_desc_title">Detailed Description</h3>
+                            <p data-i18n="p1_modal_desc">This project focuses on creating robust Deep Learning models capable of identifying anomalous patterns in massive data streams from IoT sensors in industrial environments.</p>
                             
-                            <h3>Metodología</h3>
+                            <h3 data-i18n="modal_method_title">Methodology</h3>
                             <ul>
-                                <li>Preprocesamiento de series temporales utilizando técnicas de ventana deslizante y normalización adaptativa.</li>
-                                <li>Implementación de una arquitectura Transformer modificada con mecanismos de atención dispersa para mejorar la eficiencia computacional.</li>
-                                <li>Entrenamiento no supervisado utilizando un enfoque de reconstrucción de errores.</li>
+                                <li data-i18n="p1_modal_li1">Time series preprocessing using sliding window techniques and adaptive normalization.</li>
+                                <li data-i18n="p1_modal_li2">Implementation of a modified Transformer architecture with sparse attention mechanisms to improve computational efficiency.</li>
+                                <li data-i18n="p1_modal_li3">Unsupervised training using an error reconstruction approach.</li>
                             </ul>
 
-                            <h3>Resultados</h3>
-                            <p>El modelo propuesto superó a los baselines tradicionales (LSTM, Autoencoders) en un 15% en términos de F1-Score en el dataset público SWaT.</p>
+                            <h3 data-i18n="modal_results_title">Results</h3>
+                            <p data-i18n="p1_modal_results">The proposed model outperformed traditional baselines (LSTM, Autoencoders) by 15% in terms of F1-Score on the public SWaT dataset.</p>
                             
                             <div class="links-modal">
-                                <a href="#" class="btn">Ver Paper</a>
-                                <a href="#" class="btn btn-outline">Repositorio GitHub</a>
+                                <a href="#" class="btn" data-i18n="btn_paper">View Paper</a>
+                                <a href="#" class="btn btn-outline" data-i18n="btn_repo">GitHub Repo</a>
                             </div>
                         </div>
                     </article>
@@ -85,22 +100,22 @@
                     <article class="project-card" data-id="2">
                         <div class="project-date">2023</div>
                         <div class="project-content">
-                            <h3>Optimización de Algoritmos Genéticos</h3>
-                            <p class="project-desc">Estudio comparativo sobre la eficiencia de algoritmos evolutivos en problemas de optimización combinatoria a gran escala.</p>
+                            <h3 data-i18n="p2_title">Genetic Algorithms Optimization</h3>
+                            <p class="project-desc" data-i18n="p2_desc">Comparative study on the efficiency of evolutionary algorithms in large-scale combinatorial optimization problems.</p>
                             <div class="tags">
                                 <span>C++</span>
                                 <span>Evolutionary Comp</span>
                                 <span>HPC</span>
                             </div>
-                            <span class="btn-link">Ver Detalles <i class="fas fa-plus"></i></span>
+                            <span class="btn-link"><span data-i18n="btn_details">View Details</span> <i class="fas fa-plus"></i></span>
                         </div>
                         <div class="hidden-content" style="display:none;">
-                            <h3>Descripción Detallada</h3>
-                            <p>Investigación sobre cómo paralelizar algoritmos genéticos utilizando OpenMP y MPI para resolver el problema del viajante de comercio (TSP) con millones de ciudades.</p>
-                            <h3>Contribuciones</h3>
+                            <h3 data-i18n="modal_desc_title">Detailed Description</h3>
+                            <p data-i18n="p2_modal_desc">Research on how to parallelize genetic algorithms using OpenMP and MPI to solve the Traveling Salesman Problem (TSP) with millions of cities.</p>
+                            <h3 data-i18n="modal_contrib_title">Contributions</h3>
                             <ul>
-                                <li>Diseño de un nuevo operador de cruce que preserva mejor las subestructuras óptimas.</li>
-                                <li>Implementación híbrida CPU-GPU para acelerar la evaluación de la función de fitness.</li>
+                                <li data-i18n="p2_modal_li1">Design of a new crossover operator that better preserves optimal substructures.</li>
+                                <li data-i18n="p2_modal_li2">Hybrid CPU-GPU implementation to accelerate fitness function evaluation.</li>
                             </ul>
                         </div>
                     </article>
@@ -111,20 +126,20 @@
                     <article class="project-card" data-id="3">
                         <div class="project-date">2022</div>
                         <div class="project-content">
-                            <h3>Sistema de Recomendación Contextual</h3>
-                            <p class="project-desc">Implementación de un sistema híbrido de recomendación para plataformas de e-learning, integrando filtrado colaborativo y basado en contenido.</p>
+                            <h3 data-i18n="p3_title">Contextual Recommendation System</h3>
+                            <p class="project-desc" data-i18n="p3_desc">Implementation of a hybrid recommendation system for e-learning platforms, integrating collaborative and content-based filtering.</p>
                             <div class="tags">
                                 <span>Python</span>
                                 <span>Scikit-learn</span>
                                 <span>Flask</span>
                             </div>
-                            <span class="btn-link">Ver Detalles <i class="fas fa-plus"></i></span>
+                            <span class="btn-link"><span data-i18n="btn_details">View Details</span> <i class="fas fa-plus"></i></span>
                         </div>
                         <div class="hidden-content" style="display:none;">
-                            <h3>Descripción Detallada</h3>
-                            <p>Desarrollo de un motor de recomendación para una plataforma educativa con más de 10,000 usuarios activos.</p>
-                            <h3>Tecnologías</h3>
-                            <p>Se utilizó Matrix Factorization para el filtrado colaborativo y NLP (TF-IDF) para el análisis de contenido de los cursos.</p>
+                            <h3 data-i18n="modal_desc_title">Detailed Description</h3>
+                            <p data-i18n="p3_modal_desc">Development of a recommendation engine for an educational platform with over 10,000 active users.</p>
+                            <h3 data-i18n="modal_tech_title">Technologies</h3>
+                            <p data-i18n="p3_modal_tech">Matrix Factorization was used for collaborative filtering and NLP (TF-IDF) for course content analysis.</p>
                         </div>
                     </article>
                 </div>
@@ -137,7 +152,7 @@
     <div id="project-modal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modal-title">Título del Proyecto</h2>
+                <h2 id="modal-title">Project Title</h2>
                 <button class="close-modal"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body" id="modal-body">
@@ -149,27 +164,27 @@
     <!-- CONGRESOS & EVENTOS -->
     <section id="conferences" class="section bg-light">
         <div class="container">
-            <h2 class="section-title">Congresos & Summer Schools</h2>
+            <h2 class="section-title" data-i18n="section_conferences">Conferences & Summer Schools</h2>
             <ul class="conference-list">
                 <li>
-                    <span class="conf-date">Jul 2024</span>
+                    <span class="conf-date" data-i18n="conf1_date">Jul 2024</span>
                     <div class="conf-info">
                         <strong>International Conference on Machine Learning (ICML)</strong>
-                        <span class="conf-loc">Viena, Austria - Asistente & Presentador de Poster</span>
+                        <span class="conf-loc" data-i18n="conf1_loc">Vienna, Austria - Attendee & Poster Presenter</span>
                     </div>
                 </li>
                 <li>
-                    <span class="conf-date">Ago 2023</span>
+                    <span class="conf-date" data-i18n="conf2_date">Aug 2023</span>
                     <div class="conf-info">
                         <strong>Deep Learning Summer School</strong>
-                        <span class="conf-loc">Montreal, Canadá - Becado</span>
+                        <span class="conf-loc" data-i18n="conf2_loc">Montreal, Canada - Scholarship Recipient</span>
                     </div>
                 </li>
                 <li>
-                    <span class="conf-date">Nov 2022</span>
+                    <span class="conf-date" data-i18n="conf3_date">Nov 2022</span>
                     <div class="conf-info">
                         <strong>NeurIPS Workshop</strong>
-                        <span class="conf-loc">New Orleans, USA - Asistente Virtual</span>
+                        <span class="conf-loc" data-i18n="conf3_loc">New Orleans, USA - Virtual Attendee</span>
                     </div>
                 </li>
             </ul>
@@ -179,22 +194,22 @@
     <!-- AFICIONES (Informal) -->
     <section id="hobbies" class="section">
         <div class="container">
-            <h2 class="section-title">Fuera del Laboratorio</h2>
+            <h2 class="section-title" data-i18n="section_hobbies">Beyond the Lab</h2>
             <div class="hobbies-grid">
                 <div class="hobby-card">
                     <i class="fas fa-camera-retro"></i>
-                    <h3>Fotografía</h3>
-                    <p>Capturando paisajes urbanos y naturaleza en mis viajes.</p>
+                    <h3 data-i18n="hobby1_title">Photography</h3>
+                    <p data-i18n="hobby1_desc">Capturing urban landscapes and nature during my travels.</p>
                 </div>
                 <div class="hobby-card">
                     <i class="fas fa-hiking"></i>
-                    <h3>Senderismo</h3>
-                    <p>Desconectando en la montaña cada fin de semana.</p>
+                    <h3 data-i18n="hobby2_title">Hiking</h3>
+                    <p data-i18n="hobby2_desc">Disconnecting in the mountains every weekend.</p>
                 </div>
                 <div class="hobby-card">
                     <i class="fas fa-book-open"></i>
-                    <h3>Ciencia Ficción</h3>
-                    <p>Ávido lector de Asimov, Philip K. Dick y Ursula K. Le Guin.</p>
+                    <h3 data-i18n="hobby3_title">Sci-Fi</h3>
+                    <p data-i18n="hobby3_desc">Avid reader of Asimov, Philip K. Dick, and Ursula K. Le Guin.</p>
                 </div>
             </div>
         </div>
@@ -203,17 +218,17 @@
     <!-- AI INTEGRATION -->
     <section id="ai-demo" class="section ai-section">
         <div class="container">
-            <h2 class="section-title text-white">Ask My Digital Twin</h2>
-            <p class="ai-subtitle">Una interfaz experimental impulsada por IA (simulada) para responder tus dudas sobre mi perfil.</p>
+            <h2 class="section-title text-white" data-i18n="section_ai">Ask My Digital Twin</h2>
+            <p class="ai-subtitle" data-i18n="ai_subtitle">An experimental AI-powered interface (simulated) to answer your questions about my profile.</p>
             
             <div class="chat-interface">
                 <div class="chat-window" id="chat-messages">
                     <div class="message bot">
-                        <p>¡Hola! Soy el asistente virtual de [Tu Nombre]. Pregúntame sobre mis proyectos, contacto o aficiones.</p>
+                        <p data-i18n="ai_welcome">Hello! I am [Your Name]'s virtual assistant. Ask me about my projects, contact info, or hobbies.</p>
                     </div>
                 </div>
                 <div class="chat-input-area">
-                    <input type="text" id="chat-input" placeholder="Escribe tu pregunta aquí... (ej: 'proyectos', 'contacto')">
+                    <input type="text" id="chat-input" placeholder="Type your question here... (e.g., 'projects', 'contact')">
                     <button id="chat-send"><i class="fas fa-paper-plane"></i></button>
                 </div>
             </div>
@@ -222,7 +237,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 [Tu Nombre]. Diseñado con pasión y código.</p>
+            <p>&copy; 2025 [Your Name]. Designed with passion and code.</p>
         </div>
     </footer>
 

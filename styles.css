@@ -68,7 +68,7 @@ h1, h2, h3 {
 
 /* HERO SECTION */
 .hero {
-    padding: 120px 0;
+    padding: 140px 0 120px; /* 120px original + 20px extra */
     background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
     display: flex;
     align-items: center;
@@ -120,6 +120,68 @@ h1, h2, h3 {
 .social-links a:hover {
     color: var(--primary-color);
     transform: translateY(-3px);
+}
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    z-index: 1000;
+    padding: 15px 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    letter-spacing: -1px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-links a {
+    font-weight: 500;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.lang-btn {
+    background: transparent;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.lang-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
 }
 
 /* SECTIONS GENERAL */
