@@ -325,33 +325,29 @@
         </div>
     </section>
 
-    <!-- AI INTEGRATION -->
-    <section id="ai-demo" class="section ai-section">
+    <!-- PRUNING GAME -->
+    <section id="pruning-game" class="section ai-section">
         <div class="container">
-            <h2 class="section-title text-white" data-i18n="section_ai">Local AI Challenge</h2>
-            <p class="ai-subtitle" data-i18n="ai_subtitle">Is your hardware worthy? Run a local LLM directly in your browser via WebGPU. No servers, just your GPU.</p>
+            <h2 class="section-title text-white" data-i18n="section_game">The Unstructured Pruning Game</h2>
+            <p class="ai-subtitle" data-i18n="game_subtitle">Experience my PhD thesis: Prune the connections to optimize the Neural Network. Be careful not to destroy the accuracy!</p>
             
-            <div class="chat-interface">
-                <!-- Overlay for initialization -->
-                <div id="ai-init-overlay" class="ai-overlay">
-                    <div class="ai-overlay-content">
-                        <i class="fas fa-microchip fa-3x"></i>
-                        <h3>Initialize Neural Engine</h3>
-                        <p>This will download ~600MB of model weights to your cache.</p>
-                        <button id="btn-init-ai" class="btn-primary">Load Model (WebGPU)</button>
-                        <div id="ai-progress-container" class="hidden">
-                            <div class="progress-bar"><div id="ai-progress-fill"></div></div>
-                            <p id="ai-status-text">Waiting to start...</p>
-                        </div>
+            <div class="game-interface">
+                <div class="game-stats">
+                    <div class="stat-box">
+                        <span class="stat-label">Sparsity</span>
+                        <span id="sparsity-val" class="stat-value">0%</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Accuracy</span>
+                        <span id="accuracy-val" class="stat-value">100%</span>
                     </div>
                 </div>
-
-                <div class="chat-window" id="chat-messages">
-                    <!-- Messages will appear here -->
-                </div>
-                <div class="chat-input-area">
-                    <input type="text" id="chat-input" placeholder="Initialize the model first..." disabled>
-                    <button id="chat-send" disabled><i class="fas fa-paper-plane"></i></button>
+                
+                <div id="network-canvas"></div>
+                
+                <div class="game-controls">
+                    <p id="game-feedback" class="game-feedback">Model is heavy and slow. Start pruning!</p>
+                    <button id="btn-reset-game" class="btn-primary">Reset Network</button>
                 </div>
             </div>
         </div>
@@ -363,6 +359,7 @@
         </div>
     </footer>
 
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

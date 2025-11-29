@@ -9,121 +9,136 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // AI Chat Integration (WebLLM - WebGPU)
-    const chatInput = document.getElementById('chat-input');
-    const chatSend = document.getElementById('chat-send');
-    const chatMessages = document.getElementById('chat-messages');
-    const btnInitAI = document.getElementById('btn-init-ai');
-    const aiOverlay = document.getElementById('ai-init-overlay');
-    const aiProgressContainer = document.getElementById('ai-progress-container');
-    const aiProgressFill = document.getElementById('ai-progress-fill');
-    const aiStatusText = document.getElementById('ai-status-text');
+    // Unstructured Pruning Game (D3.js)
+    const canvasContainer = document.getElementById('network-canvas');
+    const sparsityVal = document.getElementById('sparsity-val');
+    const accuracyVal = document.getElementById('accuracy-val');
+    const feedbackText = document.getElementById('game-feedback');
+    const btnReset = document.getElementById('btn-reset-game');
 
-    let engine = null;
-    // Using Llama-3.2-1B-Instruct quantized for WebGPU
-    const selectedModel = "Llama-3.2-1B-Instruct-q4f16_1-MLC"; 
+    let width, height;
+    let svg;
+    let nodes = [];
+    let links = [];
+    let initialLinksCount = 0;
+    let currentLinksCount = 0;
 
-    function addMessage(text, sender) {
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('message', sender);
-        const p = document.createElement('p');
-        p.textContent = text;
-        messageDiv.appendChild(p);
-        chatMessages.appendChild(messageDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-        return p;
-    }
-
-    async function initAI() {
-        btnInitAI.disabled = true;
-        btnInitAI.textContent = "Initializing WebGPU...";
-        aiProgressContainer.classList.remove('hidden');
+    function initGame() {
+        if (!canvasContainer) return;
         
-        try {
-            // Dynamic import from CDN
-            const { CreateMLCEngine } = await import('https://esm.run/@mlc-ai/web-llm');
+        // Clear previous SVG
+        canvasContainer.innerHTML = '';
+        
+        width = canvasContainer.clientWidth;
+        height = canvasContainer.clientHeight;
 
-            const initProgressCallback = (report) => {
-                console.log(report);
-                aiStatusText.textContent = report.text;
-                if (report.progress) {
-                    aiProgressFill.style.width = `${report.progress * 100}%`;
-                }
-            };
+        svg = d3.select("#network-canvas")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
 
-            engine = await CreateMLCEngine(
-                selectedModel,
-                { 
-                    initProgressCallback: initProgressCallback,
-                    logLevel: "INFO"
-                }
-            );
+        // Generate Neural Network Structure
+        const layers = [4, 6, 6, 4]; // Neurons per layer
+        const layerSpacing = width / (layers.length + 1);
+        
+        nodes = [];
+        links = [];
 
-            // Success
-            aiOverlay.classList.add('hidden');
-            chatInput.disabled = false;
-            chatSend.disabled = false;
-            chatInput.placeholder = "Ask me about RISC-V, HPC, or why x86 is obsolete...";
+        // Create Nodes
+        layers.forEach((neuronCount, layerIndex) => {
+            const x = (layerIndex + 1) * layerSpacing;
+            const ySpacing = height / (neuronCount + 1);
             
-            // Initial greeting
-            addMessage("System online. I am the sarcastic digital twin of José. Ask me why RISC-V rules.", 'bot');
+            for (let i = 0; i < neuronCount; i++) {
+                nodes.push({
+                    id: `l${layerIndex}-n${i}`,
+                    layer: layerIndex,
+                    x: x,
+                    y: (i + 1) * ySpacing
+                });
+            }
+        });
 
-        } catch (error) {
-            console.error("AI Init Error:", error);
-            aiStatusText.textContent = "Error: " + error.message + ". Ensure your browser supports WebGPU.";
-            btnInitAI.disabled = false;
-            btnInitAI.textContent = "Retry Initialization";
+        // Create Dense Links (Fully Connected)
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = 0; j < nodes.length; j++) {
+                if (nodes[j].layer === nodes[i].layer + 1) {
+                    links.push({
+                        source: nodes[i],
+                        target: nodes[j],
+                        id: `${nodes[i].id}-${nodes[j].id}`
+                    });
+                }
+            }
         }
-    }
 
-    async function handleChat() {
-        const text = chatInput.value.trim();
-        if (!text) return;
+        initialLinksCount = links.length;
+        currentLinksCount = initialLinksCount;
+        updateStats();
 
-        addMessage(text, 'user');
-        chatInput.value = '';
-        chatInput.disabled = true;
-        chatSend.disabled = true;
-
-        // Create a placeholder for the bot response
-        const botMessageP = addMessage("Thinking...", 'bot');
-        let fullResponse = "";
-
-        try {
-            const messages = [
-                { role: "system", content: "You are a sarcastic version of José Sánchez Yun, a PhD researcher in High-Performance Computing. You love RISC-V and despise inefficient hardware like x86. You answer questions briefly, with technical arrogance but accuracy. You are running locally on the user's browser via WebGPU." },
-                { role: "user", content: text }
-            ];
-
-            const chunks = await engine.chat.completions.create({
-                messages,
-                temperature: 0.7,
-                stream: true,
+        // Draw Links
+        const linkElements = svg.selectAll(".link")
+            .data(links, d => d.id)
+            .enter().append("line")
+            .attr("class", "link")
+            .attr("x1", d => d.source.x)
+            .attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x)
+            .attr("y2", d => d.target.y)
+            .on("mouseover", function(event, d) {
+                // Pruning Action
+                d3.select(this).remove();
+                currentLinksCount--;
+                updateStats();
             });
 
-            botMessageP.textContent = ""; // Clear "Thinking..."
+        // Draw Nodes
+        svg.selectAll(".node")
+            .data(nodes)
+            .enter().append("circle")
+            .attr("class", "node")
+            .attr("cx", d => d.x)
+            .attr("cy", d => d.y)
+            .attr("r", 8);
+    }
 
-            for await (const chunk of chunks) {
-                const content = chunk.choices[0]?.delta?.content || "";
-                fullResponse += content;
-                botMessageP.textContent = fullResponse;
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
+    function updateStats() {
+        const sparsity = ((initialLinksCount - currentLinksCount) / initialLinksCount) * 100;
+        let accuracy = 100;
 
-        } catch (error) {
-            botMessageP.textContent = "Error: " + error.message;
-        } finally {
-            chatInput.disabled = false;
-            chatSend.disabled = false;
-            chatInput.focus();
+        // Accuracy Logic based on Sparsity
+        if (sparsity < 50) {
+            accuracy = 98 + (Math.random() * 2); // High accuracy
+        } else if (sparsity < 75) {
+            accuracy = 90 - ((sparsity - 50) * 0.5); // Slight drop
+        } else {
+            accuracy = Math.max(0, 80 - Math.pow((sparsity - 75), 1.5)); // Exponential drop
+        }
+
+        sparsityVal.textContent = `${sparsity.toFixed(1)}%`;
+        accuracyVal.textContent = `${accuracy.toFixed(1)}%`;
+
+        // Feedback Logic
+        if (sparsity < 30) {
+            feedbackText.textContent = "Model is heavy and slow. High latency on edge devices.";
+            feedbackText.style.color = "#ff6b6b";
+        } else if (sparsity >= 30 && sparsity < 70) {
+            feedbackText.textContent = "Good balance! Hardware efficient and accurate.";
+            feedbackText.style.color = "#51cf66";
+        } else if (sparsity >= 70 && sparsity < 85) {
+            feedbackText.textContent = "Aggressive pruning! Accuracy is starting to suffer.";
+            feedbackText.style.color = "#fcc419";
+        } else {
+            feedbackText.textContent = "CRITICAL DAMAGE! You lobotomized the network.";
+            feedbackText.style.color = "#ff6b6b";
         }
     }
 
-    btnInitAI.addEventListener('click', initAI);
-    chatSend.addEventListener('click', handleChat);
-    chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleChat();
-    });
+    btnReset.addEventListener('click', initGame);
+    
+    // Initialize on load
+    initGame();
+    window.addEventListener('resize', initGame);
 
     // LANGUAGE SWITCHER
     const langToggle = document.getElementById('lang-toggle');
