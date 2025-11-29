@@ -88,7 +88,7 @@
                             </ul>
 
                             <h3 data-i18n="modal_results_title">Status</h3>
-                            <p data-i18n="p1_modal_results">This project is under development, and is expected to finish on the first quarter of 2026.</p>
+                            <p data-i18n="p1_modal_results">This project is under development, and it is expected to finish on the first quarter of 2026.</p>
                         </div>
                     </article>
                 </div>
@@ -96,25 +96,31 @@
                 <!-- Proyecto 2 -->
                 <div class="timeline-item">
                     <article class="project-card" data-id="2">
-                        <div class="project-date">2023</div>
+                        <div class="project-date">2024 - 2025</div>
                         <div class="project-content">
-                            <h3 data-i18n="p2_title">Genetic Algorithms Optimization</h3>
-                            <p class="project-desc" data-i18n="p2_desc">Comparative study on the efficiency of evolutionary algorithms in large-scale combinatorial optimization problems.</p>
+                            <h3 data-i18n="p2_title">Scalable Vectorization of Time Series Analysis: A Matrix Profile Implementation on RISC-V and ARM</h3>
+                            <p class="project-desc" data-i18n="p2_desc">Vector length agnostic implementation of RISC-V Vector Extension and ARM SVE on time series analysis algorithms. Performance comparation and exploration.</p>
                             <div class="tags">
-                                <span>C++</span>
-                                <span>Evolutionary Comp</span>
-                                <span>HPC</span>
+                                <span>RVV</span>
+                                <span>SVE</span>
+                                <span>Gem5</span>
+                                <span>RISC-V</span>
+                                <span>OpenMP</span>
                             </div>
                             <span class="btn-link"><span data-i18n="btn_details">View Details</span> <i class="fas fa-plus"></i></span>
                         </div>
                         <div class="hidden-content" style="display:none;">
                             <h3 data-i18n="modal_desc_title">Detailed Description</h3>
-                            <p data-i18n="p2_modal_desc">Research on how to parallelize genetic algorithms using OpenMP and MPI to solve the Traveling Salesman Problem (TSP) with millions of cities.</p>
-                            <h3 data-i18n="modal_contrib_title">Contributions</h3>
+                            <p data-i18n="p2_modal_desc">Study of the benefits of Vector Length agnostic approaches to time series analisys algorithms (SCAMP and SCRIMP) using RISC-V Vector Extension (RVV) and ARM Scalable Vector Extension (SVE). e propose implementations that exploit vectorization as much as possible in these algorithms and conduct a comprehensive evaluation to understand the trade-offs. Our results show an average speedup relative to the non-vectorized implementation of 66× on RISC-V (with vector length 16384 bits), and 8× on ARM (with vector length 2048 bits).</p>
+                            <h3 data-i18n="modal_contrib_title">Methodology</h3>
                             <ul>
-                                <li data-i18n="p2_modal_li1">Design of a new crossover operator that better preserves optimal substructures.</li>
-                                <li data-i18n="p2_modal_li2">Hybrid CPU-GPU implementation to accelerate fitness function evaluation.</li>
+                                <li data-i18n="p2_modal_li1">Vectorization of SCAMP and SCRIMP on RVV and SVE via intrinsics.</li>
+                                <li data-i18n="p2_modal_li2">Design of two equivalent processors for RISC-V and ARM architectures on gem5.</li>
+                                <li data-i18n="p2_modal_li3">Verification and validation of the proposed implementations on real matrix profile benchmarks.</li>
                             </ul>
+
+                            <h3 data-i18n="modal_results_title">Status</h3>
+                            <p data-i18n="p1_modal_results">This project is finished and currently under review for Springer Journal of Supercomputing since September 2025.</p>
                         </div>
                     </article>
                 </div>
