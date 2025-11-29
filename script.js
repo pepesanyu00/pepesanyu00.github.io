@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const translations = {
         en: {
+            nav_about: "About Me",
             nav_research: "Research",
             nav_conferences: "Conferences",
             nav_hobbies: "Hobbies",
@@ -98,6 +99,8 @@ document.addEventListener('DOMContentLoaded', () => {
             p1_modal_li4: "Integration of the accelerator with a RISC-V CPU, in order to validate and verificate the design with real benchmarks.",
             modal_results_title: "Status",
             p1_modal_results: "This project is under development, and it is expected to finish on the first quarter of 2026.",
+            section_hobbies: "Beyond the Lab",
+            hobbies_desc: "I have been passionate about nature and photography since I was young. I am also passionate about traveling, so when I travel I love taking photos that capture the moments I experience.",
             btn_paper: "View Paper",
             btn_repo: "GitHub Repo",
             p2_title: "Scalable Vectorization of Time Series Analysis: A Matrix Profile Implementation on RISC-V and ARM",
@@ -148,6 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ai_welcome: "Hello! I am [Your Name]'s virtual assistant. Ask me about my projects, contact info, or hobbies."
         },
         es: {
+            nav_about: "Sobre Mí",
             nav_research: "Investigación",
             nav_conferences: "Congresos",
             nav_hobbies: "Aficiones",
@@ -168,6 +172,8 @@ document.addEventListener('DOMContentLoaded', () => {
             p1_modal_li4: "Integración del acelerador con una CPU RISC-V, para validar y verificar el diseño con benchmarks reales.",
             modal_results_title: "Estado",
             p1_modal_results: "Este proyecto está en desarrollo y se espera que finalice en el primer trimestre de 2026.",
+            section_hobbies: "Más allá del Laboratorio",
+            hobbies_desc: "Soy un apasionado de la naturaleza y la fotografía desde que era joven. Además de ello también soy un apasionado de viajar, por lo que cuando viajo me encanta hacer fotos que capturen los momentos que vivo.",
             btn_paper: "Ver Paper",
             btn_repo: "Repositorio GitHub",
             p2_title: "Vectorización Escalable de Análisis de Series Temporales: Implementación de Matrix Profile en RISC-V y ARM",
