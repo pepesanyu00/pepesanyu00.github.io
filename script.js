@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // DOM Pruning Demo
-    const btnPrune = document.getElementById('btn-prune-web');
-    const btnRestore = document.getElementById('btn-restore-web');
     const pruningStats = document.getElementById('pruning-stats');
     const webSparsity = document.getElementById('web-sparsity');
     const webFunctionality = document.getElementById('web-functionality');
@@ -199,10 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update Stats
         pruningStats.classList.remove('hidden');
-        btnRestore.classList.remove('hidden');
-        btnPrune.textContent = type === 'unstructured' ? 
-            (currentLang === 'es' ? "Re-Aplicar Poda" : "Re-Apply Pruning") : 
-            (currentLang === 'es' ? "Re-Aplicar Poda" : "Re-Apply Pruning");
         
         webSparsity.textContent = `${sparsityPercentage}%`;
         
@@ -224,8 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 node.nodeValue = value;
             });
             pruningStats.classList.add('hidden');
-            btnRestore.classList.add('hidden');
-            btnPrune.textContent = currentLang === 'es' ? "Aplicar Poda" : "Apply Pruning";
             
             // Reset sliders
             if (sliderUnstructured) {
@@ -241,12 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    if (btnPrune) {
-        btnPrune.addEventListener('click', () => {
-            pruneWeb();
-        });
-        btnRestore.addEventListener('click', restoreWeb);
-    }
+
 
     // LANGUAGE SWITCHER
     const langToggle = document.getElementById('lang-toggle');
@@ -332,8 +319,6 @@ document.addEventListener('DOMContentLoaded', () => {
             lbl_pruning_structured: "Structured (Words)",
             lbl_sparsity: "Sparsity",
             lbl_functionality: "Functionality",
-            btn_apply_pruning: "Apply Pruning",
-            btn_restore_web: "Restore Website",
             footer_text: "&copy; 2025 José Sánchez Yun. Designed with passion and code."
         },
         es: {
@@ -417,8 +402,6 @@ document.addEventListener('DOMContentLoaded', () => {
             lbl_pruning_structured: "Estructurada (Palabras)",
             lbl_sparsity: "Dispersión (Sparsity)",
             lbl_functionality: "Funcionalidad",
-            btn_apply_pruning: "Aplicar Poda",
-            btn_restore_web: "Restaurar Web",
             footer_text: "&copy; 2025 José Sánchez Yun. Diseñado con pasión y código."
         }
     };
