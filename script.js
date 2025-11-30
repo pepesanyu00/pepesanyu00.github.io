@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } else {
             // Exclude the pruning section itself so controls remain visible
-            if (node.id === 'pruning-demo' || (node.closest && node.closest('#pruning-demo'))) {
+            if (node.id === 'pruning-demo' || (node.closest && node.closest('#pruning-demo')) || node.id === 'floating-restore-btn') {
                 return [];
             }
             

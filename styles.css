@@ -820,12 +820,53 @@ h1, h2, h3 {
 
 /* FOOTER */
 footer {
-    background: #1a1a1a;
-    color: #888;
-    text-align: center;
-    padding: 40px 0;
-    font-size: 0.9rem;
-    border-top: 1px solid #333;
+    background: #111;
+    color: #aaa;
+    padding: 60px 0 40px;
+    border-top: none;
+    position: relative;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.footer-logo {
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: var(--white);
+    letter-spacing: -2px;
+    opacity: 0.9;
+}
+
+.footer-social {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 10px;
+}
+
+.footer-social a {
+    color: #fff;
+    font-size: 1.5rem;
+    transition: all 0.3s;
+    opacity: 0.6;
+    background: rgba(255,255,255,0.1);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.footer-social a:hover {
+    color: var(--white);
+    opacity: 1;
+    background: var(--primary-color);
+    transform: translateY(-3px);
 }
 
 /* RESPONSIVE TIMELINE */
@@ -988,22 +1029,24 @@ footer {
 /* Floating Restore Button */
 .floating-btn {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 40px;
+    right: 40px;
     background: var(--primary-color);
     color: var(--white);
-    border: none;
-    padding: 12px 24px;
+    border: 2px solid rgba(255,255,255,0.2);
+    padding: 16px 32px;
     border-radius: 50px;
-    font-weight: 600;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 10px 25px rgba(0, 86, 179, 0.5);
     cursor: pointer;
     z-index: 9999;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform: translateY(0) scale(1);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    letter-spacing: 0.5px;
 }
 
 .floating-btn:hover {
