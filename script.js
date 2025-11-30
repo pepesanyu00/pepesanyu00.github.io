@@ -15,19 +15,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const pruningStats = document.getElementById('pruning-stats');
     const webSparsity = document.getElementById('web-sparsity');
     const webFunctionality = document.getElementById('web-functionality');
-    const pruningSlider = document.getElementById('pruning-slider');
-    const sliderVal = document.getElementById('slider-val');
+    
+    const sliderUnstructured = document.getElementById('pruning-slider-unstructured');
+    const valUnstructured = document.getElementById('val-unstructured');
+    const sliderStructured = document.getElementById('pruning-slider-structured');
+    const valStructured = document.getElementById('val-structured');
     
     let originalTextNodes = new Map();
     let isPruned = false;
 
-    // Update slider value display
-    if (pruningSlider && sliderVal) {
-        pruningSlider.addEventListener('input', (e) => {
-            sliderVal.textContent = `${e.target.value}%`;
-            if (isPruned) {
-                pruneWeb(parseInt(e.target.value));
+    // Update slider value display and exclusive logic
+    if (sliderUnstructured && valUnstructured && sliderStructured && valStructured) {
+        sliderUnstructured.addEventListener('input', (e) => {
+            valUnstructured.textContent = `${e.target.value}%`;
+            // Reset structured
+            if (sliderStructured.value > 0) {
+                sliderStructured.value = 0;
+                valStructured.textContent = "0%";
+                restoreWeb();
             }
+            // Apply unstructured
+            pruneWeb(); 
+        });
+
+        sliderStructured.addEventListener('input', (e) => {
+            valStructured.textContent = `${e.target.value}%`;
+            // Reset unstructured
+            if (sliderUnstructured.value > 0) {
+                sliderUnstructured.value = 0;
+                valUnstructured.textContent = "0%";
+                restoreWeb();
+            }
+            // Apply structured
+            pruneWeb();
         });
     }
 
@@ -50,135 +70,180 @@ document.addEventListener('DOMContentLoaded', () => {
         return textNodes;
     }
 
-    function calculateFunctionality(sparsity) {
-        // Curve: 
-        // 0-20% sparsity -> 100-90% functionality (Linear drop)
-        // 20-60% sparsity -> 90-10% functionality (Steep drop)
-        // 60-100% sparsity -> 10-0% functionality (Tail)
+    function calculateFunctionality(sparsity, type) {
+        // Functionality drops differently for structured vs unstructured
+        // Unstructured: Linear-ish drop, readable until high sparsity
+        // Structured: Exponential drop, unreadable quickly
         
-        if (sparsity <= 20) {
-            // y = mx + b -> (0,100), (20,90)
-            // m = -0.5
-            return 100 - (0.5 * sparsity);
-        } else if (sparsity <= 60) {
-            // (20,90), (60,10)
-            // m = (10-90)/(60-20) = -80/40 = -2
-            // y - 90 = -2(x - 20) -> y = -2x + 40 + 90 = -2x + 130
-            return 130 - (2 * sparsity);
+        let functionality;
+        if (type === 'unstructured') {
+            // Sigmoid-like curve for unstructured (resilient)
+            if (sparsity < 30) functionality = 100;
+            else if (sparsity > 80) functionality = 0;
+            else functionality = 100 - ((sparsity - 30) * 2);
         } else {
-            // (60,10), (100,0)
-            // m = (0-10)/(100-60) = -10/40 = -0.25
-            // y - 10 = -0.25(x - 60) -> y = -0.25x + 15 + 10 = -0.25x + 25
-            return Math.max(0, 25 - (0.25 * sparsity));
+            // Steep drop for structured
+            if (sparsity < 10) functionality = 100;
+            else functionality = Math.max(0, 100 - (sparsity * 1.5));
+        }
+        return Math.round(functionality);
+    }
+
+    function pruneWeb() {
+        const sparsityUnstructured = parseInt(sliderUnstructured.value);
+        const sparsityStructured = parseInt(sliderStructured.value);
+        
+        let sparsityPercentage = 0;
+        let type = 'unstructured';
+
+        if (sparsityUnstructured > 0) {
+            sparsityPercentage = sparsityUnstructured;
+            type = 'unstructured';
+        } else if (sparsityStructured > 0) {
+            sparsityPercentage = sparsityStructured;
+            type = 'structured';
+        } else {
+            // If both 0, maybe restore?
+            restoreWeb();
+            return;
+        }
+
+        if (!isPruned) {
+            // Save original text
+            const allTextNodes = getTextNodes(document.body);
+            allTextNodes.forEach((node, index) => {
+                originalTextNodes.set(node, node.nodeValue);
+            });
+            isPruned = true;
+        }
+
+        // Always restore to original before applying new pruning to ensure correct percentage
+        originalTextNodes.forEach((value, node) => {
+            node.nodeValue = value;
+        });
+
+        const protectedStrings = ["José", "Sánchez", "Yun", "JSY"];
+
+        originalTextNodes.forEach((originalText, node) => {
+            if (type === 'unstructured') {
+                let chars = originalText.split('');
+                let indices = chars.map((_, i) => i);
+                
+                // Filter out indices that are part of protected strings
+                let protectedIndices = new Set();
+                protectedStrings.forEach(pStr => {
+                    let idx = originalText.toLowerCase().indexOf(pStr.toLowerCase());
+                    while (idx !== -1) {
+                        for (let i = 0; i < pStr.length; i++) {
+                            protectedIndices.add(idx + i);
+                        }
+                        idx = originalText.toLowerCase().indexOf(pStr.toLowerCase(), idx + 1);
+                    }
+                });
+
+                let pruningIndices = indices.filter(i => 
+                    chars[i].trim() !== '' && !protectedIndices.has(i)
+                );
+
+                // Shuffle indices
+                for (let i = pruningIndices.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [pruningIndices[i], pruningIndices[j]] = [pruningIndices[j], pruningIndices[i]];
+                }
+
+                // Calculate how many to remove
+                const removeCount = Math.floor(pruningIndices.length * (sparsityPercentage / 100));
+                
+                // Remove (replace with underscore)
+                for (let i = 0; i < removeCount; i++) {
+                    chars[pruningIndices[i]] = '_';
+                }
+                
+                node.nodeValue = chars.join('');
+
+            } else {
+                // Structured Pruning (Words)
+                // Split by spaces but keep delimiters to reconstruct
+                let words = originalText.split(/(\s+)/);
+                
+                let wordIndices = [];
+                words.forEach((w, i) => {
+                    // If it's not whitespace and not protected
+                    if (w.trim().length > 0) {
+                        let isProtected = protectedStrings.some(pStr => 
+                            w.toLowerCase().includes(pStr.toLowerCase())
+                        );
+                        if (!isProtected) {
+                            wordIndices.push(i);
+                        }
+                    }
+                });
+
+                // Shuffle
+                for (let i = wordIndices.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [wordIndices[i], wordIndices[j]] = [wordIndices[j], wordIndices[i]];
+                }
+
+                const removeCount = Math.floor(wordIndices.length * (sparsityPercentage / 100));
+
+                for (let i = 0; i < removeCount; i++) {
+                    const idx = wordIndices[i];
+                    // Replace with underscores of same length
+                    words[idx] = '_'.repeat(words[idx].length);
+                }
+
+                node.nodeValue = words.join('');
+            }
+        });
+
+        // Update Stats
+        pruningStats.classList.remove('hidden');
+        btnRestore.classList.remove('hidden');
+        btnPrune.textContent = type === 'unstructured' ? 
+            (currentLang === 'es' ? "Re-Aplicar Poda" : "Re-Apply Pruning") : 
+            (currentLang === 'es' ? "Re-Aplicar Poda" : "Re-Apply Pruning");
+        
+        webSparsity.textContent = `${sparsityPercentage}%`;
+        
+        const functionality = calculateFunctionality(sparsityPercentage, type);
+        webFunctionality.textContent = `${functionality}%`;
+        
+        if (functionality < 50) {
+            webFunctionality.style.color = '#ff4d4d';
+        } else if (functionality < 80) {
+            webFunctionality.style.color = '#ffca28';
+        } else {
+            webFunctionality.style.color = '#4cc9f0';
         }
     }
 
-    function pruneWeb(sparsityPercentage = 20) {
-        const allTextNodes = getTextNodes(document.body);
-        let totalChars = 0;
-        let removedChars = 0;
-
-        // Protected strings (lowercase for easier comparison)
-        const protectedStrings = ["josé sánchez yun", "jose sanchez yun", "jsy"];
-
-        allTextNodes.forEach(node => {
-            // Save original if not saved yet
-            if (!originalTextNodes.has(node)) {
-                originalTextNodes.set(node, node.nodeValue);
-            }
-
-            const originalText = originalTextNodes.get(node);
-            const lowerText = originalText.toLowerCase();
-            
-            // Identify protected ranges within this node
-            let protectedRanges = [];
-            protectedStrings.forEach(pStr => {
-                let startIndex = 0;
-                let index;
-                while ((index = lowerText.indexOf(pStr, startIndex)) > -1) {
-                    protectedRanges.push({start: index, end: index + pStr.length});
-                    startIndex = index + pStr.length;
-                }
-            });
-
-            let newText = "";
-            
-            for (let i = 0; i < originalText.length; i++) {
-                const char = originalText[i];
-                
-                // Check if char is in any protected range
-                const isCharProtected = protectedRanges.some(range => i >= range.start && i < range.end);
-                
-                if (isCharProtected) {
-                    newText += char;
-                    // We count it as a char, but we don't prune it.
-                    // totalChars++; // Optional: decide if protected chars count towards sparsity denominator. 
-                    // Usually yes, they are part of the "visual elements".
-                    totalChars++;
-                    continue;
-                }
-
-                // Keep spaces to preserve word boundaries
-                if (char.trim() === "") {
-                    newText += char;
-                    continue;
-                }
-                
-                totalChars++;
-                // Prune based on slider percentage
-                if (Math.random() * 100 < sparsityPercentage) {
-                    removedChars++;
-                    newText += '_'; // Replace with underscore
-                } else {
-                    newText += char;
-                }
-            }
-            node.nodeValue = newText;
-        });
-
-        const actualSparsity = totalChars > 0 ? ((removedChars / totalChars) * 100).toFixed(1) : 0;
-        const functionality = calculateFunctionality(sparsityPercentage).toFixed(0);
-        
-        webSparsity.textContent = `${actualSparsity}%`;
-        if (webFunctionality) webFunctionality.textContent = `${functionality}%`;
-        
-        pruningStats.classList.remove('hidden');
-        btnPrune.classList.add('hidden');
-        btnRestore.classList.remove('hidden');
-        isPruned = true;
-    }
-
     function restoreWeb() {
-        originalTextNodes.forEach((text, node) => {
-            node.nodeValue = text;
-        });
-        
-        pruningStats.classList.add('hidden');
-        btnPrune.classList.remove('hidden');
-        btnRestore.classList.add('hidden');
-        
-        // Reset slider visual if needed, or keep it
-        // pruningSlider.value = 0; 
-        // sliderVal.textContent = "0%";
-        
-        isPruned = false;
+        if (isPruned) {
+            originalTextNodes.forEach((value, node) => {
+                node.nodeValue = value;
+            });
+            pruningStats.classList.add('hidden');
+            btnRestore.classList.add('hidden');
+            btnPrune.textContent = currentLang === 'es' ? "Aplicar Poda" : "Apply Pruning";
+            
+            // Reset sliders
+            if (sliderUnstructured) {
+                sliderUnstructured.value = 0;
+                valUnstructured.textContent = "0%";
+            }
+            if (sliderStructured) {
+                sliderStructured.value = 0;
+                valStructured.textContent = "0%";
+            }
+            
+            isPruned = false;
+        }
     }
 
     if (btnPrune) {
         btnPrune.addEventListener('click', () => {
-            const val = pruningSlider ? parseInt(pruningSlider.value) : 20;
-            // If slider is 0, maybe default to 20 for the button click? 
-            // Or just use the slider value. Let's use slider value but ensure it's at least something visible if user hasn't touched it.
-            // Actually, if slider is 0, nothing happens. Let's set slider to 20 if it is 0 on first click.
-            let targetSparsity = val;
-            if (targetSparsity === 0) {
-                targetSparsity = 20;
-                if (pruningSlider) {
-                    pruningSlider.value = 20;
-                    sliderVal.textContent = "20%";
-                }
-            }
-            pruneWeb(targetSparsity);
+            pruneWeb();
         });
         btnRestore.addEventListener('click', restoreWeb);
     }
