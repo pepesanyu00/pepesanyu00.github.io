@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pruningStats = document.getElementById('pruning-stats');
     const webSparsity = document.getElementById('web-sparsity');
     const webFunctionality = document.getElementById('web-functionality');
+    const floatingRestoreBtn = document.getElementById('floating-restore-btn');
     
     const sliderUnstructured = document.getElementById('pruning-slider-unstructured');
     const valUnstructured = document.getElementById('val-unstructured');
@@ -197,6 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update Stats
         pruningStats.classList.remove('hidden');
+        if (floatingRestoreBtn) floatingRestoreBtn.classList.remove('hidden');
         
         webSparsity.textContent = `${sparsityPercentage}%`;
         
@@ -218,6 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 node.nodeValue = value;
             });
             pruningStats.classList.add('hidden');
+            if (floatingRestoreBtn) floatingRestoreBtn.classList.add('hidden');
             
             // Reset sliders
             if (sliderUnstructured) {
@@ -319,6 +322,8 @@ document.addEventListener('DOMContentLoaded', () => {
             lbl_pruning_structured: "Structured (Words)",
             lbl_sparsity: "Sparsity",
             lbl_functionality: "Functionality",
+            btn_restore_web: "Restore Website",
+            lets_prune: "Let's prune the web!!",
             footer_text: "&copy; 2025 José Sánchez Yun. Designed with passion and code."
         },
         es: {
@@ -352,10 +357,10 @@ document.addEventListener('DOMContentLoaded', () => {
             p2_desc: "Implementación de extensiones Vector Length Agnostic como RISC-V RVV y ARM SVE en algoritmos de análisis de series temporales. Comparación de rendimiento y exploración.",
             p2_modal_desc: "Estudio de los beneficios de enfoques agnósticos a la longitud vectorial en algoritmos de análisis de series temporales (SCAMP y SCRIMP) utilizando la Extensión Vectorial RISC-V (RVV) y ARM Scalable Vector Extension (SVE). Proponemos implementaciones que explotan la vectorización tanto como sea posible en estos algoritmos y realizamos una evaluación exhaustiva para comprender los factores que afectan al rendimiento. Nuestros resultados muestran una aceleración promedio relativa a la implementación no vectorizada de 66× en RISC-V (con longitud vectorial de 16384 bits), y 8× en ARM (con longitud vectorial de 2048 bits).",
             modal_contrib_title: "Metodología",
-            p2_modal_li1: "Vectorización de SCAMP y SCRIMP en RVV y SVE vía intrínsecas.",
+            p2_modal_results: "Este proyecto está terminado y está siendo revisado en la revista Springer Journal of Supercomputing desde Septiembre de 2025.",
+            p2_modal_li1: "Vectorización de SCAMP y SCRIMP en RVV y SVE vía intrínsecos.",
             p2_modal_li2: "Diseño de dos procesadores equivalentes para arquitecturas RISC-V y ARM en gem5.",
             p2_modal_li3: "Verificación y validación de las implementaciones propuestas en benchmarks reales de matrix profile.",
-            p2_modal_results: "Este proyecto está terminado y está siendo revisado en la revista Springer Journal of Supercomputing desde Septiembre de 2025.",
             p3_title: "Barreras Transaccionales en algoritmos de Matrix Profile",
             p3_desc: "Un mecanismo de sincronización robusto usando Memoria Transaccional Hardware en algoritmos de análisis de series temporales.",
             p3_modal_desc: "Proponemos varias optimizaciones a la librería original de speculative barriers, y la hacemos compatible con Power8 e Intel. Finalmente realizamos un estudio completo sobre los factores que afectan el rendimiento de la memoria transaccional en algoritmos de análisis de series temporales.",
@@ -392,6 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
             section_ai: "Pregunta a mi Gemelo Digital",
             ai_subtitle: "Una interfaz experimental impulsada por IA (simulada) para responder tus dudas sobre mi perfil.",
             ai_welcome: "¡Hola! Soy el asistente virtual de [Tu Nombre]. Pregúntame sobre mis proyectos, contacto o aficiones.",
+
             
             // Pruning Demo Translations (ES)
             section_pruning: "Demo Comparativa de Poda",
@@ -402,6 +408,8 @@ document.addEventListener('DOMContentLoaded', () => {
             lbl_pruning_structured: "Estructurada (Palabras)",
             lbl_sparsity: "Dispersión (Sparsity)",
             lbl_functionality: "Funcionalidad",
+            btn_restore_web: "Restaurar Web",
+            lets_prune: "Vamos a podar la web!!",
             footer_text: "&copy; 2025 José Sánchez Yun. Diseñado con pasión y código."
         }
     };
@@ -557,5 +565,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+    }
+
+    if (floatingRestoreBtn) {
+        floatingRestoreBtn.addEventListener('click', restoreWeb);
     }
 });
