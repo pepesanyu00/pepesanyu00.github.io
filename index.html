@@ -352,13 +352,22 @@
             <div class="pruning-interface">
                 <div class="pruning-controls">
                     <p class="pruning-explanation" data-i18n="pruning_expl">
-                        Click the button to randomly remove 20% of the visual elements (letters) from this page. 
-                        Notice how it remains functional? That's what I do with Neural Networks: remove the superfluous while maintaining accuracy.
+                        Use the sliders to compare <strong>Unstructured Pruning</strong> (removing individual weights/letters) vs <strong>Structured Pruning</strong> (removing entire neurons/words). 
+                        Notice how unstructured pruning preserves information better at high sparsity levels, just like in Neural Networks.
                     </p>
                     
                     <div class="slider-container">
-                        <label for="pruning-slider" class="slider-label"><span data-i18n="lbl_pruning_level">Pruning Level</span>: <span id="slider-val">0%</span></label>
-                        <input type="range" id="pruning-slider" min="0" max="100" value="0" class="slider">
+                        <label for="pruning-slider-unstructured" class="slider-label">
+                            <span data-i18n="lbl_pruning_unstructured">Unstructured (Letters)</span>: <span id="val-unstructured">0%</span>
+                        </label>
+                        <input type="range" id="pruning-slider-unstructured" min="0" max="100" value="0" class="slider">
+                    </div>
+
+                    <div class="slider-container">
+                        <label for="pruning-slider-structured" class="slider-label">
+                            <span data-i18n="lbl_pruning_structured">Structured (Words)</span>: <span id="val-structured">0%</span>
+                        </label>
+                        <input type="range" id="pruning-slider-structured" min="0" max="100" value="0" class="slider">
                     </div>
 
                     <button id="btn-prune-web" class="btn-primary" data-i18n="btn_apply_pruning">Apply Pruning</button>

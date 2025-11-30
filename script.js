@@ -259,11 +259,12 @@ document.addEventListener('DOMContentLoaded', () => {
             flickr_caption: "Here you have a random photo from my flickr profile :)",
             
             // Pruning Demo Translations
-            section_pruning: "Unstructured Pruning Demo",
-            pruning_subtitle: "See how my research works applied to this very website.",
-            pruning_expl: "Use the slider to control the pruning level. Unstructured pruning creates 'sparse matrices' (data with holes). While it reduces size, standard hardware struggles to process it efficiently due to irregular memory access patterns. Watch how functionality drops drastically as sparsity increases!",
+            section_pruning: "Pruning Comparison Demo",
+            pruning_subtitle: "Visualizing the difference between Unstructured and Structured Pruning.",
+            pruning_expl: "Unstructured pruning removes individual connections (letters), maintaining the overall context. Structured pruning removes entire neurons or channels (words), creating gaps that destroy meaning. Notice how you can still read the text with 50% letters missing, but 50% words missing makes it unintelligible. This is why unstructured pruning yields higher accuracy.",
             pruning_msg: "\"Optimized for efficiency... but is the hardware happy?\"",
-            lbl_pruning_level: "Pruning Level",
+            lbl_pruning_unstructured: "Unstructured (Letters)",
+            lbl_pruning_structured: "Structured (Words)",
             lbl_sparsity: "Sparsity",
             lbl_functionality: "Functionality",
             btn_apply_pruning: "Apply Pruning",
@@ -343,11 +344,12 @@ document.addEventListener('DOMContentLoaded', () => {
             ai_welcome: "¡Hola! Soy el asistente virtual de [Tu Nombre]. Pregúntame sobre mis proyectos, contacto o aficiones.",
             
             // Pruning Demo Translations (ES)
-            section_pruning: "Demo de Poda No Estructurada",
-            pruning_subtitle: "Mira cómo funciona mi investigación aplicada a esta misma web.",
-            pruning_expl: "Usa el deslizador para controlar el nivel de poda. La poda no estructurada crea 'matrices dispersas' (datos con huecos). Aunque reduce el tamaño, al hardware estándar le cuesta procesarlo eficientemente debido a los patrones irregulares de acceso a memoria. ¡Observa cómo la funcionalidad cae drásticamente al aumentar la dispersión!",
+            section_pruning: "Demo Comparativa de Poda",
+            pruning_subtitle: "Visualizando la diferencia entre Poda Estructurada y No Estructurada.",
+            pruning_expl: "La poda no estructurada elimina conexiones individuales (letras), manteniendo el contexto general. La poda estructurada elimina neuronas o canales completos (palabras), creando vacíos que destruyen el significado. Observa cómo puedes seguir leyendo el texto con un 50% de letras faltantes, pero con un 50% de palabras faltantes se vuelve ininteligible. Por esto la poda no estructurada mantiene mejor la precisión.",
             pruning_msg: "\"Optimizado para eficiencia... ¿pero el hardware está contento?\"",
-            lbl_pruning_level: "Nivel de Poda",
+            lbl_pruning_unstructured: "No Estructurada (Letras)",
+            lbl_pruning_structured: "Estructurada (Palabras)",
             lbl_sparsity: "Dispersión (Sparsity)",
             lbl_functionality: "Funcionalidad",
             btn_apply_pruning: "Aplicar Poda",
