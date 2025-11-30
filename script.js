@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nav_research: "Investigación",
             nav_conferences: "Congresos",
             nav_hobbies: "Aficiones",
-            nav_ai: "Demo Poda",
+            nav_ai: "Demo Pruning",
             hero_tagline: "Estudiante de Doctorado en la Universidad de Málaga",
             hero_bio: "Investigador de doctorado enfocado en la optimización de Machine Learning y Computación de Alto Rendimiento. Especializado en desarrollar soluciones eficientes de modelos de ML en arquitecturas RISC-V y algoritmos paralelos. Apasionado por cerrar la brecha entre la investigación de vanguardia y los sistemas del mundo real para construir productos funcionales, escalables y de alto rendimiento.",
             section_research: "Experiencia en Investigación",

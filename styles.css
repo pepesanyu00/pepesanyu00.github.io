@@ -698,9 +698,28 @@ h1, h2, h3 {
 
 /* PRUNING DEMO SECTION */
 .ai-section {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
     color: var(--white);
     text-align: center;
+}
+
+/* Adjust controls for blue background */
+.ai-section .btn-primary {
+    background: var(--white);
+    color: var(--primary-color);
+}
+
+.ai-section .btn-primary:hover {
+    background: #f0f0f0;
+    color: var(--primary-dark);
+}
+
+.ai-section .slider::-webkit-slider-thumb {
+    background: var(--white);
+}
+
+.ai-section .slider::-moz-range-thumb {
+    background: var(--white);
 }
 
 .pruning-interface {
