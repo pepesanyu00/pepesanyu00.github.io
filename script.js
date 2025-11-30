@@ -201,6 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
             p1_date: "2025 (Under development)",
             p1_title: "Sparse inference accelerator for unstructured pruning optimization on CNN",
             p1_desc: "Development of a specialized FPGA-deployable co-processor to accelerate unstructured pruning in CNNs, implementing a full flow from PyTorch analysis to execution.",
+            card_hover_text: "Click for more details",
             btn_details: "View Details",
             modal_desc_title: "Detailed Description",
             p1_modal_desc: "This project tackles a critical challenge in AI hardware acceleration: unstructured pruning in Convolutional Neural Networks (CNNs). While pruning theoretically reduces computational load, the resulting irregularity in memory access patterns often degrades performance on conventional hardware. The goal is to design a specialized co-processor capable of exploiting this sparsity to maximize throughput and energy efficiency on edge devices.",
@@ -281,6 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
             p1_date: "2025 (En desarrollo)",
             p1_title: "Acelerador de inferencia dispersa para optimización de poda no estructurada en CNN",
             p1_desc: "Desarrollo de un coprocesador especializado desplegable en FPGA para acelerar la poda no estructurada en CNNs, implementando un flujo completo desde el análisis en PyTorch hasta la ejecución.",
+            card_hover_text: "Click para ver detalles",
             btn_details: "Ver Detalles",
             modal_desc_title: "Descripción Detallada",
             p1_modal_desc: "Este proyecto aborda un desafío crítico en la aceleración de hardware de IA: la poda no estructurada en Redes Neuronales Convolucionales (CNNs). Si bien la poda reduce teóricamente la carga computacional, la irregularidad resultante en los patrones de acceso a memoria a menudo degrada el rendimiento en hardware convencional. El objetivo es diseñar un coprocesador especializado capaz de explotar esta dispersión para maximizar el rendimiento y la eficiencia energética en dispositivos edge.",
@@ -361,6 +363,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 element.textContent = translations[lang][key];
             }
         });
+
+        document.querySelectorAll('[data-i18n-hover]').forEach(element => {
+            const key = element.getAttribute('data-i18n-hover');
+            if (translations[lang][key]) {
+                element.setAttribute('data-hover-text', translations[lang][key]);
+            }
+        });
+
         langText.textContent = lang === 'en' ? 'ES' : 'EN';
     }
 
