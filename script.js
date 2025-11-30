@@ -14,9 +14,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnRestore = document.getElementById('btn-restore-web');
     const pruningStats = document.getElementById('pruning-stats');
     const webSparsity = document.getElementById('web-sparsity');
+    const webFunctionality = document.getElementById('web-functionality');
+    const pruningSlider = document.getElementById('pruning-slider');
+    const sliderVal = document.getElementById('slider-val');
     
     let originalTextNodes = new Map();
     let isPruned = false;
+
+    // Update slider value display
+    if (pruningSlider && sliderVal) {
+        pruningSlider.addEventListener('input', (e) => {
+            sliderVal.textContent = `${e.target.value}%`;
+            if (isPruned) {
+                pruneWeb(parseInt(e.target.value));
+            }
+        });
+    }
 
     function getTextNodes(node) {
         let textNodes = [];
@@ -37,33 +50,85 @@ document.addEventListener('DOMContentLoaded', () => {
         return textNodes;
     }
 
-    function pruneWeb() {
-        if (isPruned) return;
+    function calculateFunctionality(sparsity) {
+        // Curve: 
+        // 0-20% sparsity -> 100-90% functionality (Linear drop)
+        // 20-60% sparsity -> 90-10% functionality (Steep drop)
+        // 60-100% sparsity -> 10-0% functionality (Tail)
         
+        if (sparsity <= 20) {
+            // y = mx + b -> (0,100), (20,90)
+            // m = -0.5
+            return 100 - (0.5 * sparsity);
+        } else if (sparsity <= 60) {
+            // (20,90), (60,10)
+            // m = (10-90)/(60-20) = -80/40 = -2
+            // y - 90 = -2(x - 20) -> y = -2x + 40 + 90 = -2x + 130
+            return 130 - (2 * sparsity);
+        } else {
+            // (60,10), (100,0)
+            // m = (0-10)/(100-60) = -10/40 = -0.25
+            // y - 10 = -0.25(x - 60) -> y = -0.25x + 15 + 10 = -0.25x + 25
+            return Math.max(0, 25 - (0.25 * sparsity));
+        }
+    }
+
+    function pruneWeb(sparsityPercentage = 20) {
         const allTextNodes = getTextNodes(document.body);
         let totalChars = 0;
         let removedChars = 0;
 
+        // Protected strings (lowercase for easier comparison)
+        const protectedStrings = ["josé sánchez yun", "jose sanchez yun", "jsy"];
+
         allTextNodes.forEach(node => {
-            // Save original
+            // Save original if not saved yet
             if (!originalTextNodes.has(node)) {
                 originalTextNodes.set(node, node.nodeValue);
             }
 
-            const originalText = node.nodeValue;
+            const originalText = originalTextNodes.get(node);
+            const lowerText = originalText.toLowerCase();
+            
+            // Identify protected ranges within this node
+            let protectedRanges = [];
+            protectedStrings.forEach(pStr => {
+                let startIndex = 0;
+                let index;
+                while ((index = lowerText.indexOf(pStr, startIndex)) > -1) {
+                    protectedRanges.push({start: index, end: index + pStr.length});
+                    startIndex = index + pStr.length;
+                }
+            });
+
             let newText = "";
             
-            for (let char of originalText) {
-                // Keep spaces to preserve word boundaries mostly
+            for (let i = 0; i < originalText.length; i++) {
+                const char = originalText[i];
+                
+                // Check if char is in any protected range
+                const isCharProtected = protectedRanges.some(range => i >= range.start && i < range.end);
+                
+                if (isCharProtected) {
+                    newText += char;
+                    // We count it as a char, but we don't prune it.
+                    // totalChars++; // Optional: decide if protected chars count towards sparsity denominator. 
+                    // Usually yes, they are part of the "visual elements".
+                    totalChars++;
+                    continue;
+                }
+
+                // Keep spaces to preserve word boundaries
                 if (char.trim() === "") {
                     newText += char;
                     continue;
                 }
                 
                 totalChars++;
-                // 20% chance to prune (remove character)
-                if (Math.random() > 0.9) {
+                // Prune based on slider percentage
+                if (Math.random() * 100 < sparsityPercentage) {
                     removedChars++;
+                    newText += '_'; // Replace with underscore
                 } else {
                     newText += char;
                 }
@@ -71,8 +136,11 @@ document.addEventListener('DOMContentLoaded', () => {
             node.nodeValue = newText;
         });
 
-        const sparsity = totalChars > 0 ? ((removedChars / totalChars) * 100).toFixed(1) : 0;
-        webSparsity.textContent = `${sparsity}%`;
+        const actualSparsity = totalChars > 0 ? ((removedChars / totalChars) * 100).toFixed(1) : 0;
+        const functionality = calculateFunctionality(sparsityPercentage).toFixed(0);
+        
+        webSparsity.textContent = `${actualSparsity}%`;
+        if (webFunctionality) webFunctionality.textContent = `${functionality}%`;
         
         pruningStats.classList.remove('hidden');
         btnPrune.classList.add('hidden');
@@ -88,11 +156,30 @@ document.addEventListener('DOMContentLoaded', () => {
         pruningStats.classList.add('hidden');
         btnPrune.classList.remove('hidden');
         btnRestore.classList.add('hidden');
+        
+        // Reset slider visual if needed, or keep it
+        // pruningSlider.value = 0; 
+        // sliderVal.textContent = "0%";
+        
         isPruned = false;
     }
 
     if (btnPrune) {
-        btnPrune.addEventListener('click', pruneWeb);
+        btnPrune.addEventListener('click', () => {
+            const val = pruningSlider ? parseInt(pruningSlider.value) : 20;
+            // If slider is 0, maybe default to 20 for the button click? 
+            // Or just use the slider value. Let's use slider value but ensure it's at least something visible if user hasn't touched it.
+            // Actually, if slider is 0, nothing happens. Let's set slider to 20 if it is 0 on first click.
+            let targetSparsity = val;
+            if (targetSparsity === 0) {
+                targetSparsity = 20;
+                if (pruningSlider) {
+                    pruningSlider.value = 20;
+                    sliderVal.textContent = "20%";
+                }
+            }
+            pruneWeb(targetSparsity);
+        });
         btnRestore.addEventListener('click', restoreWeb);
     }
 
@@ -107,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nav_research: "Research",
             nav_conferences: "Conferences",
             nav_hobbies: "Hobbies",
-            nav_ai: "AI Twin",
+            nav_ai: "Pruning Demo",
             hero_tagline: "PhD student at the University of Málaga",
             hero_bio: "PhD Researcher focused on Machine Learning optimization and High-Performance Computing. Specialized in developing efficient solutions of ML models on RISC-V architectures and parallel algorithms. Passionate about bridging the gap between state-of-the-art research and real-world systems to build functional, scalable, and high-performance products.",
             section_research: "Research Experience",
@@ -167,22 +254,25 @@ document.addEventListener('DOMContentLoaded', () => {
             section_hobbies: "Beyond the Lab",
             hobbies_desc: "I have been passionate about nature and photography since I was young. I am also passionate about traveling, so when I travel I love taking photos that capture the moments I experience.",
             flickr_caption: "Here you have a random photo from my flickr profile :)",
-            section_ai: "Ask My Digital Twin",
-            ai_subtitle: "An experimental AI-powered interface (simulated) to answer your questions about my profile.",
-            ai_welcome: "Hello! I am [Your Name]'s virtual assistant. Ask me about my projects, contact info, or hobbies.",
             
             // Pruning Demo Translations
             section_pruning: "Unstructured Pruning Demo",
             pruning_subtitle: "See how my research works applied to this very website.",
-            pruning_expl: "Click the button to randomly remove 50% of the visual elements (letters) from this page. Notice how it remains functional? That's what I do with Neural Networks: remove the superfluous while maintaining accuracy.",
-            pruning_msg: "\"Optimized for efficiency. Still readable, right?\""
+            pruning_expl: "Use the slider to control the pruning level. Unstructured pruning creates 'sparse matrices' (data with holes). While it reduces size, standard hardware struggles to process it efficiently due to irregular memory access patterns. Watch how functionality drops drastically as sparsity increases!",
+            pruning_msg: "\"Optimized for efficiency... but is the hardware happy?\"",
+            lbl_pruning_level: "Pruning Level",
+            lbl_sparsity: "Sparsity",
+            lbl_functionality: "Functionality",
+            btn_apply_pruning: "Apply Pruning",
+            btn_restore_web: "Restore Website",
+            footer_text: "&copy; 2025 José Sánchez Yun. Designed with passion and code."
         },
         es: {
             nav_about: "Sobre Mí",
             nav_research: "Investigación",
             nav_conferences: "Congresos",
             nav_hobbies: "Aficiones",
-            nav_ai: "Gemelo IA",
+            nav_ai: "Demo Poda",
             hero_tagline: "Estudiante de Doctorado en la Universidad de Málaga",
             hero_bio: "Investigador de doctorado enfocado en la optimización de Machine Learning y Computación de Alto Rendimiento. Especializado en desarrollar soluciones eficientes de modelos de ML en arquitecturas RISC-V y algoritmos paralelos. Apasionado por cerrar la brecha entre la investigación de vanguardia y los sistemas del mundo real para construir productos funcionales, escalables y de alto rendimiento.",
             section_research: "Experiencia en Investigación",
@@ -249,8 +339,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Pruning Demo Translations (ES)
             section_pruning: "Demo de Poda No Estructurada",
             pruning_subtitle: "Mira cómo funciona mi investigación aplicada a esta misma web.",
-            pruning_expl: "Haz clic en el botón para eliminar aleatoriamente el 50% de los elementos visuales (letras) de esta página. ¿Notas cómo sigue siendo funcional? Eso es lo que hago con las Redes Neuronales: eliminar lo superfluo manteniendo la precisión.",
-            pruning_msg: "\"Optimizado para eficiencia. Aún legible, ¿verdad?\""
+            pruning_expl: "Usa el deslizador para controlar el nivel de poda. La poda no estructurada crea 'matrices dispersas' (datos con huecos). Aunque reduce el tamaño, al hardware estándar le cuesta procesarlo eficientemente debido a los patrones irregulares de acceso a memoria. ¡Observa cómo la funcionalidad cae drásticamente al aumentar la dispersión!",
+            pruning_msg: "\"Optimizado para eficiencia... ¿pero el hardware está contento?\"",
+            lbl_pruning_level: "Nivel de Poda",
+            lbl_sparsity: "Dispersión (Sparsity)",
+            lbl_functionality: "Funcionalidad",
+            btn_apply_pruning: "Aplicar Poda",
+            btn_restore_web: "Restaurar Web",
+            footer_text: "&copy; 2025 José Sánchez Yun. Diseñado con pasión y código."
         }
     };
 

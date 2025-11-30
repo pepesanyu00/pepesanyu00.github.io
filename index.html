@@ -21,7 +21,7 @@
                 <li><a href="#research" data-i18n="nav_research">Research</a></li>
                 <li><a href="#conferences" data-i18n="nav_conferences">Conferences</a></li>
                 <li><a href="#hobbies" data-i18n="nav_hobbies">Hobbies</a></li>
-                <li><a href="#ai-demo" data-i18n="nav_ai">AI Twin</a></li>
+                <li><a href="#ai-demo" data-i18n="nav_ai">Pruning demo</a></li>
             </ul>
             <button id="lang-toggle" class="lang-btn">
                 <i class="fas fa-globe"></i> <span id="lang-text">ES</span>
@@ -200,7 +200,7 @@
                             <div data-i18n="conf2_blog_content">
                                 <p>Last week, I had the chance to attend SARTECO days for the first time, held this year in Seville. I’d heard great things from colleagues who had been to previous editions, and it definitely lived up to the hype. It was a fantastic experience. I got to connect with researchers working on topics closely related to mine, and was genuinely inspired by the level of talent and passion for research that exists in Spain.</p>
                             </div>
-                            <a href="#" class="conf-linkedin" target="_blank">
+                            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7348243926203445249/" class="conf-linkedin" target="_blank">
                                 <i class="fab fa-linkedin"></i> <span data-i18n="lnk_linkedin">View Post</span>
                             </a>
                         </div>
@@ -229,7 +229,7 @@
                                         <p>This week, I had the pleasure of presenting my work titled "RISC-V Vector Extension: A Case Study on Time Series Analysis." It was an incredibly enriching experience, and truly inspiring to witness all the progress happening in this promising industry. This event clearly shows that RISC-V International is achieving great things, and it might well become the go-to architecture in the near future.</p>
                                     </div>
                                 </div>
-                                <a href="#" class="conf-linkedin" target="_blank">
+                                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7329431799711842304/" class="conf-linkedin" target="_blank">
                                     <i class="fab fa-linkedin"></i> <span data-i18n="lnk_linkedin">View Post</span>
                                 </a>
                             </div>
@@ -255,9 +255,6 @@
                             <div data-i18n="conf4_blog_content">
                                 <p>This intensive course at the Barcelona Supercomputing Center provided deep insights into the RISC-V ISA. We worked on practical exercises involving custom instruction implementation and explored the potential of open hardware for future HPC applications.</p>
                             </div>
-                            <a href="#" class="conf-linkedin" target="_blank">
-                                <i class="fab fa-linkedin"></i> <span data-i18n="lnk_linkedin">View Post</span>
-                            </a>
                         </div>
                     </article>
 
@@ -283,7 +280,7 @@
                                         <p>This week, I had the pleasure of attending the ACM Europe Summer School on HPC Computer Architectures for AI and Dedicated Applications, a great tech event where I had the opportunity to enjoy numerous talks by individuals who dedicate their passion and a significant part of their lives to the pursuit of new knowledge that enables us to move towards a promising technological future. Among these individuals were Mateo Valero, Luca Benini, and Leslie Lamport, among many others. Not only were the talks a great source of inspiration for me, but so was meeting people from all over the world who are striving to make their way in this complex and exciting world of research. During this week, we discussed a wide range of current and important topics such as artificial intelligence, the rise of open architectures like RISC-V, the development of dedicated accelerators, and quantum computing. The latter, explained by the wonderful team from Qilimanjaro, allowed me to gain a much deeper understanding of this technology and its inherent complexity. Finally, I would like to extend my gratitude to the Barcelona Supercomputing Center (BSC) and ACM, Association for Computing Machinery for organizing this event and for promoting science and knowledge about current technologies to those of us who are just beginning our careers. Thanks to events like this, we are motivated to contribute our own small part to the advancement of science.</p>
                                     </div>
                                 </div>
-                                <a href="#" class="conf-linkedin" target="_blank">
+                                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7238486847339806720/" class="conf-linkedin" target="_blank">
                                     <i class="fab fa-linkedin"></i> <span data-i18n="lnk_linkedin">View Post</span>
                                 </a>
                             </div>
@@ -335,20 +332,26 @@
                         Click the button to randomly remove 20% of the visual elements (letters) from this page. 
                         Notice how it remains functional? That's what I do with Neural Networks: remove the superfluous while maintaining accuracy.
                     </p>
-                    <button id="btn-prune-web" class="btn-primary">Apply Pruning (20% Sparsity)</button>
-                    <button id="btn-restore-web" class="btn-secondary hidden">Restore Website</button>
+                    
+                    <div class="slider-container">
+                        <label for="pruning-slider" class="slider-label"><span data-i18n="lbl_pruning_level">Pruning Level</span>: <span id="slider-val">0%</span></label>
+                        <input type="range" id="pruning-slider" min="0" max="100" value="0" class="slider">
+                    </div>
+
+                    <button id="btn-prune-web" class="btn-primary" data-i18n="btn_apply_pruning">Apply Pruning</button>
+                    <button id="btn-restore-web" class="btn-secondary hidden" data-i18n="btn_restore_web">Restore Website</button>
                 </div>
                 
                 <div id="pruning-stats" class="pruning-stats hidden">
                     <div class="stat-item">
-                        <span class="stat-label">Sparsity</span>
+                        <span class="stat-label" data-i18n="lbl_sparsity">Sparsity</span>
                         <span id="web-sparsity" class="stat-val">0%</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-label">Functionality</span>
-                        <span class="stat-val">100%</span>
+                        <span class="stat-label" data-i18n="lbl_functionality">Functionality</span>
+                        <span id="web-functionality" class="stat-val">100%</span>
                     </div>
-                    <p class="pruning-message" data-i18n="pruning_msg">"Optimized for efficiency. Still readable, right?"</p>
+                    <p class="pruning-message" id="pruning-msg" data-i18n="pruning_msg">"Optimized for efficiency. Still readable, right?"</p>
                 </div>
             </div>
         </div>
@@ -356,7 +359,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 [Your Name]. Designed with passion and code.</p>
+            <p data-i18n="footer_text">&copy; 2025 José Sánchez Yun. Designed with passion and code.</p>
         </div>
     </footer>
 
