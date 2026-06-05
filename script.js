@@ -410,6 +410,7 @@ document.addEventListener('DOMContentLoaded', () => {
             lbl_functionality: "Funcionalidad",
             btn_restore_web: "Restaurar Web",
             lets_prune: "Vamos a podar la web!!",
+            warning_pruning: "Advertencia: las barras deslizantes de abajo alteran las letras y palabras de la web. Para volver al estado inicial, pulse el botón de restaurar web.",
             footer_text: "&copy; 2025 José Sánchez Yun. Diseñado con pasión y código."
         }
     };
