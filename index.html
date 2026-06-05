@@ -199,6 +199,31 @@
                     <!-- Conference 1 -->
                     <article class="conf-card" data-id="c2">
                         <div class="conf-image">
+                            <img src="images/Summit2026.avif" alt="Summit2026">
+                        </div>
+                        <div class="conf-content">
+                            <h3 data-i18n="conf2_title">RISC-V Summit Europe 2026</h3>
+                            <div class="conf-meta">
+                                <i class="fas fa-map-marker-alt"></i> <span data-i18n="conf2_loc">Bologna, Italy</span>
+                                <span style="margin: 0 5px;">|</span>
+                                <i class="far fa-calendar-alt"></i> <span data-i18n="conf2_date">June 2026</span>
+                            </div>
+                        </div>
+                        <div class="hidden-content" style="display:none;">
+                            <img src="images/Summit2026.avif" class="modal-hero-img" alt="Summit2026">
+                            <p class="blog-date" data-i18n="conf2_blog_date">Written on June 5, 2026</p>
+                            <div data-i18n="conf2_blog_content">
+                                <p>Coming soon.</p>
+                            </div>
+                            <!-- <a href="https://www.linkedin.com/feed/update/urn:li:activity:7348243926203445249/" class="conf-linkedin" target="_blank"> -->
+                            <!--     <i class="fab fa-linkedin"></i> <span data-i18n="lnk_linkedin">View Post</span> -->
+                            <!-- </a> -->
+                        </div>
+                    </article>
+
+                    <!-- Conference 1 -->
+                    <article class="conf-card" data-id="c2">
+                        <div class="conf-image">
                             <img src="images/sarteco2.jpeg" alt="SARTECO">
                         </div>
                         <div class="conf-content">
@@ -347,6 +372,8 @@
                         This demo aims to teach the concept of <strong>unstructured pruning </strong> and why it needs to be optimized. Pruning in neural networks consists of removing <strong>individual weights and connections</strong>. This way, those that do not contribute much to the model's knowledge are eliminated. At the software level, this greatly optimizes the model, allowing for smaller models that better preserve accuracy. However, this type of pruning leaves <strong>irregular and sparse structures</strong>, which is exactly what hardware does not process efficiently. This gives rise to structured pruning, which removes complete structures from the network, being more efficient for hardware but reducing model accuracy more quickly as pruning increases.<br><br>To visualize this, let's test it: let's <strong>prune this website!!</strong> Slide any of the bars and <strong>see what happens</strong>. In this case, unstructured pruning removes individual letters, giving us a more precise idea of what the word might mean and the final context of a sentence. In contrast, with the structured pattern, whole words are deleted, leading to the occasional removal of key words for understanding the full sentence, and thus losing accuracy more quickly.<br><br>Therefore, it is of vital importance to investigate efficient solutions for structured pruning, and create a perfect balance between hardware and software.
                     </p>
                     <h2 class="section-title text-white" data-i18n="lets_prune">Let's prune the web!!</h2>
+
+                    <h3 class="section-title text-red" data-i18n="warning_pruning">Warning: the slides below alterate the words and sentences in the web, you can press restart button to make the web fully visible again.</h3>
                     
                     <div class="slider-container">
                         <label for="pruning-slider-unstructured" class="slider-label">
