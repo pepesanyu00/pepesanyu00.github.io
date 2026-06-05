@@ -1,15 +1,29 @@
 /* VARIABLES & RESET */
 :root {
-    --primary-color: #0056b3; /* Azul Intenso */
-    --primary-dark: #004494;
-    --secondary-color: #f4f6f8;
-    --text-color: #333;
-    --text-light: #666;
-    --white: #ffffff;
-    --red: #ff4d4d;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Paleta Base OKLCH */
+    --bg-color: oklch(0.98 0.01 255);       /* Fondo principal (Blanco roto azulado) */
+    --surface-color: oklch(1 0 0);          /* Superficies y tarjetas (Blanco puro) */
+    --secondary-color: oklch(0.95 0.02 255);/* Superficies secundarias (Sustituye al gris claro) */
+    
+    /* Textos */
+    --text-color: oklch(0.35 0.03 260);     /* Texto principal (Gris pizarra) */
+    --text-light: oklch(0.55 0.02 260);     /* Texto secundario (Gris azulado suave) */
+    --text-heading: oklch(0.15 0.04 260);   /* Títulos (Casi negro, pero con tono azul profundo) */
+    
+    /* Marca y Acentos */
+    --primary-color: oklch(0.55 0.16 255);  /* Azul vibrante moderno */
+    --primary-dark: oklch(0.45 0.16 255);   /* Azul profundo (para hovers o gradientes) */
+    --accent-cyan: oklch(0.65 0.18 210);    /* Cian eléctrico (ideal para destacar datos en la demo) */
+    --accent-amber: oklch(0.75 0.15 65);    /* Ámbar cálido (para contrastes puntuales) */
+    --red: oklch(0.6 0.2 25);               /* Alertas */
+    
+    /* Estructura */
+    --border-color: oklch(0.90 0.02 260);   /* Sustituye a los grises genéricos #eee y #ddd */
+    --shadow: 0 4px 15px rgba(37, 99, 235, 0.06); /* Sombra con toque de azul primario */
+    --shadow-hover: 0 15px 30px rgba(37, 99, 235, 0.12);
     --radius: 12px;
     --transition: all 0.3s ease;
+    --white: oklch(1 0 0);
 }
 
 * {
@@ -22,7 +36,7 @@ body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background-color: var(--white);
+    background-color: var(--bg-color);
 }
 
 a {
@@ -43,7 +57,7 @@ ul {
 /* TYPOGRAPHY */
 h1, h2, h3 {
     font-weight: 800;
-    color: #111;
+    color: var(--text-heading);
 }
 
 .section-title {
@@ -70,8 +84,8 @@ h1, h2, h3 {
 
 /* HERO SECTION */
 .hero {
-    padding: 140px 0 120px; /* 120px original + 20px extra */
-    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    padding: 140px 0 120px;
+    background: linear-gradient(135deg, var(--bg-color) 0%, var(--secondary-color) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -220,7 +234,7 @@ h1, h2, h3 {
     bottom: 0;
     left: 50%;
     width: 2px;
-    background: #e0e0e0;
+    background: var(--border-color);
     transform: translateX(-50%);
 }
 
