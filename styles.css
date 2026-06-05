@@ -65,6 +65,7 @@ h1, h2, h3 {
 }
 
 .text-white { color: var(--white) !important; }
+.text-red { color: var(--red) !important; }
 
 /* HERO SECTION */
 .hero {
