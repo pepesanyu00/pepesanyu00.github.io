@@ -872,7 +872,7 @@ h3 {
     display: flex;
     justify-content: space-between;
     font-weight: 600;
-    color: var(--text-light);
+    color: var(--text-color);
     font-size: 0.95rem;
     text-transform: uppercase;
     letter-spacing: 1px;
