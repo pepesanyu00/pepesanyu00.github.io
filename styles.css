@@ -751,14 +751,17 @@ h3 {
 .pruning-interface {
     max-width: 1200px;
     margin: 0 auto;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    background: linear-gradient(135deg, oklch(0.18 0.03 260) 0%, oklch(0.12 0.03 260) 100%);
     color: var(--white);
     border-radius: 20px;
     padding: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.35);
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        "header header"
+        "info dashboard";
     gap: 40px;
     text-align: left;
     backdrop-filter: blur(10px);
@@ -767,11 +770,45 @@ h3 {
 @media (max-width: 900px) {
     .pruning-interface {
         grid-template-columns: 1fr;
+        grid-template-areas: 
+            "header"
+            "info"
+            "dashboard";
         padding: 30px 20px;
     }
 }
 
+.pruning-header {
+    grid-area: header;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.tech-font {
+    font-family: 'Orbitron', sans-serif;
+}
+
+.tech-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(101, 204, 219, 0.4);
+}
+
+.tech-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 .pruning-info-col {
+    grid-area: info;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -794,6 +831,7 @@ h3 {
 }
 
 .pruning-dashboard-col {
+    grid-area: dashboard;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -919,10 +957,10 @@ h3 {
 
 .digital-display {
     font-size: 2.8rem;
-    font-weight: 800;
+    font-weight: 700;
     color: var(--accent-cyan);
     display: block;
-    font-family: 'Courier New', Courier, monospace; /* Digital look */
+    font-family: 'Orbitron', sans-serif; /* Tech digital look */
     text-shadow: 0 0 20px rgba(101, 204, 219, 0.4);
     line-height: 1;
 }
