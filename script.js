@@ -14,12 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const webSparsity = document.getElementById('web-sparsity');
     const webFunctionality = document.getElementById('web-functionality');
     const floatingRestoreBtn = document.getElementById('floating-restore-btn');
-    
+
     const sliderUnstructured = document.getElementById('pruning-slider-unstructured');
     const valUnstructured = document.getElementById('val-unstructured');
     const sliderStructured = document.getElementById('pruning-slider-structured');
     const valStructured = document.getElementById('val-structured');
-    
+
     let originalTextNodes = new Map();
     let unstructuredShuffleMap = new Map();
     let structuredShuffleMap = new Map();
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 restoreWeb();
             }
             // Apply unstructured
-            pruneWeb(); 
+            pruneWeb();
         });
 
         sliderStructured.addEventListener('input', (e) => {
@@ -61,12 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } else {
             // Exclude controls and warning so the interface remains usable, but allow pruning the explanation
-            if (node.id === 'pruning-warning' || 
-                node.id === 'floating-restore-btn' || 
+            if (node.id === 'pruning-warning' ||
+                node.id === 'floating-restore-btn' ||
                 (node.classList && (node.classList.contains('slider-panel') || node.classList.contains('pruning-stats')))) {
                 return [];
             }
-            
+
             for (let child of node.childNodes) {
                 textNodes.push(...getTextNodes(child));
             }
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Functionality drops differently for structured vs unstructured
         // Unstructured: Linear-ish drop, readable until high sparsity
         // Structured: Exponential drop, unreadable quickly
-        
+
         let functionality;
         if (type === 'unstructured') {
             // Sigmoid-like curve for unstructured (resilient)
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function pruneWeb() {
         const sparsityUnstructured = parseInt(sliderUnstructured.value);
         const sparsityStructured = parseInt(sliderStructured.value);
-        
+
         let sparsityPercentage = 0;
         let type = 'unstructured';
 
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
             allTextNodes.forEach((node) => {
                 const originalText = node.nodeValue;
                 originalTextNodes.set(node, originalText);
-                
+
                 // Pre-compute Unstructured Shuffled Indices
                 let chars = originalText.split('');
                 let indices = chars.map((_, i) => i);
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let wordIndices = [];
                 words.forEach((w, i) => {
                     if (w.trim().length > 0) {
-                        let isProtected = protectedStrings.some(pStr => 
+                        let isProtected = protectedStrings.some(pStr =>
                             w.toLowerCase().includes(pStr.toLowerCase())
                         );
                         if (!isProtected) {
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let chars = originalText.split('');
                 let pruningIndices = unstructuredShuffleMap.get(node);
                 const removeCount = Math.floor(pruningIndices.length * (sparsityPercentage / 100));
-                
+
                 for (let i = 0; i < removeCount; i++) {
                     chars[pruningIndices[i]] = '_';
                 }
@@ -202,12 +202,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update Stats
         pruningStats.classList.remove('hidden');
         if (floatingRestoreBtn) floatingRestoreBtn.classList.remove('hidden');
-        
+
         webSparsity.textContent = `${sparsityPercentage}%`;
-        
+
         const functionality = calculateFunctionality(sparsityPercentage, type);
         webFunctionality.textContent = `${functionality}%`;
-        
+
         if (functionality < 50) {
             webFunctionality.style.color = '#ff4d4d';
         } else if (functionality < 80) {
@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             pruningStats.classList.add('hidden');
             if (floatingRestoreBtn) floatingRestoreBtn.classList.add('hidden');
-            
+
             // Reset sliders
             if (sliderUnstructured) {
                 sliderUnstructured.value = 0;
@@ -234,13 +234,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 sliderStructured.value = 0;
                 valStructured.textContent = "0%";
             }
-            
+
             // Unlock heights
             lockedElements.forEach(el => {
                 el.style.minHeight = '';
             });
             lockedElements = [];
-            
+
             isPruned = false;
         }
     }
@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
             section_hobbies: "Beyond the Lab",
             hobbies_desc: "I have been passionate about nature and photography since I was young. I am also passionate about traveling, so when I travel I love taking photos that capture the moments I experience.",
             flickr_caption: "Here you have a random photo from my flickr profile :)",
-            
+
             // Pruning Demo Translations
             section_pruning: "Pruning Comparison Demo",
             pruning_subtitle: "Visualizing the difference between Unstructured and Structured Pruning.",
@@ -357,7 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
             p1_modal_li3: "Diseño de un acelerador MMIO que acelera convoluciones de kernel dispersas.",
             p1_modal_li4: "Integración del acelerador con una CPU RISC-V, para validar y verificar el diseño con benchmarks reales.",
             modal_results_title: "Estado",
-            p1_modal_results: "Este proyecto está en desarrollo y se espera que finalice en el primer trimestre de 2026.",
+            p1_modal_results: "Este proyecto está en desarrollo.",
             section_hobbies: "Más allá del Laboratorio",
             hobbies_desc: "Soy un apasionado de la naturaleza y la fotografía desde que era joven. Mi objetivo con la fotografía es captar momentos y sensaciones de los lugares que veo, y transmitir las mismas sensaciones que sentía yo a la hora de hacer la foto. Aquí tienes el enlace a mi perfil de instagram donde voy subiendo fotos periódicamente y a mi perfil de flickr, que uso como repositorio de fotografía.",
             btn_paper: "Ver Paper",
@@ -407,9 +407,9 @@ document.addEventListener('DOMContentLoaded', () => {
             ai_subtitle: "Una interfaz experimental impulsada por IA (simulada) para responder tus dudas sobre mi perfil.",
             ai_welcome: "¡Hola! Soy el asistente virtual de [Tu Nombre]. Pregúntame sobre mis proyectos, contacto o aficiones.",
 
-            
+
             // Pruning Demo Translations (ES)
-            section_pruning: "Demo Comparativa de Poda",
+            section_pruning: "Demo Comparativa de pruning",
             pruning_subtitle: "Visualizando la diferencia entre Poda Estructurada y No Estructurada.",
             pruning_expl: "Esta demo persigue enseñar el concepto de pruning no estructurado, y de porqué es necesario optimizarlo. La poda en redes neuronales consiste en eliminar pesos y conexiones individuales de una red neuronal. De esta forma, se eliminan aquellos que no aportan mucho al conocimiento del modelo. Esto a nivel software optimiza mucho el modelo, y permite tener modelos más pequeños y que conservan mejor la precisión. En cambio, este tipo de poda deja estructuras irregulares y dispersas, justo lo que al hardware no procesa de forma eficiente. Por ello surge el pruning estructurado, que elimina estructuras completas de la red, siendo más eficiente para el hardware, pero reduciendo más rápidamente la precisión del modelo conforme se aumenta la poda.<br><br>Para visualizarlo hagamos una prueba, vamos a podar esta página web!! Para ello desliza cualquiera de las barras y mira lo que pasa. En este caso, el pruning no estructurado borra letras individuales, lo que nos da una idea más precisa de lo que puede significar la palabra y el contexto final de una frase. En cambio, con el patrón estructurado se borran palabras completas, dando lugar a que en ocasiones se borren palabras clave para entender la frase completa, y por tanto, perdiendo precisión más rápidamente.<br><br>Por ello, es de vital importancia el investigar soluciones eficientes para el pruning estructurado, y crear un equilibrio perfecto entre el hardware y el software.",
             pruning_msg: "\"Optimizado para eficiencia... ¿pero el hardware está contento?\"",
@@ -460,7 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const hiddenContent = card.querySelector('.hidden-content').innerHTML;
 
         modalTitle.textContent = title;
-        
+
         let contentHTML = '';
 
         if (isConference) {
@@ -468,7 +468,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             const tags = card.querySelector('.tags').outerHTML;
             const date = card.querySelector('.project-date').textContent;
-            
+
             contentHTML = `
                 <div style="margin-bottom: 20px; color: #666; font-weight: bold;">${date}</div>
                 ${tags}
@@ -476,7 +476,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${hiddenContent}
             `;
         }
-        
+
         modalBody.innerHTML = contentHTML;
         modal.classList.add('active');
         document.body.style.overflow = 'hidden'; // Prevent background scrolling
@@ -534,7 +534,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Global callback for Flickr JSONP
-    window.flickrCallback = function(data) {
+    window.flickrCallback = function (data) {
         if (data.items && data.items.length > 0) {
             const randomItem = data.items[Math.floor(Math.random() * data.items.length)];
             const flickrImg = document.getElementById('flickr-img');
@@ -552,7 +552,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mobileMenuBtn && navLinks) {
         mobileMenuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            
+
             // Toggle icon
             const icon = mobileMenuBtn.querySelector('i');
             if (navLinks.classList.contains('active')) {

@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>José Sánchez Yun</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@500;700;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="container nav-container">
             <a href="#" class="logo">JSY</a>
-            
+
             <div class="menu-toggle" id="mobile-menu">
                 <i class="fas fa-bars"></i>
             </div>
@@ -45,11 +49,16 @@
                 <h1>José Sánchez Yun</h1>
                 <p class="tagline" data-i18n="hero_tagline">PhD student at the University of Málaga</p>
                 <p class="bio" data-i18n="hero_bio">
-                    PhD student focused on Machine Learning optimization and High-Performance Computing. Specialized in developing efficient solutions of ML models on RISC-V architectures and parallel algorithms. Passionate about bridging the gap between state-of-the-art research and real-world systems to build functional, scalable, and high-performance products.
+                    PhD student focused on Machine Learning optimization and High-Performance Computing. Specialized in
+                    developing efficient solutions of ML models on RISC-V architectures and parallel algorithms.
+                    Passionate about bridging the gap between state-of-the-art research and real-world systems to build
+                    functional, scalable, and high-performance products.
                 </p>
                 <div class="social-links">
-                    <a href="https://github.com/pepesanyu00" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/jose-sanchezyun/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/pepesanyu00" target="_blank" title="GitHub"><i
+                            class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/jose-sanchezyun/" target="_blank" title="LinkedIn"><i
+                            class="fab fa-linkedin"></i></a>
                     <a href="mailto:pepesy00@uma.es" title="Email"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
@@ -61,14 +70,18 @@
         <div class="container">
             <h2 class="section-title" data-i18n="section_research">Research Experience</h2>
             <div class="timeline">
-                
+
                 <!-- Proyecto 1 -->
                 <div class="timeline-item">
-                    <article class="project-card" data-id="1" data-hover-text="Click for more details" data-i18n-hover="card_hover_text">
+                    <article class="project-card" data-id="1" data-hover-text="Click for more details"
+                        data-i18n-hover="card_hover_text">
                         <div class="project-date" data-i18n="p1_date">2025 (Under development)</div>
                         <div class="project-content">
-                            <h3 data-i18n="p1_title">Sparse inference accelerator for unstructured pruning optimization on CNN</h3>
-                            <p class="project-desc" data-i18n="p1_desc">Development of a specialized FPGA-deployable co-processor to accelerate unstructured pruning in CNNs, implementing a full flow from PyTorch analysis to execution.</p>
+                            <h3 data-i18n="p1_title">Sparse inference accelerator for unstructured pruning optimization
+                                on CNN</h3>
+                            <p class="project-desc" data-i18n="p1_desc">Development of a specialized FPGA-deployable
+                                co-processor to accelerate unstructured pruning in CNNs, implementing a full flow from
+                                PyTorch analysis to execution.</p>
                             <div class="tags">
                                 <span>PyTorch</span>
                                 <span>ONNX</span>
@@ -80,30 +93,43 @@
                         <!-- Contenido Oculto para el Modal -->
                         <div class="hidden-content" style="display:none;">
                             <h3 data-i18n="modal_desc_title">Detailed Description</h3>
-                            <p data-i18n="p1_modal_desc">This project tackles a critical challenge in AI hardware acceleration: unstructured pruning in Convolutional Neural Networks (CNNs). While pruning theoretically reduces computational load, the resulting irregularity in memory access patterns often degrades performance on conventional hardware. The goal is to design a specialized co-processor capable of exploiting this sparsity to maximize throughput and energy efficiency on edge devices.</p>
-                            
+                            <p data-i18n="p1_modal_desc">This project tackles a critical challenge in AI hardware
+                                acceleration: unstructured pruning in Convolutional Neural Networks (CNNs). While
+                                pruning theoretically reduces computational load, the resulting irregularity in memory
+                                access patterns often degrades performance on conventional hardware. The goal is to
+                                design a specialized co-processor capable of exploiting this sparsity to maximize
+                                throughput and energy efficiency on edge devices.</p>
+
                             <h3 data-i18n="modal_method_title">Methodology</h3>
                             <ul>
-                                <li data-i18n="p1_modal_li1">Creation of post-training methods to analyse and classificate all kernels in a CNN model.
+                                <li data-i18n="p1_modal_li1">Creation of post-training methods to analyse and
+                                    classificate all kernels in a CNN model.
                                 </li>
-                                <li data-i18n="p1_modal_li2">Design of a dispatcher that receives the data and send it to the accelerator.</li>
-                                <li data-i18n="p1_modal_li3">Design of an MMIO accelerator that accelerates sparse kernel convolutions.</li>
-                                <li data-i18n="p1_modal_li4">Integration of the accelerator with a RISC-V CPU, in order to validate and verificate the design with real benchmarks.</li>
+                                <li data-i18n="p1_modal_li2">Design of a dispatcher that receives the data and send it
+                                    to the accelerator.</li>
+                                <li data-i18n="p1_modal_li3">Design of an MMIO accelerator that accelerates sparse
+                                    kernel convolutions.</li>
+                                <li data-i18n="p1_modal_li4">Integration of the accelerator with a RISC-V CPU, in order
+                                    to validate and verificate the design with real benchmarks.</li>
                             </ul>
 
                             <h3 data-i18n="modal_results_title">Status</h3>
-                            <p data-i18n="p1_modal_results">This project is under development, and it is expected to finish on the first quarter of 2026.</p>
+                            <p data-i18n="p1_modal_results">This project is under development.</p>
                         </div>
                     </article>
                 </div>
 
                 <!-- Proyecto 2 -->
                 <div class="timeline-item">
-                    <article class="project-card" data-id="2" data-hover-text="Click for more details" data-i18n-hover="card_hover_text">
+                    <article class="project-card" data-id="2" data-hover-text="Click for more details"
+                        data-i18n-hover="card_hover_text">
                         <div class="project-date">2024 - 2025</div>
                         <div class="project-content">
-                            <h3 data-i18n="p2_title">Scalable Vectorization of Time Series Analysis: A Matrix Profile Implementation on RISC-V and ARM</h3>
-                            <p class="project-desc" data-i18n="p2_desc">Vector length agnostic implementation of RISC-V Vector Extension and ARM SVE on time series analysis algorithms. Performance comparation and exploration.</p>
+                            <h3 data-i18n="p2_title">Scalable Vectorization of Time Series Analysis: A Matrix Profile
+                                Implementation on RISC-V and ARM</h3>
+                            <p class="project-desc" data-i18n="p2_desc">Vector length agnostic implementation of RISC-V
+                                Vector Extension and ARM SVE on time series analysis algorithms. Performance comparation
+                                and exploration.</p>
                             <div class="tags">
                                 <span>RVV</span>
                                 <span>SVE</span>
@@ -114,19 +140,30 @@
                         </div>
                         <div class="hidden-content" style="display:none;">
                             <h3 data-i18n="modal_desc_title">Detailed Description</h3>
-                            <p data-i18n="p2_modal_desc">Study of the benefits of Vector Length agnostic approaches to time series analisys algorithms (SCAMP and SCRIMP) using RISC-V Vector Extension (RVV) and ARM Scalable Vector Extension (SVE). e propose implementations that exploit vectorization as much as possible in these algorithms and conduct a comprehensive evaluation to understand the trade-offs. Our results show an average speedup relative to the non-vectorized implementation of 66× on RISC-V (with vector length 16384 bits), and 8× on ARM (with vector length 2048 bits).</p>
+                            <p data-i18n="p2_modal_desc">Study of the benefits of Vector Length agnostic approaches to
+                                time series analisys algorithms (SCAMP and SCRIMP) using RISC-V Vector Extension (RVV)
+                                and ARM Scalable Vector Extension (SVE). e propose implementations that exploit
+                                vectorization as much as possible in these algorithms and conduct a comprehensive
+                                evaluation to understand the trade-offs. Our results show an average speedup relative to
+                                the non-vectorized implementation of 66× on RISC-V (with vector length 16384 bits), and
+                                8× on ARM (with vector length 2048 bits).</p>
                             <h3 data-i18n="modal_contrib_title">Methodology</h3>
                             <ul>
-                                <li data-i18n="p2_modal_li1">Vectorization of SCAMP and SCRIMP on RVV and SVE via intrinsics.</li>
-                                <li data-i18n="p2_modal_li2">Design of two equivalent processors for RISC-V and ARM architectures on gem5.</li>
-                                <li data-i18n="p2_modal_li3">Verification and validation of the proposed implementations on real matrix profile benchmarks.</li>
+                                <li data-i18n="p2_modal_li1">Vectorization of SCAMP and SCRIMP on RVV and SVE via
+                                    intrinsics.</li>
+                                <li data-i18n="p2_modal_li2">Design of two equivalent processors for RISC-V and ARM
+                                    architectures on gem5.</li>
+                                <li data-i18n="p2_modal_li3">Verification and validation of the proposed implementations
+                                    on real matrix profile benchmarks.</li>
                             </ul>
 
                             <h3 data-i18n="modal_results_title">Status</h3>
-                            <p data-i18n="p2_modal_results">This project is finished and currently under review for Springer Journal of Supercomputing since September 2025.</p>
-                            
+                            <p data-i18n="p2_modal_results">This project is finished and currently under review for
+                                Springer Journal of Supercomputing since September 2025.</p>
+
                             <div style="margin-top: 20px;">
-                                <a href="https://github.com/pepesanyu00/Matrix_Profile_Vectorization" target="_blank" class="btn-link">
+                                <a href="https://github.com/pepesanyu00/Matrix_Profile_Vectorization" target="_blank"
+                                    class="btn-link">
                                     <i class="fab fa-github"></i> <span data-i18n="btn_repo">GitHub Repo</span>
                                 </a>
                             </div>
@@ -136,11 +173,13 @@
 
                 <!-- Proyecto 3 -->
                 <div class="timeline-item">
-                    <article class="project-card" data-id="3" data-hover-text="Click for more details" data-i18n-hover="card_hover_text">
+                    <article class="project-card" data-id="3" data-hover-text="Click for more details"
+                        data-i18n-hover="card_hover_text">
                         <div class="project-date">2024</div>
                         <div class="project-content">
                             <h3 data-i18n="p3_title">Transactional Barriers in Matrix Profile algorithms.</h3>
-                            <p class="project-desc" data-i18n="p3_desc">A robust synchronization mechanism using Hardware Transactional Memory in time series analysis algorithms.</p>
+                            <p class="project-desc" data-i18n="p3_desc">A robust synchronization mechanism using
+                                Hardware Transactional Memory in time series analysis algorithms.</p>
                             <div class="tags">
                                 <span>Transactional memory</span>
                                 <span>IBM HTM</span>
@@ -150,19 +189,27 @@
                         </div>
                         <div class="hidden-content" style="display:none;">
                             <h3 data-i18n="modal_desc_title">Detailed Description</h3>
-                            <p data-i18n="p3_modal_desc">We propose several optimizations to the original Speculative Barriers Library, and make it compatible with Power8 and Intel. Finally we make a complete study on the factors that affect transactional memory performance on time series analysis algorithms.</p>
+                            <p data-i18n="p3_modal_desc">We propose several optimizations to the original Speculative
+                                Barriers Library, and make it compatible with Power8 and Intel. Finally we make a
+                                complete study on the factors that affect transactional memory performance on time
+                                series analysis algorithms.</p>
                             <h3 data-i18n="modal_tech_title">Methodology</h3>
                             <ul>
-                                <li data-i18n="p3_modal_li1">Optimization of previous speculative barrier by managing transactional abort handling.</li>
-                                <li data-i18n="p3_modal_li2">Creation of a compatible version of the library on Intel architectures.</li>
-                                <li data-i18n="p3_modal_li3">Conduction of a multiarchitecture study that validate and verify the proposed implementations.</li>
+                                <li data-i18n="p3_modal_li1">Optimization of previous speculative barrier by managing
+                                    transactional abort handling.</li>
+                                <li data-i18n="p3_modal_li2">Creation of a compatible version of the library on Intel
+                                    architectures.</li>
+                                <li data-i18n="p3_modal_li3">Conduction of a multiarchitecture study that validate and
+                                    verify the proposed implementations.</li>
                             </ul>
 
                             <h3 data-i18n="modal_results_title">Status</h3>
-                            <p data-i18n="p3_modal_results">This project is finished and currently in final review stage for Elsevier Journal of Parallel Computing.</p>
-                            
+                            <p data-i18n="p3_modal_results">This project is finished and currently in final review stage
+                                for Elsevier Journal of Parallel Computing.</p>
+
                             <div style="margin-top: 20px;">
-                                <a href="https://github.com/pepesanyu00/transactional_barriers" target="_blank" class="btn-link">
+                                <a href="https://github.com/pepesanyu00/transactional_barriers" target="_blank"
+                                    class="btn-link">
                                     <i class="fab fa-github"></i> <span data-i18n="btn_repo">GitHub Repo</span>
                                 </a>
                             </div>
@@ -191,11 +238,11 @@
     <section id="conferences" class="section bg-light">
         <div class="container">
             <h2 class="section-title" data-i18n="section_conferences">Conferences & Summer Schools</h2>
-            
+
             <div class="carousel-container">
                 <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
                 <div class="conferences-track">
-                    
+
                     <!-- Conference 1 -->
                     <article class="conf-card" data-id="c2">
                         <div class="conf-image">
@@ -238,9 +285,15 @@
                             <img src="images/sarteco.jpeg" class="modal-hero-img" alt="SARTECO">
                             <p class="blog-date" data-i18n="conf2_blog_date">Written on July 4, 2025</p>
                             <div data-i18n="conf2_blog_content">
-                                <p>Last week, I had the chance to attend SARTECO days for the first time, held this year in Seville. I’d heard great things from colleagues who had been to previous editions, and it definitely lived up to the hype. It was a fantastic experience. I got to connect with researchers working on topics closely related to mine, and was genuinely inspired by the level of talent and passion for research that exists in Spain.</p>
+                                <p>Last week, I had the chance to attend SARTECO days for the first time, held this year
+                                    in Seville. I’d heard great things from colleagues who had been to previous
+                                    editions, and it definitely lived up to the hype. It was a fantastic experience. I
+                                    got to connect with researchers working on topics closely related to mine, and was
+                                    genuinely inspired by the level of talent and passion for research that exists in
+                                    Spain.</p>
                             </div>
-                            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7348243926203445249/" class="conf-linkedin" target="_blank">
+                            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7348243926203445249/"
+                                class="conf-linkedin" target="_blank">
                                 <i class="fab fa-linkedin"></i> <span data-i18n="lnk_linkedin">View Post</span>
                             </a>
                         </div>
@@ -266,10 +319,16 @@
                                 <div class="modal-text-content">
                                     <p class="blog-date" data-i18n="conf1_blog_date">Written on May 16, 2025</p>
                                     <div data-i18n="conf1_blog_content">
-                                        <p>This week, I had the pleasure of presenting my work titled "RISC-V Vector Extension: A Case Study on Time Series Analysis." It was an incredibly enriching experience, and truly inspiring to witness all the progress happening in this promising industry. This event clearly shows that RISC-V International is achieving great things, and it might well become the go-to architecture in the near future.</p>
+                                        <p>This week, I had the pleasure of presenting my work titled "RISC-V Vector
+                                            Extension: A Case Study on Time Series Analysis." It was an incredibly
+                                            enriching experience, and truly inspiring to witness all the progress
+                                            happening in this promising industry. This event clearly shows that RISC-V
+                                            International is achieving great things, and it might well become the go-to
+                                            architecture in the near future.</p>
                                     </div>
                                 </div>
-                                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7329431799711842304/" class="conf-linkedin" target="_blank">
+                                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7329431799711842304/"
+                                    class="conf-linkedin" target="_blank">
                                     <i class="fab fa-linkedin"></i> <span data-i18n="lnk_linkedin">View Post</span>
                                 </a>
                             </div>
@@ -284,7 +343,8 @@
                         <div class="conf-content">
                             <h3 data-i18n="conf4_title">BSC Training Course: RISC-V principles</h3>
                             <div class="conf-meta">
-                                <i class="fas fa-map-marker-alt"></i> <span data-i18n="conf4_loc">Barcelona, Spain</span>
+                                <i class="fas fa-map-marker-alt"></i> <span data-i18n="conf4_loc">Barcelona,
+                                    Spain</span>
                                 <span style="margin: 0 5px;">|</span>
                                 <i class="far fa-calendar-alt"></i> <span data-i18n="conf4_date">Nov 2024</span>
                             </div>
@@ -293,7 +353,10 @@
                             <img src="images/risc-v_logo.jpeg" class="modal-hero-img" alt="BSC Course">
                             <p class="blog-date" data-i18n="conf4_blog_date">Written on November 15, 2024</p>
                             <div data-i18n="conf4_blog_content">
-                                <p>This intensive course at the Barcelona Supercomputing Center provided deep insights into the RISC-V ISA. We worked on practical exercises involving custom instruction implementation and explored the potential of open hardware for future HPC applications.</p>
+                                <p>This intensive course at the Barcelona Supercomputing Center provided deep insights
+                                    into the RISC-V ISA. We worked on practical exercises involving custom instruction
+                                    implementation and explored the potential of open hardware for future HPC
+                                    applications.</p>
                             </div>
                         </div>
                     </article>
@@ -306,7 +369,8 @@
                         <div class="conf-content">
                             <h3 data-i18n="conf3_title">ACM Europe Summer School on HPC</h3>
                             <div class="conf-meta">
-                                <i class="fas fa-map-marker-alt"></i> <span data-i18n="conf3_loc">Barcelona, Spain</span>
+                                <i class="fas fa-map-marker-alt"></i> <span data-i18n="conf3_loc">Barcelona,
+                                    Spain</span>
                                 <span style="margin: 0 5px;">|</span>
                                 <i class="far fa-calendar-alt"></i> <span data-i18n="conf3_date">Sept 2024</span>
                             </div>
@@ -317,10 +381,30 @@
                                 <div class="modal-text-content">
                                     <p class="blog-date" data-i18n="conf3_blog_date">Written on September 10, 2024</p>
                                     <div data-i18n="conf3_blog_content">
-                                        <p>This week, I had the pleasure of attending the ACM Europe Summer School on HPC Computer Architectures for AI and Dedicated Applications, a great tech event where I had the opportunity to enjoy numerous talks by individuals who dedicate their passion and a significant part of their lives to the pursuit of new knowledge that enables us to move towards a promising technological future. Among these individuals were Mateo Valero, Luca Benini, and Leslie Lamport, among many others. Not only were the talks a great source of inspiration for me, but so was meeting people from all over the world who are striving to make their way in this complex and exciting world of research. During this week, we discussed a wide range of current and important topics such as artificial intelligence, the rise of open architectures like RISC-V, the development of dedicated accelerators, and quantum computing. The latter, explained by the wonderful team from Qilimanjaro, allowed me to gain a much deeper understanding of this technology and its inherent complexity. Finally, I would like to extend my gratitude to the Barcelona Supercomputing Center (BSC) and ACM, Association for Computing Machinery for organizing this event and for promoting science and knowledge about current technologies to those of us who are just beginning our careers. Thanks to events like this, we are motivated to contribute our own small part to the advancement of science.</p>
+                                        <p>This week, I had the pleasure of attending the ACM Europe Summer School on
+                                            HPC Computer Architectures for AI and Dedicated Applications, a great tech
+                                            event where I had the opportunity to enjoy numerous talks by individuals who
+                                            dedicate their passion and a significant part of their lives to the pursuit
+                                            of new knowledge that enables us to move towards a promising technological
+                                            future. Among these individuals were Mateo Valero, Luca Benini, and Leslie
+                                            Lamport, among many others. Not only were the talks a great source of
+                                            inspiration for me, but so was meeting people from all over the world who
+                                            are striving to make their way in this complex and exciting world of
+                                            research. During this week, we discussed a wide range of current and
+                                            important topics such as artificial intelligence, the rise of open
+                                            architectures like RISC-V, the development of dedicated accelerators, and
+                                            quantum computing. The latter, explained by the wonderful team from
+                                            Qilimanjaro, allowed me to gain a much deeper understanding of this
+                                            technology and its inherent complexity. Finally, I would like to extend my
+                                            gratitude to the Barcelona Supercomputing Center (BSC) and ACM, Association
+                                            for Computing Machinery for organizing this event and for promoting science
+                                            and knowledge about current technologies to those of us who are just
+                                            beginning our careers. Thanks to events like this, we are motivated to
+                                            contribute our own small part to the advancement of science.</p>
                                     </div>
                                 </div>
-                                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7238486847339806720/" class="conf-linkedin" target="_blank">
+                                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7238486847339806720/"
+                                    class="conf-linkedin" target="_blank">
                                     <i class="fab fa-linkedin"></i> <span data-i18n="lnk_linkedin">View Post</span>
                                 </a>
                             </div>
@@ -339,13 +423,15 @@
             <div class="hobbies-container">
                 <div class="hobbies-text-content">
                     <p class="hobbies-text" data-i18n="hobbies_desc">
-                        I have been passionate about nature and photography since I was a child. I am also passionate about traveling, so when I travel I love taking photos that capture the moments I experience.
+                        I have been passionate about nature and photography since I was a child. I am also passionate
+                        about traveling, so when I travel I love taking photos that capture the moments I experience.
                     </p>
                     <div class="hobbies-links">
                         <a href="https://www.instagram.com/pepeyunph/" target="_blank" class="hobby-link instagram">
                             <i class="fab fa-instagram"></i> <span>Instagram</span>
                         </a>
-                        <a href="https://www.flickr.com/photos/196477770@N08/" target="_blank" class="hobby-link flickr">
+                        <a href="https://www.flickr.com/photos/196477770@N08/" target="_blank"
+                            class="hobby-link flickr">
                             <i class="fab fa-flickr"></i> <span>Flickr</span>
                         </a>
                     </div>
@@ -353,8 +439,10 @@
                 <div class="hobbies-image">
                     <!-- Placeholder image. Replace 'images/hobbies.jpg' with your local image -->
                     <!-- The ID 'flickr-img' is used by the script to replace it with a random Flickr photo if configured -->
-                    <img src="images/hobbies.jpg" id="flickr-img" alt="Photography Hobby" onerror="this.src='images/profile.jpg'">
-                    <p class="flickr-caption" data-i18n="flickr_caption">Here you have a random photo from my flickr profile :)</p>
+                    <img src="images/hobbies.jpg" id="flickr-img" alt="Photography Hobby"
+                        onerror="this.src='images/profile.jpg'">
+                    <p class="flickr-caption" data-i18n="flickr_caption">Here you have a random photo from my flickr
+                        profile :)</p>
                 </div>
             </div>
         </div>
@@ -366,37 +454,59 @@
             <div class="pruning-interface">
                 <div class="pruning-header">
                     <h2 class="tech-title" data-i18n="section_pruning">Pruning comparison Demo</h2>
-                    <h3 class="tech-subtitle" data-i18n="pruning_subtitle">Visualizing the difference between Unstructured and Structured Pruning.</h3>
+                    <h3 class="tech-subtitle" data-i18n="pruning_subtitle">Visualizing the difference between
+                        Unstructured and Structured Pruning.</h3>
                 </div>
                 <div class="pruning-info-col">
                     <p class="pruning-explanation" data-i18n="pruning_expl">
-                        This demo aims to teach the concept of <strong>unstructured pruning </strong> and why it needs to be optimized. Pruning in neural networks consists of removing <strong>individual weights and connections</strong>. This way, those that do not contribute much to the model's knowledge are eliminated. At the software level, this greatly optimizes the model, allowing for smaller models that better preserve accuracy. However, this type of pruning leaves <strong>irregular and sparse structures</strong>, which is exactly what hardware does not process efficiently. This gives rise to structured pruning, which removes complete structures from the network, being more efficient for hardware but reducing model accuracy more quickly as pruning increases.<br><br>To visualize this, let's test it: let's <strong>prune this website!!</strong> Slide any of the bars and <strong>see what happens</strong>. In this case, unstructured pruning removes individual letters, giving us a more precise idea of what the word might mean and the final context of a sentence. In contrast, with the structured pattern, whole words are deleted, leading to the occasional removal of key words for understanding the full sentence, and thus losing accuracy more quickly.<br><br>Therefore, it is of vital importance to investigate efficient solutions for structured pruning, and create a perfect balance between hardware and software.
+                        This demo aims to teach the concept of <strong>unstructured pruning </strong> and why it needs
+                        to be optimized. Pruning in neural networks consists of removing <strong>individual weights and
+                            connections</strong>. This way, those that do not contribute much to the model's knowledge
+                        are eliminated. At the software level, this greatly optimizes the model, allowing for smaller
+                        models that better preserve accuracy. However, this type of pruning leaves <strong>irregular and
+                            sparse structures</strong>, which is exactly what hardware does not process efficiently.
+                        This gives rise to structured pruning, which removes complete structures from the network, being
+                        more efficient for hardware but reducing model accuracy more quickly as pruning
+                        increases.<br><br>To visualize this, let's test it: let's <strong>prune this website!!</strong>
+                        Slide any of the bars and <strong>see what happens</strong>. In this case, unstructured pruning
+                        removes individual letters, giving us a more precise idea of what the word might mean and the
+                        final context of a sentence. In contrast, with the structured pattern, whole words are deleted,
+                        leading to the occasional removal of key words for understanding the full sentence, and thus
+                        losing accuracy more quickly.<br><br>Therefore, it is of vital importance to investigate
+                        efficient solutions for structured pruning, and create a perfect balance between hardware and
+                        software.
                     </p>
                 </div>
-                
+
                 <div class="pruning-dashboard-col">
                     <div class="dashboard-card">
                         <h3 class="dashboard-title tech-font" data-i18n="lets_prune">Let's prune the web!!</h3>
-                        
-                        <h4 id="pruning-warning" class="text-red warning-text" data-i18n="warning_pruning">Warning: The sliders below alter the words and sentences on the page. You can press the restore button to make the text fully visible again.</h4>
-                        
+
+                        <h4 id="pruning-warning" class="text-red warning-text" data-i18n="warning_pruning">Warning: The
+                            sliders below alter the words and sentences on the page. You can press the restore button to
+                            make the text fully visible again.</h4>
+
                         <div class="slider-panel">
                             <div class="slider-container">
                                 <label for="pruning-slider-unstructured" class="slider-label">
-                                    <span data-i18n="lbl_pruning_unstructured">Unstructured (Letters)</span>: <span id="val-unstructured" class="slider-val">0%</span>
+                                    <span data-i18n="lbl_pruning_unstructured">Unstructured (Letters)</span>: <span
+                                        id="val-unstructured" class="slider-val">0%</span>
                                 </label>
-                                <input type="range" id="pruning-slider-unstructured" min="0" max="100" value="0" class="slider neon-slider">
+                                <input type="range" id="pruning-slider-unstructured" min="0" max="100" value="0"
+                                    class="slider neon-slider">
                             </div>
 
                             <div class="slider-container">
                                 <label for="pruning-slider-structured" class="slider-label">
-                                    <span data-i18n="lbl_pruning_structured">Structured (Words)</span>: <span id="val-structured" class="slider-val">0%</span>
+                                    <span data-i18n="lbl_pruning_structured">Structured (Words)</span>: <span
+                                        id="val-structured" class="slider-val">0%</span>
                                 </label>
-                                <input type="range" id="pruning-slider-structured" min="0" max="100" value="0" class="slider neon-slider">
+                                <input type="range" id="pruning-slider-structured" min="0" max="100" value="0"
+                                    class="slider neon-slider">
                             </div>
                         </div>
                     </div>
-                    
+
                     <div id="pruning-stats" class="pruning-stats dashboard-card hidden">
                         <div class="stats-grid">
                             <div class="stat-item">
@@ -408,7 +518,8 @@
                                 <span id="web-functionality" class="stat-val digital-display">100%</span>
                             </div>
                         </div>
-                        <p class="pruning-message" id="pruning-msg" data-i18n="pruning_msg">"Optimized for efficiency. Still readable, right?"</p>
+                        <p class="pruning-message" id="pruning-msg" data-i18n="pruning_msg">"Optimized for efficiency.
+                            Still readable, right?"</p>
                     </div>
                 </div>
             </div>
@@ -418,10 +529,12 @@
     <footer>
         <div class="container footer-content">
             <div class="footer-logo">JSY</div>
-            
+
             <div class="footer-social">
-                <a href="https://github.com/pepesanyu00" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/jose-sanchezyun/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/pepesanyu00" target="_blank" title="GitHub"><i
+                        class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/jose-sanchezyun/" target="_blank" title="LinkedIn"><i
+                        class="fab fa-linkedin"></i></a>
                 <a href="mailto:pepesy00@uma.es" title="Email"><i class="fas fa-envelope"></i></a>
             </div>
 
@@ -432,7 +545,8 @@
     <button id="floating-restore-btn" class="floating-btn hidden">
         <i class="fas fa-undo"></i> <span data-i18n="btn_restore_web">Restore Web</span>
     </button>
-    
+
     <script src="script.js"></script>
 </body>
+
 </html>
