@@ -752,7 +752,7 @@ h3 {
 .pruning-interface {
     max-width: 1200px;
     margin: 0 auto;
-    background: var(--secondary-color);
+    background: var(--surface-color);
     color: var(--text-color);
     border-radius: 20px;
     padding: 40px;
