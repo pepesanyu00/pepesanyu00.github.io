@@ -15,7 +15,7 @@
     --primary-dark: oklch(0.45 0.16 255);   /* Azul profundo (para hovers o gradientes) */
     --accent-cyan: oklch(0.65 0.18 210);    /* Cian eléctrico (ideal para destacar datos en la demo) */
     --accent-amber: oklch(0.75 0.15 65);    /* Ámbar cálido (para contrastes puntuales) */
-    --red: oklch(0.6 0.2 25);               /* Alertas */
+    --red: oklch(0.45 0.2 25);              /* Alertas - Darkened for WCAG 2.2 contrast */
     
     /* Estructura */
     --border-color: oklch(0.90 0.02 260);   /* Sustituye a los grises genéricos #eee y #ddd */
@@ -714,51 +714,33 @@ h1, h2, h3 {
 
 /* PRUNING DEMO SECTION */
 .ai-section {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-    color: var(--white);
+    background: var(--secondary-color);
+    color: var(--text-color);
     text-align: center;
-}
-
-/* Adjust controls for blue background */
-.ai-section .btn-primary {
-    background: var(--white);
-    color: var(--primary-color);
-}
-
-.ai-section .btn-primary:hover {
-    background: #f0f0f0;
-    color: var(--primary-dark);
-}
-
-.ai-section .slider::-webkit-slider-thumb {
-    background: var(--white);
-}
-
-.ai-section .slider::-moz-range-thumb {
-    background: var(--white);
 }
 
 .pruning-interface {
     max-width: 800px;
     margin: 0 auto;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--white);
     border-radius: var(--radius);
     padding: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
 }
 
 .pruning-explanation {
     font-size: 1.1rem;
     margin-bottom: 30px;
     line-height: 1.6;
-    color: #ddd;
+    color: var(--text-color);
+    min-height: 350px;
 }
 
 .pruning-stats {
     margin-top: 30px;
     padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--border-color);
     animation: fadeIn 0.5s ease;
 }
 
