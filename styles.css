@@ -144,6 +144,7 @@ h3 {
     color: var(--text-color);
     margin-bottom: 30px;
     max-width: 600px;
+    text-align: justify;
 }
 
 .social-links a {
