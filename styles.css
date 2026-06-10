@@ -950,7 +950,7 @@ h3 {
 .stat-label {
     display: block;
     font-size: 0.85rem;
-    color: var(--text-light);
+    color: var(--text-color);
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 8px;
