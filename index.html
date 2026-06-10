@@ -372,12 +372,13 @@
                     <p class="pruning-explanation" data-i18n="pruning_expl">
                         This demo aims to teach the concept of <strong>unstructured pruning </strong> and why it needs to be optimized. Pruning in neural networks consists of removing <strong>individual weights and connections</strong>. This way, those that do not contribute much to the model's knowledge are eliminated. At the software level, this greatly optimizes the model, allowing for smaller models that better preserve accuracy. However, this type of pruning leaves <strong>irregular and sparse structures</strong>, which is exactly what hardware does not process efficiently. This gives rise to structured pruning, which removes complete structures from the network, being more efficient for hardware but reducing model accuracy more quickly as pruning increases.<br><br>To visualize this, let's test it: let's <strong>prune this website!!</strong> Slide any of the bars and <strong>see what happens</strong>. In this case, unstructured pruning removes individual letters, giving us a more precise idea of what the word might mean and the final context of a sentence. In contrast, with the structured pattern, whole words are deleted, leading to the occasional removal of key words for understanding the full sentence, and thus losing accuracy more quickly.<br><br>Therefore, it is of vital importance to investigate efficient solutions for structured pruning, and create a perfect balance between hardware and software.
                     </p>
-                    <h4 class="text-red warning-text" data-i18n="warning_pruning">Warning: The sliders below alter the words and sentences on the page. You can press the restore button to make the text fully visible again.</h4>
                 </div>
                 
                 <div class="pruning-dashboard-col">
                     <div class="dashboard-card">
                         <h3 class="dashboard-title tech-font" data-i18n="lets_prune">Let's prune the web!!</h3>
+                        
+                        <h4 id="pruning-warning" class="text-red warning-text" data-i18n="warning_pruning">Warning: The sliders below alter the words and sentences on the page. You can press the restore button to make the text fully visible again.</h4>
                         
                         <div class="slider-panel">
                             <div class="slider-container">

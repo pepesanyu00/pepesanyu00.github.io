@@ -60,8 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 textNodes.push(node);
             }
         } else {
-            // Exclude the pruning section itself so controls remain visible
-            if (node.id === 'pruning-demo' || (node.closest && node.closest('#pruning-demo')) || node.id === 'floating-restore-btn') {
+            // Exclude controls and warning so the interface remains usable, but allow pruning the explanation
+            if (node.id === 'pruning-warning' || 
+                node.id === 'floating-restore-btn' || 
+                (node.classList && (node.classList.contains('slider-panel') || node.classList.contains('pruning-stats')))) {
                 return [];
             }
             
@@ -115,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isPruned) {
             // Save original text and lock heights to prevent layout shift (vibration)
             document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li, .bio, .project-desc, .timeline-item').forEach(el => {
-                if (!el.style.height && !el.closest('#pruning-demo')) {
+                if (!el.style.height) {
                     el.style.minHeight = el.getBoundingClientRect().height + 'px';
                     lockedElements.push(el);
                 }

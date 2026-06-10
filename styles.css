@@ -5,7 +5,8 @@
     /* Fondo principal (Blanco roto azulado) */
     --surface-color: oklch(1 0 0);
     /* Superficies y tarjetas (Blanco puro) */
-    --secondary-color: oklch(0.92 0.05 255);/* Superficies secundarias (Más intenso) */
+    --secondary-color: oklch(0.92 0.05 255);
+    /* Superficies secundarias (Más intenso) */
 
     /* Textos */
     --text-color: oklch(0.35 0.03 260);
@@ -757,10 +758,10 @@ h3 {
     padding: 40px;
     border: 1px solid rgba(0, 0, 0, 0.05);
     border-top: 4px solid var(--primary-color);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: 
+    grid-template-areas:
         "header header"
         "info dashboard";
     gap: 40px;
@@ -771,7 +772,7 @@ h3 {
 @media (max-width: 900px) {
     .pruning-interface {
         grid-template-columns: 1fr;
-        grid-template-areas: 
+        grid-template-areas:
             "header"
             "info"
             "dashboard";
@@ -900,7 +901,7 @@ h3 {
     border-radius: 50%;
     background: var(--primary-color);
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: transform 0.1s;
 }
 
@@ -914,7 +915,7 @@ h3 {
     border-radius: 50%;
     background: var(--primary-color);
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: transform 0.1s;
     border: none;
 }
@@ -939,10 +940,10 @@ h3 {
 }
 
 .stat-item {
-    background: rgba(0,0,0,0.02);
+    background: rgba(0, 0, 0, 0.02);
     padding: 20px 10px;
     border-radius: 12px;
-    border: 1px solid rgba(0,0,0,0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .stat-label {
@@ -959,7 +960,8 @@ h3 {
     font-weight: 700;
     color: var(--primary-color);
     display: block;
-    font-family: 'Orbitron', sans-serif; /* Tech digital look */
+    font-family: 'Orbitron', sans-serif;
+    /* Tech digital look */
     line-height: 1;
 }
 
@@ -1025,7 +1027,7 @@ h3 {
 /* FOOTER */
 footer {
     background: var(--primary-color);
-    color: rgba(255,255,255,0.8);
+    color: rgba(255, 255, 255, 0.8);
     padding: 60px 0 40px;
     border-top: none;
     position: relative;
