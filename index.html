@@ -364,42 +364,50 @@
     <section id="pruning-demo" class="section ai-section">
         <div class="container">
             <h2 class="section-title" data-i18n="section_pruning">Pruning comparison Demo</h2>
-            <p class="ai-subtitle" data-i18n="pruning_subtitle">Visualizing the difference between Unstructured and Structured Pruning.</p>
+            <h3 class="ai-subtitle" data-i18n="pruning_subtitle">Visualizing the difference between Unstructured and Structured Pruning.</h3>
             
             <div class="pruning-interface">
-                <div class="pruning-controls">
+                <div class="pruning-info-col">
                     <p class="pruning-explanation" data-i18n="pruning_expl">
                         This demo aims to teach the concept of <strong>unstructured pruning </strong> and why it needs to be optimized. Pruning in neural networks consists of removing <strong>individual weights and connections</strong>. This way, those that do not contribute much to the model's knowledge are eliminated. At the software level, this greatly optimizes the model, allowing for smaller models that better preserve accuracy. However, this type of pruning leaves <strong>irregular and sparse structures</strong>, which is exactly what hardware does not process efficiently. This gives rise to structured pruning, which removes complete structures from the network, being more efficient for hardware but reducing model accuracy more quickly as pruning increases.<br><br>To visualize this, let's test it: let's <strong>prune this website!!</strong> Slide any of the bars and <strong>see what happens</strong>. In this case, unstructured pruning removes individual letters, giving us a more precise idea of what the word might mean and the final context of a sentence. In contrast, with the structured pattern, whole words are deleted, leading to the occasional removal of key words for understanding the full sentence, and thus losing accuracy more quickly.<br><br>Therefore, it is of vital importance to investigate efficient solutions for structured pruning, and create a perfect balance between hardware and software.
                     </p>
-                    <h2 class="section-title text-white" data-i18n="lets_prune">Let's prune the web!!</h2>
-
-                    <h4 class="text-red" data-i18n="warning_pruning">Warning: The sliders below alter the words and sentences on the page. You can press the restore button to make the text fully visible again.</h4>
-                    
-                    <div class="slider-container">
-                        <label for="pruning-slider-unstructured" class="slider-label">
-                            <span data-i18n="lbl_pruning_unstructured">Unstructured (Letters)</span>: <span id="val-unstructured">0%</span>
-                        </label>
-                        <input type="range" id="pruning-slider-unstructured" min="0" max="100" value="0" class="slider">
-                    </div>
-
-                    <div class="slider-container">
-                        <label for="pruning-slider-structured" class="slider-label">
-                            <span data-i18n="lbl_pruning_structured">Structured (Words)</span>: <span id="val-structured">0%</span>
-                        </label>
-                        <input type="range" id="pruning-slider-structured" min="0" max="100" value="0" class="slider">
-                    </div>
+                    <h4 class="text-red warning-text" data-i18n="warning_pruning">Warning: The sliders below alter the words and sentences on the page. You can press the restore button to make the text fully visible again.</h4>
                 </div>
                 
-                <div id="pruning-stats" class="pruning-stats hidden">
-                    <div class="stat-item">
-                        <span class="stat-label" data-i18n="lbl_sparsity">Sparsity</span>
-                        <span id="web-sparsity" class="stat-val">0%</span>
+                <div class="pruning-dashboard-col">
+                    <div class="dashboard-card">
+                        <h3 class="dashboard-title text-white" data-i18n="lets_prune">Let's prune the web!!</h3>
+                        
+                        <div class="slider-panel">
+                            <div class="slider-container">
+                                <label for="pruning-slider-unstructured" class="slider-label">
+                                    <span data-i18n="lbl_pruning_unstructured">Unstructured (Letters)</span>: <span id="val-unstructured" class="slider-val">0%</span>
+                                </label>
+                                <input type="range" id="pruning-slider-unstructured" min="0" max="100" value="0" class="slider neon-slider">
+                            </div>
+
+                            <div class="slider-container">
+                                <label for="pruning-slider-structured" class="slider-label">
+                                    <span data-i18n="lbl_pruning_structured">Structured (Words)</span>: <span id="val-structured" class="slider-val">0%</span>
+                                </label>
+                                <input type="range" id="pruning-slider-structured" min="0" max="100" value="0" class="slider neon-slider">
+                            </div>
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-label" data-i18n="lbl_functionality">Functionality</span>
-                        <span id="web-functionality" class="stat-val">100%</span>
+                    
+                    <div id="pruning-stats" class="pruning-stats dashboard-card hidden">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label" data-i18n="lbl_sparsity">Sparsity</span>
+                                <span id="web-sparsity" class="stat-val digital-display">0%</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label" data-i18n="lbl_functionality">Functionality</span>
+                                <span id="web-functionality" class="stat-val digital-display">100%</span>
+                            </div>
+                        </div>
+                        <p class="pruning-message" id="pruning-msg" data-i18n="pruning_msg">"Optimized for efficiency. Still readable, right?"</p>
                     </div>
-                    <p class="pruning-message" id="pruning-msg" data-i18n="pruning_msg">"Optimized for efficiency. Still readable, right?"</p>
                 </div>
             </div>
         </div>
