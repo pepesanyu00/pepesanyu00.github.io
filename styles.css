@@ -788,11 +788,13 @@ h3 {
 }
 
 .tech-font {
-    font-family: 'Orbitron', sans-serif;
+    font-family: sans-serif;
+    /*font-family: 'Orbitron', sans-serif;*/
 }
 
 .tech-title {
-    font-family: 'Orbitron', sans-serif;
+    font-family: sans-serif;
+    /*font-family: 'Orbitron', sans-serif;*/
     font-size: 2.5rem;
     font-weight: 700;
     color: var(--primary-color);
@@ -830,6 +832,7 @@ h3 {
     border-left: 4px solid var(--red);
     font-size: 0.95rem;
     margin-top: auto;
+    margin-bottom: 25px;
     color: var(--red);
 }
 
