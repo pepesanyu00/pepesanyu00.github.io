@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const valStructured = document.getElementById('val-structured');
     
     let originalTextNodes = new Map();
+    let unstructuredShuffleMap = new Map();
+    let structuredShuffleMap = new Map();
+    let lockedElements = [];
     let isPruned = false;
 
     // Update slider value display and exclusive logic
@@ -107,28 +110,25 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (!isPruned) {
-            // Save original text
-            const allTextNodes = getTextNodes(document.body);
-            allTextNodes.forEach((node, index) => {
-                originalTextNodes.set(node, node.nodeValue);
-            });
-            isPruned = true;
-        }
-
-        // Always restore to original before applying new pruning to ensure correct percentage
-        originalTextNodes.forEach((value, node) => {
-            node.nodeValue = value;
-        });
-
         const protectedStrings = ["José", "Sánchez", "Yun", "JSY"];
 
-        originalTextNodes.forEach((originalText, node) => {
-            if (type === 'unstructured') {
+        if (!isPruned) {
+            // Save original text and lock heights to prevent layout shift (vibration)
+            document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li, .bio, .project-desc, .timeline-item').forEach(el => {
+                if (!el.style.height && !el.closest('#pruning-demo')) {
+                    el.style.minHeight = el.getBoundingClientRect().height + 'px';
+                    lockedElements.push(el);
+                }
+            });
+
+            const allTextNodes = getTextNodes(document.body);
+            allTextNodes.forEach((node) => {
+                const originalText = node.nodeValue;
+                originalTextNodes.set(node, originalText);
+                
+                // Pre-compute Unstructured Shuffled Indices
                 let chars = originalText.split('');
                 let indices = chars.map((_, i) => i);
-                
-                // Filter out indices that are part of protected strings
                 let protectedIndices = new Set();
                 protectedStrings.forEach(pStr => {
                     let idx = originalText.toLowerCase().indexOf(pStr.toLowerCase());
@@ -139,35 +139,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         idx = originalText.toLowerCase().indexOf(pStr.toLowerCase(), idx + 1);
                     }
                 });
-
-                let pruningIndices = indices.filter(i => 
-                    chars[i].trim() !== '' && !protectedIndices.has(i)
-                );
-
-                // Shuffle indices
+                let pruningIndices = indices.filter(i => chars[i].trim() !== '' && !protectedIndices.has(i));
                 for (let i = pruningIndices.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
                     [pruningIndices[i], pruningIndices[j]] = [pruningIndices[j], pruningIndices[i]];
                 }
+                unstructuredShuffleMap.set(node, pruningIndices);
 
-                // Calculate how many to remove
-                const removeCount = Math.floor(pruningIndices.length * (sparsityPercentage / 100));
-                
-                // Remove (replace with underscore)
-                for (let i = 0; i < removeCount; i++) {
-                    chars[pruningIndices[i]] = '_';
-                }
-                
-                node.nodeValue = chars.join('');
-
-            } else {
-                // Structured Pruning (Words)
-                // Split by spaces but keep delimiters to reconstruct
+                // Pre-compute Structured Shuffled Indices
                 let words = originalText.split(/(\s+)/);
-                
                 let wordIndices = [];
                 words.forEach((w, i) => {
-                    // If it's not whitespace and not protected
                     if (w.trim().length > 0) {
                         let isProtected = protectedStrings.some(pStr => 
                             w.toLowerCase().includes(pStr.toLowerCase())
@@ -177,21 +159,40 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     }
                 });
-
-                // Shuffle
                 for (let i = wordIndices.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
                     [wordIndices[i], wordIndices[j]] = [wordIndices[j], wordIndices[i]];
                 }
+                structuredShuffleMap.set(node, wordIndices);
+            });
+            isPruned = true;
+        }
 
+        // Always restore to original before applying new pruning to ensure correct percentage
+        originalTextNodes.forEach((value, node) => {
+            node.nodeValue = value;
+        });
+
+        originalTextNodes.forEach((originalText, node) => {
+            if (type === 'unstructured') {
+                let chars = originalText.split('');
+                let pruningIndices = unstructuredShuffleMap.get(node);
+                const removeCount = Math.floor(pruningIndices.length * (sparsityPercentage / 100));
+                
+                for (let i = 0; i < removeCount; i++) {
+                    chars[pruningIndices[i]] = '_';
+                }
+                node.nodeValue = chars.join('');
+
+            } else {
+                let words = originalText.split(/(\s+)/);
+                let wordIndices = structuredShuffleMap.get(node);
                 const removeCount = Math.floor(wordIndices.length * (sparsityPercentage / 100));
 
                 for (let i = 0; i < removeCount; i++) {
                     const idx = wordIndices[i];
-                    // Replace with underscores of same length
                     words[idx] = '_'.repeat(words[idx].length);
                 }
-
                 node.nodeValue = words.join('');
             }
         });
@@ -231,6 +232,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 sliderStructured.value = 0;
                 valStructured.textContent = "0%";
             }
+            
+            // Unlock heights
+            lockedElements.forEach(el => {
+                el.style.minHeight = '';
+            });
+            lockedElements = [];
             
             isPruned = false;
         }
