@@ -333,6 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
             lbl_functionality: "Functionality",
             btn_restore_web: "Restore Website",
             lets_prune: "Let's prune the web!!",
+            warning_pruning: "<strong>Warning:</strong> The sliders below alter the words and sentences on the page. You can press the restore button to make the text fully visible again.",
             footer_text: "&copy; 2025 José Sánchez Yun. Designed with passion and code."
         },
         es: {
@@ -419,7 +420,7 @@ document.addEventListener('DOMContentLoaded', () => {
             lbl_functionality: "Funcionalidad",
             btn_restore_web: "Restaurar Web",
             lets_prune: "Vamos a podar la web!!",
-            warning_pruning: "Advertencia: las barras deslizantes de abajo alteran las letras y palabras de la web. Para volver al estado inicial, pulse el botón de restaurar web.",
+            warning_pruning: "<strong>Advertencia:</strong> las barras deslizantes de abajo alteran las letras y palabras de la web. Para volver al estado inicial, pulse el botón de restaurar web.",
             footer_text: "&copy; 2025 José Sánchez Yun. Diseñado con pasión y código."
         }
     };
