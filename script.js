@@ -115,10 +115,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const protectedStrings = ["José", "Sánchez", "Yun", "JSY"];
 
         if (!isPruned) {
-            // Save original text and lock heights to prevent layout shift (vibration)
-            document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li, .bio, .project-desc, .timeline-item').forEach(el => {
-                if (!el.style.height) {
+            // Save original text and lock dimensions to prevent layout shift (vibration)
+            document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li, span, .bio, .project-desc, .timeline-item, .project-card, .conf-content, .hero-text, .hobbies-text-content, .pruning-explanation, .section-title').forEach(el => {
+                if (!el.dataset.locked) {
+                    el.dataset.locked = '1';
                     el.style.height = el.getBoundingClientRect().height + 'px';
+                    el.style.overflow = 'hidden';
                     lockedElements.push(el);
                 }
             });
@@ -235,9 +237,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 valStructured.textContent = "0%";
             }
 
-            // Unlock heights
+            // Unlock dimensions
             lockedElements.forEach(el => {
                 el.style.height = '';
+                el.style.overflow = '';
+                delete el.dataset.locked;
             });
             lockedElements = [];
 
@@ -326,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
             section_pruning: "Pruning Comparison Demo",
             pruning_subtitle: "Visualizing the difference between Unstructured and Structured Pruning.",
             pruning_expl: "This demo aims to teach the concept of unstructured pruning and why it needs to be optimized. Pruning in neural networks consists of removing individual weights and connections. This way, those that do not contribute much to the model's knowledge are eliminated. At the software level, this greatly optimizes the model, allowing for smaller models that better preserve accuracy. However, this type of pruning leaves irregular and sparse structures, which is exactly what hardware does not process efficiently. This gives rise to structured pruning, which removes complete structures from the network, being more efficient for hardware but reducing model accuracy more quickly as pruning increases.<br><br>To visualize this, let's test it: let's prune this website!! Slide any of the bars and see what happens. In this case, unstructured pruning removes individual letters, giving us a more precise idea of what the word might mean and the final context of a sentence. In contrast, with the structured pattern, whole words are deleted, leading to the occasional removal of key words for understanding the full sentence, and thus losing accuracy more quickly.<br><br>Therefore, it is of vital importance to investigate efficient solutions for structured pruning, and create a perfect balance between hardware and software.",
-            pruning_msg: "\"Optimized for efficiency... but is the hardware happy?\"",
+
             lbl_pruning_unstructured: "Unstructured (Letters)",
             lbl_pruning_structured: "Structured (Words)",
             lbl_sparsity: "Sparsity",
@@ -413,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
             section_pruning: "Demo Comparativa de pruning",
             pruning_subtitle: "Visualizando la diferencia entre Poda Estructurada y No Estructurada.",
             pruning_expl: "Esta demo persigue enseñar el concepto de pruning no estructurado, y de porqué es necesario optimizarlo. La poda en redes neuronales consiste en eliminar pesos y conexiones individuales de una red neuronal. De esta forma, se eliminan aquellos que no aportan mucho al conocimiento del modelo. Esto a nivel software optimiza mucho el modelo, y permite tener modelos más pequeños y que conservan mejor la precisión. En cambio, este tipo de poda deja estructuras irregulares y dispersas, justo lo que al hardware no procesa de forma eficiente. Por ello surge el pruning estructurado, que elimina estructuras completas de la red, siendo más eficiente para el hardware, pero reduciendo más rápidamente la precisión del modelo conforme se aumenta la poda.<br><br>Para visualizarlo hagamos una prueba, vamos a podar esta página web!! Para ello desliza cualquiera de las barras y mira lo que pasa. En este caso, el pruning no estructurado borra letras individuales, lo que nos da una idea más precisa de lo que puede significar la palabra y el contexto final de una frase. En cambio, con el patrón estructurado se borran palabras completas, dando lugar a que en ocasiones se borren palabras clave para entender la frase completa, y por tanto, perdiendo precisión más rápidamente.<br><br>Por ello, es de vital importancia el investigar soluciones eficientes para el pruning estructurado, y crear un equilibrio perfecto entre el hardware y el software.",
-            pruning_msg: "\"Optimizado para eficiencia... ¿pero el hardware está contento?\"",
+
             lbl_pruning_unstructured: "No Estructurada (Letras)",
             lbl_pruning_structured: "Estructurada (Palabras)",
             lbl_sparsity: "Dispersión (Sparsity)",

@@ -979,11 +979,7 @@ h3 {
     line-height: 1;
 }
 
-.pruning-message {
-    font-style: italic;
-    color: var(--text-color);
-    font-size: 0.95rem;
-}
+
 
 .btn-primary {
     background: var(--primary-color);
