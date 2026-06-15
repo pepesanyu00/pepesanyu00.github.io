@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Save original text and lock heights to prevent layout shift (vibration)
             document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li, .bio, .project-desc, .timeline-item').forEach(el => {
                 if (!el.style.height) {
-                    el.style.minHeight = el.getBoundingClientRect().height + 'px';
+                    el.style.height = el.getBoundingClientRect().height + 'px';
                     lockedElements.push(el);
                 }
             });
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Unlock heights
             lockedElements.forEach(el => {
-                el.style.minHeight = '';
+                el.style.height = '';
             });
             lockedElements = [];
 
