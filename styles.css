@@ -293,7 +293,7 @@ h3 {
 
 .timeline-item:nth-child(even)::after {
     right: auto;
-    left: -10px;
+    left: -13px;
 }
 
 .timeline-item:hover::after {
