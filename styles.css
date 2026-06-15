@@ -47,6 +47,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
+    font-size: clamp(0.85rem, 2vw, 1.1rem);
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--bg-color);
@@ -143,7 +144,6 @@ h3 {
 }
 
 .bio {
-    font-size: clamp(0.85rem, 2vw, 1.1rem);
     color: var(--text-color);
     margin-bottom: 30px;
     max-width: 600px;
@@ -459,7 +459,6 @@ h3 {
     padding: 40px;
     overflow-y: auto;
     line-height: 1.8;
-    font-size: 1.1rem;
     color: #444;
 }
 
@@ -672,7 +671,6 @@ h3 {
 }
 
 .hobbies-text {
-    font-size: 1.2rem;
     color: var(--text-color);
     margin-bottom: 30px;
     line-height: 1.8;
@@ -808,7 +806,6 @@ h3 {
 }
 
 .tech-subtitle {
-    font-size: clamp(0.85rem, 2vw, 1.1rem);
     color: var(--text-color);
     font-weight: 400;
     max-width: 800px;
@@ -823,7 +820,6 @@ h3 {
 }
 
 .pruning-explanation {
-    font-size: clamp(0.85rem, 2vw, 1.1rem);
     line-height: 1.7;
     color: var(--text-color);
     margin-bottom: 25px;
@@ -1104,7 +1100,7 @@ footer {
 
     .timeline-item::after,
     .timeline-item:nth-child(even)::after {
-        left: calc(8% - 10px);
+        left: calc(8% - 13px);
         right: auto;
     }
 
@@ -1130,7 +1126,6 @@ footer {
 
     .modal-body {
         padding: 5%;
-        font-size: clamp(0.85rem, 2.5vw, 1rem);
     }
 
     .modal-body h3 {
