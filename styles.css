@@ -280,7 +280,7 @@ h3 {
     content: '';
     position: absolute;
     top: 30px;
-    right: -11px;
+    right: -10px;
     width: 20px;
     height: 20px;
     background: var(--primary-color);
@@ -293,7 +293,7 @@ h3 {
 
 .timeline-item:nth-child(even)::after {
     right: auto;
-    left: -11px;
+    left: -10px;
 }
 
 .timeline-item:hover::after {
@@ -1104,7 +1104,7 @@ footer {
 
     .timeline-item::after,
     .timeline-item:nth-child(even)::after {
-        left: 5.5%;
+        left: calc(8% - 10px);
         right: auto;
     }
 
@@ -1112,6 +1112,29 @@ footer {
         width: 100%;
         height: 100%;
         border-radius: 0;
+        display: block;
+        overflow-y: auto;
+    }
+
+    .modal-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        padding: 3% 5%;
+    }
+
+    .modal-header h2 {
+        font-size: clamp(1rem, 4vw, 1.5rem);
+        max-width: 85%;
+    }
+
+    .modal-body {
+        padding: 5%;
+        font-size: clamp(0.85rem, 2.5vw, 1rem);
+    }
+
+    .modal-body h3 {
+        font-size: clamp(1rem, 3vw, 1.3rem);
     }
 }
 
