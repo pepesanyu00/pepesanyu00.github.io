@@ -116,10 +116,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!isPruned) {
             // Save original text and lock dimensions to prevent layout shift (vibration)
-            document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li, span, .bio, .project-desc, .timeline-item, .project-card, .conf-content, .hero-text, .hobbies-text-content, .pruning-explanation, .section-title').forEach(el => {
-                if (!el.dataset.locked) {
+            // Only lock visible block-level elements (skip spans and hidden elements)
+            document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li, .bio, .project-desc, .timeline-item, .project-card, .conf-content, .hero-text, .hobbies-text-content, .pruning-explanation, .section-title').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (!el.dataset.locked && rect.height > 0) {
                     el.dataset.locked = '1';
-                    el.style.height = el.getBoundingClientRect().height + 'px';
+                    el.style.height = rect.height + 'px';
                     el.style.overflow = 'hidden';
                     lockedElements.push(el);
                 }
